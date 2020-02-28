@@ -1,30 +1,45 @@
-import eventlet
-import socketio
 import random
+import socketio
+import asyncio
+from aiohttp import web
 
-sio = socketio.Server()
-app = socketio.WSGIApp(sio)
+sio = socketio.AsyncServer(async_mode='aiohttp')
+app = web.Application()
+sio.attach(app)
 
-exercises = ['Heladeria', 'Tienda', 'Ferreteria']
-difficulties = ['Easy', 'Medium', 'Hard']
+exercises = ['heladeria', 'fruteria', 'puzzles']
+difficulties = ['facil', 'intermedia', 'dificil']
+usernames = ['Jose', 'Amalia']
 
-@sio.event
-def connect(sid, environ):
-    print(f"Client {sid} connected!")
-    sio.sleep(2)
-    sio.emit(
-        'exercise_selected',
-        data={'exercise': random.choice(exercises), 'difficulty': random.choice(difficulties)},
-        room=sid
-    )
-
-@sio.event
-def results(sid, data):
-    print(f"Results data from {sid} received:", data)
+def create_random_exercise():
+    return {
+        'ejercicio': random.choice(exercises),
+        'dificultad': random.choice(difficulties)
+    }
 
 @sio.event
-def disconnect(sid):
-    print(f"Client {sid} disconnected")
+async def connect(sid, environ):
+    await sio.save_session(sid, {'username': random.choice(usernames)})
+    random_exercise = create_random_exercise()
+    async with sio.session(sid) as session:
+        print(f"Cliente {session['username']} conectado!")
+        print(f"Enviando {random_exercise} a {session['username']}")
+        await sio.emit(
+            'exercise_selected',
+            data=random_exercise,
+            room=sid
+        )
+
+@sio.event
+async def results(sid, data):
+    async with sio.session(sid) as session:
+        print(f"Resultados de {session['username']} recibidos:", data)
+
+@sio.event
+async def disconnect(sid):
+    async with sio.session(sid) as session:
+        print(f"Cliente {session['username']} desconectado")
+
 
 if __name__ == '__main__':
-    eventlet.wsgi.server(eventlet.listen(('', 5000)), app)
+    web.run_app(app)

@@ -3,28 +3,36 @@ import socketio
 
 sio = socketio.Client()
 
+exercises_results = {
+    'heladeria' : {'helados servidos' : 10, 'clientes servidos' : 5, 'tiempo' : 25},
+    'fruteria' : {'frutas vendidas' : 10, 'clientes servidos' : 3, 'tiempo' : 18},
+    'puzzles' : {'puzzles resueltos' : 7, 'puzzles incorrectos' : 2, 'tiempo' : 25}
+}
+
 exercise = None
 difficulty = None
 
 @sio.event
 def connect():
-    print('Connected to server!')
-
-@sio.event
-def message(data):
-    print('Message received from server:', data)
+    print('Cliente conectado al servidor!')
 
 @sio.event
 def exercise_selected(data):
-    exercise = data['exercise']
-    difficulty = data['difficulty']
-    print(f"Exercise {exercise} with difficulty {difficulty} received from server")
+    global exercise 
+    global difficulty
+    exercise = data['ejercicio']
+    difficulty = data['dificultad']
+    print(f"Recibido ejercicio {exercise} con dificultad {difficulty}")
 
 @sio.event
 def disconnect():
-    print('Disconnected from server')
+    print('Desconectado del servidor')
 
-sio.connect(os.get('SERVER_IP'))
-sio.sleep(6)
-sio.emit('results', {'exercise': exercise, 'results': {'ice cream' : 4, 'time' : 260}})
-sio.disconnect()
+def main():
+    sio.connect(os.getenv('SERVER_IP'))
+    sio.sleep(5)
+    sio.emit('results', {'ejercicio': exercise, 'resultados': exercises_results[exercise]})
+    sio.wait()
+
+if __name__ == '__main__':
+    main()
