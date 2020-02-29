@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AgreLink</title>
+</head>
+<body>
+    {% for sid, device in devices.items() %}
+        <h2>Dispositivo: {{ sid }}</h2>
+        {% for key, value in device.items() %}
+            <p>{{ key.capitalize() }} : {{ value }}</p>
+        {% endfor %}
+    {% endfor %}
+</body>
+</html>

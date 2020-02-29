@@ -1,45 +1,59 @@
+import os
 import random
+import eventlet
 import socketio
-import asyncio
-from aiohttp import web
+from flask import Flask, render_template
 
-sio = socketio.AsyncServer(async_mode='aiohttp')
-app = web.Application()
-sio.attach(app)
+flask_app = Flask(__name__)
+flask_app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+
+sio = socketio.Server()
+app = socketio.WSGIApp(sio, flask_app)
+
+connected_devices = {}
 
 exercises = ['heladeria', 'fruteria', 'puzzles']
 difficulties = ['facil', 'intermedia', 'dificil']
-usernames = ['Jose', 'Amalia']
+usernames = ['Jose', 'Amalia', 'Ana', 'Monica']
 
-def create_random_exercise():
+def create_random_exercise(username):
     return {
+        'usuario': username,
         'ejercicio': random.choice(exercises),
         'dificultad': random.choice(difficulties)
     }
 
-@sio.event
-async def connect(sid, environ):
-    await sio.save_session(sid, {'username': random.choice(usernames)})
-    random_exercise = create_random_exercise()
-    async with sio.session(sid) as session:
-        print(f"Cliente {session['username']} conectado!")
-        print(f"Enviando {random_exercise} a {session['username']}")
-        await sio.emit(
-            'exercise_selected',
-            data=random_exercise,
-            room=sid
-        )
 
 @sio.event
-async def results(sid, data):
-    async with sio.session(sid) as session:
-        print(f"Resultados de {session['username']} recibidos:", data)
+def connect(sid, environ):
+    username = random.choice(usernames)
+    random_exercise = create_random_exercise(username)
+    connected_devices[sid] = random_exercise
+    print(f"Cliente {sid} conectado!")
+    print(f"Enviando {random_exercise} a {username}")
+    sio.emit(
+        'exercise_selected',
+        data=random_exercise,
+        room=sid
+    )
+
 
 @sio.event
-async def disconnect(sid):
-    async with sio.session(sid) as session:
-        print(f"Cliente {session['username']} desconectado")
+def results(sid, data):
+    connected_devices[sid] = data
+    print(f"Resultados de {sid} recibidos:", data)
+
+
+@sio.event
+def disconnect(sid):
+    del connected_devices[sid]
+    print(f"Cliente {sid} desconectado")
+
+
+@flask_app.route("/")
+def index():
+    return render_template('index.html', devices=connected_devices)
 
 
 if __name__ == '__main__':
-    web.run_app(app)
+    eventlet.wsgi.server(eventlet.listen(('', 5000)), app)
