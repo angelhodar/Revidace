@@ -4,12 +4,14 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+pylint = "*"
 
 [packages]
 python-socketio = {extras = ["asyncio_client"],version = "*"}
 eventlet = "*"
 aiohttp = {extras = ["speedups"],version = "*"}
 flask = "*"
+requests = "*"
 
 [requires]
 python_version = "3.7"
