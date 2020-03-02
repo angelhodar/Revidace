@@ -29,7 +29,7 @@ def disconnect():
 
 
 def main():
-    sio.connect(os.getenv('SERVER_IP'))
+    sio.connect(os.getenv('LOCAL'))
     sio.sleep(10)
     exercise_data['resultados'] = exercises_results[exercise_data['ejercicio']]
     print(f"Enviando resultados: {exercise_data}")
