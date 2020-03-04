@@ -28,6 +28,7 @@ def disconnect():
     print('Desconectado del servidor')
 
 
+# IMPORTANT TO SET HTTP:// IN WINDOWS
 def main():
     sio.connect(os.getenv('LOCAL'))
     sio.sleep(10)
