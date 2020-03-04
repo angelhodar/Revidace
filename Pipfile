@@ -10,6 +10,7 @@ python-socketio = {extras = ["asyncio_client"],version = "*"}
 eventlet = "*"
 aiohttp = {extras = ["speedups"],version = "*"}
 flask = "*"
+fastapi = {extras = ["all"],version = "*"}
 
 [requires]
 python_version = "3.7"

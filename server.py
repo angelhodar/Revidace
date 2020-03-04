@@ -1,14 +1,23 @@
 import os
 import random
-import eventlet
 import socketio
-from flask import Flask, render_template, url_for
+from fastapi import FastAPI, Request
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 
-flask_app = Flask(__name__)
-flask_app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+fast_app = FastAPI(debug=True)
+fast_app.mount("/static", StaticFiles(directory="static"), name="static")
+templates = Jinja2Templates(directory="templates")
 
-sio = socketio.Server()
-app = socketio.WSGIApp(sio, flask_app)
+sio = socketio.AsyncServer(
+    async_mode='asgi',
+    cors_allowed_origins='*'
+)
+
+app = socketio.ASGIApp(
+    socketio_server=sio,
+    other_asgi_app=fast_app
+)
 
 connected_devices = {}
 
@@ -25,13 +34,13 @@ def create_random_exercise(username):
 
 
 @sio.event
-def connect(sid, environ):
+async def connect(sid, environ):
     username = random.choice(usernames)
     random_exercise = create_random_exercise(username)
     connected_devices[sid] = random_exercise
     print(f"Cliente {sid} conectado!")
     print(f"Enviando {random_exercise} a {username}")
-    sio.emit(
+    await sio.emit(
         'exercise_selected',
         data=random_exercise,
         room=sid
@@ -39,21 +48,17 @@ def connect(sid, environ):
 
 
 @sio.event
-def results(sid, data):
+async def results(sid, data):
     connected_devices[sid] = data
     print(f"Resultados de {sid} recibidos:", data)
 
 
 @sio.event
-def disconnect(sid):
+async def disconnect(sid):
     del connected_devices[sid]
     print(f"Cliente {sid} desconectado")
 
 
-@flask_app.route("/")
-def index():
-    return render_template('index.html', devices=connected_devices)
-
-
-if __name__ == '__main__':
-    eventlet.wsgi.server(eventlet.listen(('', 5000)), app)
+@fast_app.get("/")
+async def index(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request, "devices": connected_devices})
