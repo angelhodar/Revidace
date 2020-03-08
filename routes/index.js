@@ -1,8 +1,10 @@
 const express = require('express')
 const router = express.Router()
 
+let devices = []
+
 router.get('/', (req, res) => {
-  res.render('index')
+  res.render('index', {devices : devices})
 })
 
-module.exports = router
+module.exports = {router, devices}
