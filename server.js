@@ -27,10 +27,11 @@ app.use(express.static('public'))
 app.use('/', index_mod.router)
 
 io.on('connection', function (socket) {
-    console.log('Cliente conectado: ' + socket.id)
+    console.log('Cliente conectado: ' + socket.id) 
     socket.on('device-connected', function(msg){
-        io.emit('device-ready', msg)
-        console.log(msg)
+        index_mod.devices[socket.id] = msg
+        io.emit('device-ready', msg.engine, msg.name)
+        console.log(index_mod.devices)
     })
 })
 

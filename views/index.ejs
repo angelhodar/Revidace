@@ -1,1 +1,14 @@
-Hola
+<% Object.keys(devices).forEach(function(id) { %>
+    <div class="container">
+        <div class="row">
+        <div class="col-lg-12 text-center">
+            <h3 class="mt-5">Dispositivo: <%- id %></h1>
+                <p><%- devices[id].name %></p>
+                <p><%- devices[id].engine %></p>
+        </div>
+        </div>
+    </div>
+<% }); %>
+
+
+    

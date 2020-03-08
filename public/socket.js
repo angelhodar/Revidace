@@ -1,9 +1,9 @@
-const socketio = io()
+const socket = io()
 
-socketio.on('connect', function (socket) {
-    console.log("Mi ID es: ", socketio.id)
+socket.on('connect', function () {
+    console.log('Mi ID es: ', socket.id)
+    socket.on('device-ready', function (engine, name) {
+        console.log('Se ha conectado un dispositivo de nombre' + name + ' utilizando ' + engine)
+    })
 })
 
-socketio.on('device-ready', function (data) {
-    console.log('Se ha conectado un dispositivo: ' + data)
-})
