@@ -3,13 +3,12 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const express = require('express')
-const expressLayouts = require('express-ejs-layouts')
 const app = express()
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
 const mongoose = require('mongoose')
 
-app.set('view engine', 'ejs')
+app.set('view engine', 'pug')
 app.set('views', __dirname + '/views')
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
@@ -28,6 +27,7 @@ let devices = {}
 io.on('connection', function(socket){
     console.log('Cliente conectado en devices: ' + socket.id) 
     socket.on('device', function(data){
+        console.log(data)
         devices[socket.id] = data
     })
 })

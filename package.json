@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "start-dev": "nodemon server.js"
+    "start-dev": "nodemon server.js",
+    "client": "node test_client.js"
   },
   "repository": {
     "type": "git",
@@ -24,7 +25,8 @@
     "express-ejs-layouts": "^2.5.0",
     "mongoose": "^5.9.3",
     "pug": "^2.0.4",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.3.0",
+    "socket.io-client": "^2.3.0"
   },
   "devDependencies": {
     "dotenv": "^8.2.0",
