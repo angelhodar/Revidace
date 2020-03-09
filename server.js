@@ -11,8 +11,6 @@ const mongoose = require('mongoose')
 
 app.set('view engine', 'ejs')
 app.set('views', __dirname + '/views')
-app.set('layout', 'layouts/layout')
-app.use(expressLayouts)
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static('public'))
@@ -39,7 +37,7 @@ io.on('connection', function(socket){
 const router = express.Router()
 
 router.get('/', (req, res) => {
-    res.render('index', {devices : devices})
+    res.render('index.pug', {devices : devices})
 })
 
 router.post('/', (req, res) => {
