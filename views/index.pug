@@ -1,0 +1,21 @@
+extends layouts/layout.pug
+
+block content
+    each id, data in devices
+        script.
+            console.log(!{Hola})
+        <div class="container">
+            <div class="row">
+            <div class="col-lg-12 text-center">
+                <h3 class="mt-5">Dispositivo: #{id}</h3>
+                <h5>Motor gráfico: #{data.engine}</h5>
+                <h5>Fabricante: #{data.manufacturer}</h5>
+                <h5>Dispositivo: #{data.product}</h5>
+                <h5>Cuenta asociada: #{data.account}</h5>
+                <form id="exercise_form" action="" method="post">
+                    <input type="text" name="exercise"/>
+                    <button type="submit">Cargar ejercicio</button>
+                </form>
+            </div>
+            </div>
+        </div>
