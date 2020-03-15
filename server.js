@@ -22,13 +22,13 @@ app.use(express.static('public'))
 //     console.log('Connected to MongoDB')
 // })
 
-let devices = {}
+let devices = []
 
 io.on('connection', function(socket){
     console.log('Cliente conectado en devices: ' + socket.id) 
     socket.on('device', function(data){
-        console.log(data)
-        devices[socket.id] = data
+        data['id'] = socket.id
+        devices.push(data)
     })
 })
 
@@ -37,7 +37,8 @@ io.on('connection', function(socket){
 const router = express.Router()
 
 router.get('/', (req, res) => {
-    res.render('index.pug', {devices : devices})
+    console.log(devices)
+    res.render('index.pug', {devices : devices, variable : 1})
 })
 
 router.post('/', (req, res) => {
