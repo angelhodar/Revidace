@@ -7,6 +7,7 @@ const app = express()
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
 const mongoose = require('mongoose')
+const router = require('./routes/index')
 
 app.set('view engine', 'pug')
 app.set('views', __dirname + '/views')
@@ -32,19 +33,9 @@ io.on('connection', function(socket){
     })
 })
 
-// Rutas movidas aqui temporalmente hasta entender mejor el 
-// module.exports para hacer el emit desde index.js en routes
-const router = express.Router()
-
-router.get('/', (req, res) => {
-    console.log(devices)
-    res.render('index.pug', {devices : devices, variable : 1})
-})
-
-router.post('/', (req, res) => {
-    io.emit('exercise', req.body.exercise)
-})
-
 app.use('/', router)
 
 server.listen(process.env.PORT || 3000)
+
+app.locals.io = io
+app.locals.devices = devices
