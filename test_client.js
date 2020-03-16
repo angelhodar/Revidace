@@ -1,4 +1,6 @@
-var io = require('socket.io-client')('http://localhost:5000')
+require('dotenv').config()
+
+var io = require('socket.io-client')(`${process.env.LOCAL}:${process.env.PORT || 3000}`)
 
 io.on('connect', function(){
     console.log('Connected to server')
