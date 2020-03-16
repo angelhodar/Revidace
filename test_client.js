@@ -15,5 +15,9 @@ io.on('connect', function(){
     
     io.on('exercise', function(data){
         console.log('Exercise received: ' + data)
+        console.log('Emitting results...')
+        io.emit('results', {"tipos": ["rojo", "azul"], "tiempo": 20}, function(response){
+            console.log('Results emitted')
+        })
     })
 })
