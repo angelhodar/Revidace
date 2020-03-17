@@ -18,7 +18,11 @@ io.on('connect', function(){
     io.on('exercise', function(data){
         console.log('Exercise received: ' + data)
         console.log('Emitting results...')
-        io.emit('results', {"tipos": ["rojo", "azul"], "tiempo": 20}, function(response){
+        let results = {
+            "tipos": ["rojo", "azul"], 
+            "tiempo": 20
+        }
+        io.emit('results', JSON.stringify(results, null, 4), function(response){
             console.log('Results emitted')
         })
     })

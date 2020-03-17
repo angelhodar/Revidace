@@ -3,21 +3,47 @@ extends layout.pug
 block content
     <div class="container">
         <h2 class="header center orange-text">Dispositivos</h2>
+        <div class="row">
         each device in devices
-            <div class="row">
-                <div class="col s8">
-                    <h3>Conexión: #{device.id}</h3>
-                    <h5>Motor gráfico: #{device.engine}</h5>
-                    <h5>Fabricante: #{device.manufacturer}</h5>
-                    <h5>Dispositivo: #{device.device}</h5>
-                    <h5>Cuenta asociada: #{device.account}</h5>
-                    <h5>Resultados: #{device.results}</h5>
-                    <form id="exercise_form" action="" method="POST">
-                        <input type="text" name="exercise"/>
-                        <button class="btn waves-effect waves-light" type="submit" name="action">Cargar ejercicio
-                        <i class="material-icons right">send</i>
-                        </button>
-                    </form>
+            <div class="col s12 m4">
+                <div class="card hoverable">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img src="quest.jpg">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title center">#{device.account}<a href="#"><i class="fab fa-unity right fa-3x"></i></a></span>
+                    </div>
                 </div>
+
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">account_circle</i>
+                    <select>
+                        <option value="" disabled selected>Selecciona un usuario</option>
+                        <option value="1">Angel Rodriguez</option>
+                        <option value="2">Jose Neuropsicólogo</option>
+                        <option value="3">Raul Sanchez</option>
+                    </select>
+                    <label>Usuario</label>
+                </div>
+
+                <form id="exercise_form" action="" method="POST">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">mode_edit</i>
+                        <select>
+                            <option value="" disabled selected>Selecciona un ejercicio</option>
+                            <option value="1">Cubos</option>
+                            <option value="2">Matcher</option>
+                            <option value="3">Heladeria</option>
+                        </select>
+                        <label>Ejercicio</label>
+                    </div>
+                    
+                    <div class="col s12 center-align">
+                        <button class="btn center-align" type="submit" name="action">Cargar ejercicio
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </form>
             </div>
+        </div>
     </div>

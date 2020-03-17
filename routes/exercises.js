@@ -1,4 +1,5 @@
 const express = require('express')
+// TODO: Add schema inheritance from an abstract Exercise schema
 const Cube = require('../models/cube')
 const Matcher = require('../models/matcher')
 const IceCreamShop = require('../models/iceshop')
