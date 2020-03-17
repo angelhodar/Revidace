@@ -11,7 +11,7 @@ block content
                         <img src="quest.jpg">
                     </div>
                     <div class="card-content">
-                        <span class="card-title center">#{device.account}<a href="#"><i class="fab fa-unity right fa-3x"></i></a></span>
+                        <span class="card-title center">#{device.account}<a href="#"></a></span>
                     </div>
                 </div>
 
@@ -26,20 +26,19 @@ block content
                     <label>Usuario</label>
                 </div>
 
-                <form id="exercise_form" action="" method="POST">
+                <form id="exercise_form" action="", method="POST">
                     <div class="input-field col s12">
                         <i class="material-icons prefix">mode_edit</i>
-                        <select>
-                            <option value="" disabled selected>Selecciona un ejercicio</option>
-                            <option value="1">Cubos</option>
-                            <option value="2">Matcher</option>
-                            <option value="3">Heladeria</option>
+                        <select form="exercise_form" name="exercise">
+                            <option value="null" disabled selected>Selecciona un ejercicio</option>
+                            <option value="cubos">Cubos</option>
+                            <option value="matcher">Matcher</option>
+                            <option value="heladeria">Heladeria</option>
                         </select>
                         <label>Ejercicio</label>
                     </div>
-                    
                     <div class="col s12 center-align">
-                        <button class="btn center-align" type="submit" name="action">Cargar ejercicio
+                        <button class="btn center-align" type="submit">Cargar ejercicio
                             <i class="material-icons right">send</i>
                         </button>
                     </div>

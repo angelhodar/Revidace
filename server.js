@@ -8,6 +8,8 @@ const mongoose = require('mongoose')
 const indexRouter = require('./routes/index')
 const devicesRouter = require('./routes/devices')
 const exercisesRouter = require('./routes/exercises')
+const loginRouter = require('./routes/login')
+const registerRouter = require('./routes/register')
 
 app.set('view engine', 'pug')
 app.set('views', __dirname + '/views')
@@ -41,6 +43,8 @@ io.on('connection', function(socket){
 app.use('/', indexRouter)
 app.use('/devices', devicesRouter)
 app.use('/exercises', exercisesRouter)
+app.use('/login', loginRouter)
+app.use('/register', registerRouter)
 
 server.listen(process.env.PORT || 3000)
 
