@@ -1,28 +1,15 @@
 const mongoose = require('mongoose')
+const BaseExercise = require('./exercise')
 
 const matcherSchema = mongoose.Schema({
-    "name" : {
-        type: String,
-        required: true
-    },
-    "description": {
-        type: String,
-        required: true
-    },
-    "img": {
-        type: String,
-        required: true
-    },
     "parameters": {
         "velocidad": {type: Number, default: 3},
-        "reaparicion": {type: Number, default: 2},
-        "duracion": {type: Number, default: 60} 
+        "reaparicion": {type: Number, default: 2}
     },
     "params_description": {
         "Velocidad": {type: String, default: "Velocidad a la que los patrones se acercan al paciente"},
-        "Reaparición": {type: String, default: "Tiempo de reaparición de los patrones"},
-        "Duración": {type: String, default: "Duración del ejercicio en segundos"},
+        "Reaparición": {type: String, default: "Tiempo de reaparición de los patrones"}
     }
 })
 
-module.exports = mongoose.model('Matcher', matcherSchema)
+module.exports = BaseExercise.discriminator('Matcher', matcherSchema)

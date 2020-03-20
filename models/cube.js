@@ -1,28 +1,15 @@
 const mongoose = require('mongoose')
+const BaseExercise = require('./exercise')
 
-const cubeSchema = mongoose.Schema({
-    "name" : {
-        type: String,
-        required: true
-    },
-    "description": {
-        type: String,
-        required: true
-    },
-    "img": {
-        type: String,
-        required: true
-    },
+const CubeSchema = mongoose.Schema({
     "parameters": {
         "cantidad": {type: Number, default: 2},
-        "reaparicion": {type: Number, default: 2},
-        "duracion": {type: Number, default: 60} 
+        "reaparicion": {type: Number, default: 2}
     },
     "params_description": {
         "Cantidad": {type: String, default: "Número de cubos a mostrar"},
-        "Reaparición": {type: String, default: "Tiempo de reaparición de los cubos"},
-        "Duración": {type: String, default: "Duración del ejercicio en segundos"},
+        "Reaparición": {type: String, default: "Tiempo de reaparición de los cubos"}
     }
 })
 
-module.exports = mongoose.model('Cube', cubeSchema)
+module.exports = BaseExercise.discriminator('Cube', CubeSchema)

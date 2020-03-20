@@ -1,8 +1,8 @@
 const express = require('express')
-// TODO: Add schema inheritance from an abstract Exercise schema
 const Cube = require('../models/cube')
 const Matcher = require('../models/matcher')
 const IceCreamShop = require('../models/iceshop')
+const Sandwich = require('../models/sandwich')
 const router = express.Router()
 
 // toObject necesario para no extraer metadatos innecesarios de un schema en el html
@@ -40,10 +40,22 @@ iceCreamShop = new IceCreamShop({
   }
 }).toObject()
 
+sandwich = new Sandwich({
+  name: "Sandwich",
+  description: "Creación de diferentes sandwiches con número de ingredientes y pisos variable.",
+  img: "sandwich.jpg",
+  parameters: {
+    ingredientes: 6,
+    pisos: 2,
+    duracion: 60
+  }
+}).toObject()
+
 exercises = [
   cube,
   matcher,
-  iceCreamShop
+  iceCreamShop,
+  sandwich
 ]
 
 router.get('/', (req, res) => {
