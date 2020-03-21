@@ -16,45 +16,41 @@ block content
     </div>
   </div>
 
-  <!--  Features Section   -->
+  <!-- Automated Section -->
   <div class="section">
     <div class="container">
       <div class="row">
-        <div class="col s12 m4">
+        <div class="col s12">
           <div class="icon-block">
-            <h2 class="center"><i class="medium material-icons yellow-text">flash_on</i></h2>
-            <h5 class="center">Automatizado</h5>
-
-            <p class="light">Todo el proceso de recolección y procesado de datos se hace automaticamente.</p>
+            <h2 class="center"><i class="large material-icons teal-text">autorenew</i></h2>
+            <h4 class="center">Automatizado</h4>
+            <h6 class="light center">Todo el proceso de recolección y procesado de datos se hace automaticamente.</h6>
           </div>
         </div>
-
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center"><i class="medium material-icons brown-text">group</i></h2>
-            <h5 class="center">Intuitivo</h5>
-
-            <p class="light">Manejo extremadamente sencillo del flujo de ejercicios en cada sesión, con una interfaz intuitiva, fácil de usar y compatible con dispositivos móviles.</p>
-          </div>
-        </div>
-
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center light-teal-text"><i class="medium material-icons teal-text">settings</i></h2>
-            <h5 class="center">Personalizable</h5>
-
-            <p class="light">Personaliza la dificultad de cada ejercicio con los parámetros que se ajusten mejor a cada paciente.</p>
-          </div>
+      </div>
+      <div class="row center">
+        <div class="col s12">
+          <img class="responsive-img" src="auto.png">
         </div>
       </div>
     </div>
   </div>
 
+  <!-- Engines Section -->
   <div class="section">
     <div class="container">
       <div class="row">
+        <div class="col s12">
+          <div class="icon-block">
+            <h2 class="center light-brown-text"><i class="large material-icons teal-text">code</i></h2>
+            <h4 class="center">Adaptable</h4>
+            <h6 class="light center">Toda la funcionalidad puede ser creada en el motor gráfico que se quiera. Sin restricciones.</h6>
+          </div>
+        </div>
+      </div>
+      <div class="row">
         <div class="col s12 m6 l4 xl3 push-xl3">
-          <div class="card sticky-action">
+          <div class="card sticky-action hoverable">
             <div class="card-image">
               <img src="unreal.png">
             </div>
@@ -67,7 +63,7 @@ block content
           </div>
         </div>
         <div class="col s12 m6 l4 xl3 push-xl3">
-          <div class="card sticky-action">
+          <div class="card sticky-action hoverable">
             <div class="card-image">
               <img src="unity.png">
             </div>
@@ -83,14 +79,131 @@ block content
     </div>
   </div>
 
+  <!-- Exercise Personalization Section -->
   <div class="section">
     <div class="container">
       <div class="row">
-      
+        <div class="col s12">
+          <div class="icon-block">
+            <h2 class="center light-teal-text"><i class="large material-icons teal-text">settings</i></h2>
+            <h4 class="center">Personalizable</h4>
+            <h6 class="light center">Personaliza la dificultad de cada ejercicio con los parámetros que se ajusten mejor a cada paciente.</h6>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <ul class="tabs blue z-depth-1">
+            <li class="tab col s4"><a class="active white-text" href="#facil">Fácil</a></li>
+            <li class="tab col s4"><a class="active white-text" href="#medio">Medio</a></li>
+            <li class="tab col s4"><a class="active white-text" href="#dificil">Dificil</a></li>
+          </ul>
+        </div>
+      </div>
+        <div class="row">
+        <div class="container">
+          <div id="facil" class="col s12 m12 l6 xl6">
+            <table>
+              <thead>
+                <tr>
+                    <th>Parámetro</th>
+                    <th>Descripción</th>
+                    <th>Valor</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Ingredientes</td>
+                  <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce et.</td>
+                  <td>6</td>
+                </tr>
+                <tr>
+                  <td>Pisos</td>
+                  <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce et.</td>
+                  <td>3</td>
+                </tr>
+                <tr>
+                  <td>Duracion</td>
+                  <td>Tiempo en segundos de duración del ejercicio</td>
+                  <td>60</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="medio" class="col s12 m12 l6 xl6" style="display: none;">
+            <table>
+              <thead>
+                <tr>
+                    <th>Parámetro</th>
+                    <th>Descripción</th>
+                    <th>Valor</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Ingredientes</td>
+                  <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce et.</td>
+                  <td>9</td>
+                </tr>
+                <tr>
+                  <td>Pisos</td>
+                  <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce et.</td>
+                  <td>5</td>
+                </tr>
+                <tr>
+                  <td>Duracion</td>
+                  <td>Tiempo en segundos de duración del ejercicio</td>
+                  <td>120</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="dificil" class="col s12 m12 l6 xl6" style="display: none;">
+            <table>
+              <thead>
+                <tr>
+                    <th>Parámetro</th>
+                    <th>Descripción</th>
+                    <th>Valor</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Ingredientes</td>
+                  <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce et.</td>
+                  <td>12</td>
+                </tr>
+                <tr>
+                  <td>Pisos</td>
+                  <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce et.</td>
+                  <td>7</td>
+                </tr>
+                <tr>
+                  <td>Duracion</td>
+                  <td>Tiempo en segundos de duración del ejercicio</td>
+                  <td>180</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col s12 x6 l6 xl6">
+            <div class="card hoverable">
+              <div class="card-image waves-effect waves-block waves-light">
+                  <img src="sandwich.jpg">
+              </div>
+              <div class="card-content">
+                  <span class="card-title">Sandwich</span>
+                  <p>Creación de diferentes sandwiches con número de ingredientes y pisos variable.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
       </div>
     </div>
   </div>
 
+  <!-- Footer -->
   <footer class="page-footer blue">
     <div class="container">
       <div class="row">

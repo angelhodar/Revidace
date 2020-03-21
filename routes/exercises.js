@@ -3,6 +3,8 @@ const Cube = require('../models/cube')
 const Matcher = require('../models/matcher')
 const IceCreamShop = require('../models/iceshop')
 const Sandwich = require('../models/sandwich')
+const Discriminator = require('../models/discriminator')
+const Recycle = require('../models/recycle')
 const router = express.Router()
 
 // toObject necesario para no extraer metadatos innecesarios de un schema en el html
@@ -51,11 +53,35 @@ sandwich = new Sandwich({
   }
 }).toObject()
 
+discriminator = new Discriminator({
+  name: "Discriminación",
+  description: "Discriminar palabras en distintas temáticas según la palabra concreta",
+  img: "voronoi.png",
+  parameters: {
+    ingredientes: 6,
+    pisos: 2,
+    duracion: 60
+  }
+}).toObject()
+
+recycle = new Recycle({
+  name: "Reciclaje",
+  description: "Reciclado de distintos objetos en sus cubos correspondientes",
+  img: "reciclaje2.jpg",
+  parameters: {
+    ingredientes: 6,
+    pisos: 2,
+    duracion: 60
+  }
+}).toObject()
+
 exercises = [
   cube,
   matcher,
   iceCreamShop,
-  sandwich
+  sandwich,
+  discriminator,
+  recycle
 ]
 
 router.get('/', (req, res) => {

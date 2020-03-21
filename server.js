@@ -11,6 +11,17 @@ const exercisesRouter = require('./routes/exercises')
 const loginRouter = require('./routes/login')
 const registerRouter = require('./routes/register')
 
+mongoose.connect(process.env.MONGO_LOCAL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'Error connecting to MongoDB'));
+db.once('open', function() {
+  console.log('Connected to MongoDB!')
+});
+
 app.set('view engine', 'pug')
 app.set('views', __dirname + '/views')
 app.use(express.json())
