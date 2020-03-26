@@ -1,90 +1,10 @@
 const express = require('express')
-const Cube = require('../models/cube')
-const Matcher = require('../models/matcher')
-const IceCreamShop = require('../models/iceshop')
-const Sandwich = require('../models/sandwich')
-const Discriminator = require('../models/discriminator')
-const Recycle = require('../models/recycle')
+const BaseExercise = require('../models/exercise')
 const router = express.Router()
 
-// toObject necesario para no extraer metadatos innecesarios de un schema en el html
-
-cube = new Cube({
-  name: "Cubos",
-  description: "Se presentan unos cubos con tiempos de aparición aleatorios donde el paciente debe reaccionar con el mando adecuado para hacerlos desaparecer.",
-  img: "cubos.jpg",
-  parameters: {
-    cantidad: 2,
-    reaparicion: 2,
-    duracion: 40
-  }
-}).toObject()
-
-matcher = new Matcher({
-  name: "Matcher",
-  description: "El paciente debe usar el joystick del mando correspondiente para destruir ciertos objetos en el momento adecuado.",
-  img: "matcher.png",
-  parameters: {
-    velocidad: 2,
-    reaparicion: 3,
-    duracion: 40
-  }
-}).toObject()
-
-iceCreamShop = new IceCreamShop({
-  name: "Heladeria",
-  description: "Simulación de una heladería en la que el paciente deberá atender a un conjunto de clientes sirviendo helados.",
-  img: "heladeria.jpg",
-  parameters: {
-    sabores: 6,
-    clientes: 1,
-    duracion: 60
-  }
-}).toObject()
-
-sandwich = new Sandwich({
-  name: "Sandwich",
-  description: "Creación de diferentes sandwiches con número de ingredientes y pisos variable.",
-  img: "sandwich.jpg",
-  parameters: {
-    ingredientes: 6,
-    pisos: 2,
-    duracion: 60
-  }
-}).toObject()
-
-discriminator = new Discriminator({
-  name: "Discriminación",
-  description: "Discriminar palabras en distintas temáticas según la palabra concreta",
-  img: "voronoi.png",
-  parameters: {
-    ingredientes: 6,
-    pisos: 2,
-    duracion: 60
-  }
-}).toObject()
-
-recycle = new Recycle({
-  name: "Reciclaje",
-  description: "Reciclado de distintos objetos en sus cubos correspondientes",
-  img: "reciclaje2.jpg",
-  parameters: {
-    ingredientes: 6,
-    pisos: 2,
-    duracion: 60
-  }
-}).toObject()
-
-exercises = [
-  cube,
-  matcher,
-  iceCreamShop,
-  sandwich,
-  discriminator,
-  recycle
-]
-
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
+  let exercises = await BaseExercise.find()
+  exercises = exercises.map(function(exercise) {return exercise.toObject()})
   res.render('exercises', {exercises: exercises})
 })
 

@@ -1,11 +1,12 @@
 {
   "name": "AgreLink",
   "version": "1.0.0",
-  "description": "Testing repo for agrelink project",
+  "description": "Automated virtual reality exercises for people with acquired brain damage",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "start-dev": "nodemon server.js",
+    "populate-db": "node populate_db_exercises.js",
     "client": "node test_client.js"
   },
   "repository": {
@@ -20,9 +21,11 @@
   },
   "homepage": "https://github.com/angelhodar/AgreLink#readme",
   "dependencies": {
+    "connect-mongodb-session": "^2.3.1",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
     "express-ejs-layouts": "^2.5.0",
+    "express-session": "^1.17.0",
     "mongoose": "^5.9.3",
     "pug": "^2.0.4",
     "socket.io": "^2.3.0",

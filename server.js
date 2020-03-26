@@ -1,32 +1,42 @@
 require('dotenv').config()
 
 const express = require('express')
+var session = require('express-session')
+var MongoDBStore = require('connect-mongodb-session')(session)
 const app = express()
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
-const mongoose = require('mongoose')
+const db = require('./db')
+
+// Routes
 const indexRouter = require('./routes/index')
 const devicesRouter = require('./routes/devices')
 const exercisesRouter = require('./routes/exercises')
 const loginRouter = require('./routes/login')
 const registerRouter = require('./routes/register')
 
-mongoose.connect(process.env.MONGO_LOCAL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
-
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'Error connecting to MongoDB'));
-db.once('open', function() {
-  console.log('Connected to MongoDB!')
-});
-
 app.set('view engine', 'pug')
 app.set('views', __dirname + '/views')
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static('public'))
+
+var store = new MongoDBStore({
+    uri: process.env.MONGO_LOCAL,
+    collection: 'Sessions'
+});
+
+// Catch session errors
+store.on('error', function(error) {
+    console.log(error);
+});
+
+app.use(session({
+    secret: process.env.SECRET,
+    store: store,
+    resave: true,
+    saveUninitialized: true
+}));
 
 let devices = []
 
