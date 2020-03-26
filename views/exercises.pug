@@ -6,16 +6,17 @@ block content
         <div class="row">
         each exercise in exercises
             <div class="col s12 m6 l6 xl4">
-                <div class="card hoverable large">
+                <div class="card hoverable">
                     <div class="card-image waves-effect waves-block waves-light">
                         <img class="activator" src=#{exercise.img}>
                     </div>
                     <div class="card-content">
                         <span class="card-title">#{exercise.name}</span>
-                        <p>#{exercise.description}</p>
                     </div>
                     <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">Parámetros<i class="material-icons right">close</i></span>
+                        <span class="card-title grey-text text-darken-4">Descripción<i class="material-icons right">close</i></span>
+                        <p>#{exercise.description}</p>
+                        <span class="card-title grey-text text-darken-4">Parámetros</span>
                         <ul class="collection">
                         each value, param in exercise.params_description
                             <li class="collection-item"><b>#{param}</b>: #{value}</li>
