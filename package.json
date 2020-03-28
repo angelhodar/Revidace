@@ -7,7 +7,7 @@
     "start": "node server.js",
     "start-dev": "nodemon server.js",
     "populate-db": "node populate_db_exercises.js",
-    "client": "node test_client.js"
+    "client": "node tests/test_client.js"
   },
   "repository": {
     "type": "git",
