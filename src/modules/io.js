@@ -1,5 +1,5 @@
 // Models
-const DeviceSession = require('./models/device')
+const DeviceSession = require('../db/models/device')
 
 function create_io(server){
     const io = require('socket.io')(server)

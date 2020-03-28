@@ -1,5 +1,5 @@
 const express = require('express')
-const BaseExercise = require('../models/exercise')
+const BaseExercise = require('../db/models/exercise')
 const router = express.Router()
 
 router.get('/', async (req, res) => {
