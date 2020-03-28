@@ -1,4 +1,4 @@
-const db = require('./db')
+const db = require('./db_connector')
 const BaseExercise = require('./models/exercise')
 const Cube = require('./models/cube')
 const Matcher = require('./models/matcher')
