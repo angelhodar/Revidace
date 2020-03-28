@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const express = require('express')
 var session = require('express-session')
-var MongoDBStore = require('connect-mongodb-session')(session)
+var MongoDBStore = require('connect-mongo')(session)
 const app = express()
 const server = require('http').Server(app)
 const socketio = require('socket.io')(server)
@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static('public'))
 
 var store = new MongoDBStore({
-    uri: process.env.MONGO_CLUSTER,
+    mongooseConnection: db,
     collection: 'Sessions'
 });
 
