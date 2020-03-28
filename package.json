@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/angelhodar/AgreLink#readme",
   "dependencies": {
+    "acorn": "^7.1.1",
     "connect-mongodb-session": "^2.3.1",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
