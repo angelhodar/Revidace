@@ -1,7 +1,9 @@
 // Models
 const DeviceSession = require('./models/device')
 
-function create_io(io){
+function create_io(server){
+    const io = require('socket.io')(server)
+
     io.on('connection', function (socket) {
         console.log(`Client connected: socket.id`)
 

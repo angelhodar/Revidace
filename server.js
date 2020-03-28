@@ -5,8 +5,7 @@ var session = require('express-session')
 var MongoDBStore = require('connect-mongo')(session)
 const app = express()
 const server = require('http').Server(app)
-const socketio = require('socket.io')(server)
-const io = require('./io')(socketio)
+const io = require('./io')(server)
 const db = require('./db')
 
 // Routes
