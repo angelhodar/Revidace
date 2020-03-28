@@ -3,7 +3,7 @@ const Cube = require('./models/cube')
 const Matcher = require('./models/matcher')
 const IceCreamShop = require('./models/iceshop')
 const Sandwich = require('./models/sandwich')
-const Discriminator = require('./models/discriminator')
+const Discriminator = require('./models/clasification')
 const Recycle = require('./models/recycle')
 
 cube = new Cube({
@@ -50,9 +50,9 @@ sandwich = new Sandwich({
   }
 })
 
-discriminator = new Discriminator({
-  name: "Discriminación",
-  description: "Discriminar palabras en distintas temáticas según la palabra concreta",
+discriminator = new Clasification({
+  name: "Clasificación",
+  description: "Clasificar palabras en distintas temáticas según la palabra concreta",
   img: "voronoi.png",
   parameters: {
     ingredientes: 6,

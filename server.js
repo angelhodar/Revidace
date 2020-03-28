@@ -5,7 +5,8 @@ var session = require('express-session')
 var MongoDBStore = require('connect-mongodb-session')(session)
 const app = express()
 const server = require('http').Server(app)
-const io = require('socket.io')(server)
+const socketio = require('socket.io')(server)
+const io = require('./io')(socketio)
 const db = require('./db')
 
 // Routes
@@ -22,44 +23,21 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static('public'))
 
 var store = new MongoDBStore({
-    uri: process.env.MONGO_LOCAL,
+    uri: process.env.MONGO_CLUSTER,
     collection: 'Sessions'
 });
 
 // Catch session errors
-store.on('error', function(error) {
+store.on('error', function (error) {
     console.log(error);
 });
 
 app.use(session({
     secret: process.env.SECRET,
     store: store,
-    resave: true,
-    saveUninitialized: true
+    resave: false,
+    saveUninitialized: false
 }));
-
-let devices = []
-
-io.on('connection', function(socket){
-    console.log('Cliente conectado: ' + socket.id)
-
-    socket.on('device', function(data){
-        data.id = socket.id
-        data.results = []
-        devices.push(data)
-    })
-
-    socket.on('results', function(data, callback){
-        let device = devices.find(elem => elem.id == socket.id);
-        device.results.push(JSON.stringify(data))
-        callback('OK')
-    })
-
-    socket.on('disconnect', function(){
-        console.log('Cliente desconectado: ' + socket.id) 
-        devices = devices.filter(elem => elem.id != socket.id);
-    })
-})
 
 app.use('/', indexRouter)
 app.use('/devices', devicesRouter)
@@ -70,4 +48,3 @@ app.use('/register', registerRouter)
 server.listen(process.env.PORT || 3000)
 
 app.locals.io = io
-app.locals.devices = devices

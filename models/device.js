@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const Patient = require('./patient')
-const Result = require('./result')
+const Result = require('./exercise_results')
 
 const DeviceSessionSchema = mongoose.Schema({
     "sid": {
@@ -15,11 +15,15 @@ const DeviceSessionSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    "account": {
+        type: String,
+        required: true
+    },
     "patient": {
-        type: Patient
+        type: Patient.schema
     },
     "results": {
-        type: [Result]
+        type: [Result.schema]
     }
 })
 

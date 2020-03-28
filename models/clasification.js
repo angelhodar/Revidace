@@ -1,11 +1,11 @@
 const mongoose = require('mongoose')
 const BaseExercise = require('./exercise')
 
-const discriminatorSchema = mongoose.Schema({
+const clasificationSchema = mongoose.Schema({
     "parameters": {
         "subjects": {type: Number, default: 5},
         "words": {type: Number, default: 20},
-        "colored": {type: Boolean, default: true},
+        "colored": {type: Boolean, default: true}
     },
     "params_description": {
         "Temáticas": {type: String, default: "Número de las distintas temáticas en las que discriminar"},
@@ -14,4 +14,4 @@ const discriminatorSchema = mongoose.Schema({
     }
 })
 
-module.exports = BaseExercise.discriminator('Discriminator', discriminatorSchema)
+module.exports = BaseExercise.discriminator('Clasification', clasificationSchema)

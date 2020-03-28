@@ -1,8 +1,11 @@
 const express = require('express')
 const router = express.Router()
+const Devices = require('../models/device')
 
-router.get('/', (req, res) => {
-  res.render('devices', {devices : req.app.locals.devices})
+router.get('/', async (req, res) => {
+  let devices = await Devices.find()
+  devices = devices.map(function(device) {return device.toObject()})
+  res.render('devices', {devices : devices})
 })
 
 router.post('/', (req, res) => {
