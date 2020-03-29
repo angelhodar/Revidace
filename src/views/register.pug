@@ -5,24 +5,24 @@ block content
         <h2 class="header center orange-text">Registro</h2>
         <div class="valign-center">
             <div class="col s12 l6 xl6 push-l3 push-xl3 card-panel">
-                <form class="login-form">
+                <form class="login-form" action="register" method="post">
                     <div class="input-field col s12">
                         <i class="material-icons prefix">account_circle</i>
-                        <input id="username" type="text">
+                        <input name="username" type="text">
                         <label for="username">Usuario</label>
                     </div>
                     <div class="input-field col s12">
                         <i class="material-icons prefix">mail_outline</i>
-                        <input class="validate" id="email" type="email">
+                        <input class="validate" name="email" type="email">
                         <label for="email" data-error="wrong" data-success="right">Email</label>
                     </div>
                     <div class="input-field col s12">
                         <i class="material-icons prefix">lock_outline</i>
-                        <input id="password" type="password">
+                        <input name="password" type="password">
                         <label for="password">Contraseña</label>
                     </div>
                     <div class="input-field col s12">
-                        <a href="#" class="btn waves-effect blue waves-light col s12">Registrarse</a>
+                        <input type="submit" value="Registrarse" class="btn">
                     </div>
                 </form>
             </div>
