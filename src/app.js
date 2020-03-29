@@ -12,6 +12,7 @@ const db = require('./db/db_connector')
 const indexRouter = require('./routes/index')
 const devicesRouter = require('./routes/devices')
 const exercisesRouter = require('./routes/exercises')
+const dashboardRouter = require('./routes/dashboard')
 const loginRouter = require('./routes/login')
 const registerRouter = require('./routes/register')
 
@@ -41,6 +42,7 @@ app.use(session({
 app.use('/', indexRouter)
 app.use('/devices', devicesRouter)
 app.use('/exercises', exercisesRouter)
+app.use('/dashboard', dashboardRouter)
 app.use('/login', loginRouter)
 app.use('/register', registerRouter)
 
