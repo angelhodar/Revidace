@@ -12,13 +12,11 @@ router.post('/', (req, res) => {
   var email = req.body.email;
   var pass = req.body.password;
 
-  bcrypt.hash(pass, 10, (err, hash) => {
-    pass = hash
-
+  bcrypt.hash(pass, 10, (err, hashed_pw) => {
     var new_user = new User({
       "email": email,
-      "password": pass,
       "username": username,
+      "password": hashed_pw
     });
 
     new_user.save((err) => {
@@ -29,7 +27,7 @@ router.post('/', (req, res) => {
     });
   })
 
-  res.redirect('/');
+  res.redirect('/login');
 })
 
 module.exports = router

@@ -11,22 +11,17 @@ router.post('/', (req, res) => {
   var email = req.body.email;
   var candidate_pass = req.body.password;
   var query = User.findOne({ 'email': email })
-  var sessionData;
 
   query.exec((err, user) => {
-    console
     bcrypt.compare(candidate_pass, user.password, (err, result) => {
       if (result) {
-        sessionData = req.session;
-        sessionData.user = {
-          "name": user.username
-        }
+        req.session.user = { "name": user.username }
         res.redirect('/dashboard');
-      } else {
+      }
+      else {
         res.redirect('/');
       }
     });
-
   });
 
 
