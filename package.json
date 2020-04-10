@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node src/app.js",
     "start-dev": "nodemon src/app.js",
-    "populate-db": "node src/db/populate_exercises.js",
+    "populate-exercises": "node src/db/populate_exercises.js",
+    "populate-patients": "node src/db/populate_patients.js",
     "client": "node tests/test_client.js"
   },
   "repository": {

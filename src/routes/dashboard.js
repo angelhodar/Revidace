@@ -5,7 +5,19 @@ const router = express.Router()
 router.use(auth);
 
 router.get('/', (req, res) => {
-  res.render('dashboard', {'user':req.session.user})
+  res.redirect('dashboard/home')
+})
+
+router.get('/home', (req, res) => {
+  res.render('dashboard/home', {user: req.session.user})
+})
+
+router.get('/profile', (req, res) => {
+  res.render('dashboard/profile', {user: req.session.user})
+})
+
+router.post('/profile', (req, res) => {
+  // TODO: Update user profile data on DB validating it before
 })
 
 module.exports = router

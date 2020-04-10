@@ -1,20 +1,21 @@
 const express = require('express')
-const BaseExercise = require('../db/models/exercise')
+const Exercise = require('../db/models/exercise')
 const router = express.Router()
 
 router.get('/', async (req, res) => {
-  let exercises = await BaseExercise.find()
-  // Remove mongoose model metadata
-  exercises = exercises.map(function(exercise) {return exercise.toObject()})
-  res.render('exercises', {exercises: exercises})
+  let exercises = await Exercise.find().lean()
+  res.render('dashboard/exercises', {
+    user: req.session.user,
+    exercises: exercises
+  })
 })
 
-router.get('/new', async (req, res) => {
-  // Get the exercise creation form
+router.get('/new', (req, res) => {
+  // TODO: Create the exercise form view and route
 })
 
-router.post('/new', async (req, res) => {
-  // Submit that new exercise
+router.post('/new', (req, res) => {
+  // TODO: Submit that new exercise
 })
 
 module.exports = router

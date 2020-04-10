@@ -1,0 +1,55 @@
+mixin device(device, patients, exercises)
+    <div class="col s12 m6 l6 xl4">
+        <div class="card">
+            <div class="card-image">
+                <img src="/images/devices/quest.png">
+            </div>
+            <div class="card-content">
+                <span class="card-title center">#{device.account}<a href="#"></a></span>
+                <form id="device_form" method="POST">
+                    <input type="hidden" id="device_id" name="account" value=#{device.account}>
+                    <div class=row>
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">person</i>
+                            <select name="patient">
+                                <option value="" disabled selected>Asignar paciente</option>
+                                each patient in patients
+                                    <option value=#{patient._id}>#{patient.name}</option>
+                            </select>
+                            <label>Paciente</label>
+                        </div>
+                    </div>
+                    <div class=row>
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">description</i>
+                            <select name="exercise">
+                                <option value="null" disabled selected>Seleccionar ejercicio</option>
+                                each exercise in exercises
+                                    <option value=#{exercise._id}>#{exercise.name}</option>
+                            </select>
+                            <label>Ejercicio</label>
+                        </div>
+                    </div>
+                    <div class=row>
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">create</i>
+                            <select name="difficulty">
+                                <option value="null" disabled selected>Seleccionar dificultad</option>
+                                <option value="easy">Fácil</option>
+                                <option value="medium">Medio</option>
+                                <option value="difficult">Dificil</option>
+                            </select>
+                            <label>Dificultad</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 center-align">
+                            <button class="btn center-align" type="submit">Lanzar ejercicio
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

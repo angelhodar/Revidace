@@ -10,7 +10,7 @@ const Recycle = require('./models/recycle')
 cube = new Cube({
   name: "Cubos",
   description: "Se presentan unos cubos con tiempos de aparición aleatorios donde el paciente debe reaccionar con el mando adecuado para hacerlos desaparecer.",
-  img: "images/exercises/cubos.jpg",
+  img: "/images/exercises/cubos.jpg",
   parameters: {
     cantidad: 2,
     reaparicion: 2,
@@ -21,7 +21,7 @@ cube = new Cube({
 matcher = new Matcher({
   name: "Matcher",
   description: "El paciente debe usar el joystick del mando correspondiente para destruir ciertos objetos en el momento adecuado.",
-  img: "images/exercises/matcher.png",
+  img: "/images/exercises/matcher.png",
   parameters: {
     velocidad: 2,
     reaparicion: 3,
@@ -32,7 +32,7 @@ matcher = new Matcher({
 iceCreamShop = new IceCreamShop({
   name: "Heladeria",
   description: "Simulación de una heladería en la que el paciente deberá atender a un conjunto de clientes sirviendo helados.",
-  img: "images/exercises/heladeria.jpg",
+  img: "/images/exercises/heladeria.jpg",
   parameters: {
     sabores: 6,
     clientes: 1,
@@ -43,7 +43,7 @@ iceCreamShop = new IceCreamShop({
 sandwich = new Sandwich({
   name: "Sandwich",
   description: "Creación de diferentes sandwiches con número de ingredientes y pisos variable.",
-  img: "images/exercises/sandwich.jpg",
+  img: "/images/exercises/sandwich.jpg",
   parameters: {
     ingredientes: 6,
     pisos: 2,
@@ -54,7 +54,7 @@ sandwich = new Sandwich({
 discriminator = new Clasification({
   name: "Clasificación",
   description: "Clasificar palabras en distintas temáticas según la palabra concreta",
-  img: "images/exercises/voronoi.png",
+  img: "/images/exercises/voronoi.png",
   parameters: {
     ingredientes: 6,
     pisos: 2,
@@ -65,7 +65,7 @@ discriminator = new Clasification({
 recycle = new Recycle({
   name: "Reciclaje",
   description: "Reciclado de distintos objetos en sus cubos correspondientes",
-  img: "images/exercises/reciclaje.jpg",
+  img: "/images/exercises/reciclaje.jpg",
   parameters: {
     ingredientes: 6,
     pisos: 2,

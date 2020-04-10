@@ -15,7 +15,10 @@ router.post('/', (req, res) => {
   query.exec((err, user) => {
     bcrypt.compare(candidate_pass, user.password, (err, result) => {
       if (result) {
-        req.session.user = { "name": user.username }
+        req.session.user = {
+          "name": user.username,
+          "email": user.email
+        }
         res.redirect('/dashboard');
       }
       else {

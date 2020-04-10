@@ -1,3 +1,21 @@
 .tabs .indicator {
     background-color:#26a69a;
 }
+
+.tabs .tab a:focus.active {
+    background-color: rgb(38, 166, 154);
+}
+
+header, main, footer {
+    padding-left: 300px;
+}
+
+@media only screen and (max-width : 992px) {
+    header, main, footer {
+        padding-left: 0;
+    }
+}
+
+#dashboard-content {
+    padding: 10px;
+}

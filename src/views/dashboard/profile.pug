@@ -1,0 +1,63 @@
+extends dashboard.pug
+
+block dashboard-content
+    <div id="profile-card" class="card">
+        <form method="POST">
+            <div class="card-content">
+                <span class="card-title grey-text center text-darken-2">Perfil</span>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">account_box</i><input id="id_username" name="username" type="text" disabled>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12" id="id_email_container">
+                        <i class="material-icons prefix">email</i><input id="id_email" name="email" type="email" disabled>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 required" id="id_password_container">
+                        <i class="material-icons prefix">lock_open</i><input id="id_password" name="password" type="password" disabled>
+                    </div>
+                </div>
+                </div>
+                <div class="section row">
+                    <div class="col s12">
+                        <h5>Datos personales</h5>
+                    <div class="layout-row row">
+                        <div class="col s12 m6">
+                            <div class="row">
+                                <div class="input-field col s12" id="id_first_name_container">
+                                    <input id="id_first_name" name="first_name" type="text">
+                                    <label for="id_first_name">Nombre</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s12 m6">
+                            <div class="row">
+                                <div class="input-field col s12" id="id_last_name_container">
+                                    <input id="id_last_name" name="last_name" type="text">
+                                    <label for="id_last_name">Apellidos</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 required" id="id_gender_container">
+                        <select>
+                            <option value="" disabled selected>Numale</option>
+                            <option value="F">Female</option>
+                            <option value="M">Male</option>
+                        </select>
+                        <label>Género</label>
+                    </div>
+                </div>
+                <div class="card-action">
+                    <div class="center-align">
+                        <button class="waves-effect waves-light btn" type="submit">Actualizar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
