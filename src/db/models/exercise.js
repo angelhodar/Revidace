@@ -1,5 +1,11 @@
 const mongoose = require('mongoose')
 
+const parameterSchema = mongoose.Schema({
+    "name": String,
+    "description": String,
+    "value" : mongoose.Schema.Types.Mixed
+})
+
 const exerciseSchema = mongoose.Schema({
     "name" : {
         type: String,

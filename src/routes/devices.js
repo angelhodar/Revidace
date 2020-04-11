@@ -16,7 +16,12 @@ router.get('/', async (req, res) => {
   })
 })
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
+  let device = await Device.findById(req.body.device_id).lean()
+  console.log(device)
+  let assigned_patient = await Patient.findById(req.body.patient)
+  console.log(assigned_patient)
+  const status = await Device.updateOne({_id: req.body.device_id}, {patient: assigned_patient})
   // TODO: Update device model on DB with req.body.patient
   // Get all form params like req.body.exercise, req.body.difficulty
   // and so on and pass to req.app.locals.io to run exercise
