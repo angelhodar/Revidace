@@ -1,13 +1,15 @@
 extends dashboard.pug
 
 block dashboard-content
-    <div id="dashboard-card" class="card">
-        <div id="dashboard-card-content" class="card-content">
+    <div id="patients-card" class="card">
+        <div id="patients-card-content" class="card-content">
             <div class="card-title center">Pacientes</div>
             <div class="row">
             each patient_data in patients
-                include ../partials/patient
-                +patient(patient_data)
+                <div class="col s12 m6 l4 xl3">
+                    include ../partials/patient
+                    +patient(patient_data)
+                </div>
             </div>
         </div>
     </div>

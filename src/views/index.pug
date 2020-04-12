@@ -2,237 +2,34 @@ extends layout.pug
 
 block content
 
-  <!--  Main Header Section   -->
-  <div class="section no-pad-bot" id="index-banner">
-    <div class="container">
-      <h1 class="header center blue-text">AgreLink</h1>
-      <div class="row center">
-        <h5 class="header col s12 light">Automatización de ejercicios con realidad virtual para personas con daño cerebral adquirido</h5>
-      </div>
-      <div class="row center">
-        <a href="/login" class="btn-large waves-effect waves-light blue">Ingresar</a>
-        <a href="/register" class="btn-large waves-effect waves-light teal">Registrarse</a>
-      </div>
-    </div>
+  <!--  Banner Section   -->
+  <div class="section" id="banner-section">
+    include sections/banner
   </div>
 
   <!-- Automated Section -->
-  <div class="section">
-    <div class="container">
-      <div class="row">
-        <div class="col s12">
-          <div class="icon-block">
-            <h2 class="center"><i class="large material-icons teal-text">autorenew</i></h2>
-            <h4 class="center">Automatizado</h4>
-            <h6 class="light center">Todo el proceso de recolección y procesado de datos se hace automaticamente.</h6>
-          </div>
-        </div>
-      </div>
-      <div class="row center">
-        <div class="col s12">
-          <img class="responsive-img" src="images/cycle_diagram.png">
-        </div>
-      </div>
-    </div>
+  <div class="section" id="automated-section">
+    include sections/automated
   </div>
 
   <!-- Exercises Section -->
-  <div class="section">
+  <div class="section" id="exercises-section">
     <div class="container">
-      <div class="row">
-        <div class="col s12">
-          <div class="icon-block">
-            <h2 class="center light-teal-text"><i class="large material-icons teal-text">edit</i></h2>
-            <h4 class="center">Diverso</h4>
-            <h6 class="light center">Amplio catálogo de ejercicios para adaptarse a la patología concreta de cada paciente.</h6>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-      each exercise in exercises
-        include partials/exercise
-        +exercise(exercise)
-      </div>
+      include sections/exercises_sample
     </div>
   </div>
 
   <!-- Exercise Personalization Section -->
-  <div class="section">
+  <div class="section" id="personalization-section">
     <div class="container">
-      <div class="row">
-        <div class="col s12">
-          <div class="icon-block">
-            <h2 class="center light-teal-text"><i class="large material-icons teal-text">settings</i></h2>
-            <h4 class="center">Personalizable</h4>
-            <h6 class="light center">Personaliza la dificultad de cada ejercicio con los parámetros que se ajusten mejor a cada paciente.</h6>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col s12">
-          <ul class="tabs blue z-depth-1">
-            <li class="tab col s4"><a class="active white-text" href="#facil">Fácil</a></li>
-            <li class="tab col s4"><a class="white-text" href="#medio">Medio</a></li>
-            <li class="tab col s4"><a class="white-text" href="#dificil">Dificil</a></li>
-          </ul>
-        </div>
-      </div>
-        <div class="row">
-        <div class="container">
-          <div id="facil" class="col s12 m12 l6 xl6">
-            <table>
-              <thead>
-                <tr>
-                  <th>Parámetro</th>
-                  <th>Descripción</th>
-                  <th>Valor</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Ingredientes</td>
-                  <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce et.</td>
-                  <td>6</td>
-                </tr>
-                <tr>
-                  <td>Pisos</td>
-                  <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce et.</td>
-                  <td>3</td>
-                </tr>
-                <tr>
-                  <td>Duracion</td>
-                  <td>Tiempo en segundos de duración del ejercicio</td>
-                  <td>60</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div id="medio" class="col s12 m12 l6 xl6" style="display: none;">
-            <table>
-              <thead>
-                <tr>
-                  <th>Parámetro</th>
-                  <th>Descripción</th>
-                  <th>Valor</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Ingredientes</td>
-                  <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce et.</td>
-                  <td>9</td>
-                </tr>
-                <tr>
-                  <td>Pisos</td>
-                  <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce et.</td>
-                  <td>5</td>
-                </tr>
-                <tr>
-                  <td>Duracion</td>
-                  <td>Tiempo en segundos de duración del ejercicio</td>
-                  <td>120</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div id="dificil" class="col s12 m12 l6 xl6" style="display: none;">
-            <table>
-              <thead>
-                <tr>
-                  <th>Parámetro</th>
-                  <th>Descripción</th>
-                  <th>Valor</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Ingredientes</td>
-                  <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce et.</td>
-                  <td>12</td>
-                </tr>
-                <tr>
-                  <td>Pisos</td>
-                  <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce et.</td>
-                  <td>7</td>
-                </tr>
-                <tr>
-                  <td>Duracion</td>
-                  <td>Tiempo en segundos de duración del ejercicio</td>
-                  <td>180</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="col s12 x6 l6 xl6">
-            <div class="card hoverable">
-              <div class="card-image waves-effect waves-block waves-light">
-                <img src="images/exercises/sandwich.jpg">
-              </div>
-              <div class="card-content">
-                <span class="card-title">Sandwich</span>
-                <p>Creación de diferentes sandwiches con número de ingredientes y pisos variable.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        </div>
-      </div>
+      include sections/personalization
+      +personalization(exercises[3])
     </div>
   </div>
 
-  <!-- Engines Section -->
-  <div class="section">
+    <!-- Engines Section -->
+  <div class="section" id="engines-section">
     <div class="container">
-      <div class="row">
-        <div class="col s12">
-          <div class="icon-block">
-            <h2 class="center light-brown-text"><i class="large material-icons teal-text">code</i></h2>
-            <h4 class="center">Adaptable</h4>
-            <h6 class="light center">Toda la funcionalidad puede ser creada en el motor gráfico que se quiera. Sin restricciones.</h6>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col s12 m6 l4 xl3 push-xl3">
-          <div class="card sticky-action hoverable">
-            <div class="card-image">
-              <img src="images/engines/unreal.png">
-            </div>
-            <div class="card-content">
-              <span class="card-title">Unreal Engine<i class="material-icons light-green-text right">android</i><i class="material-icons right">desktop_windows</i></span>
-            </div>
-            <div class="card-action">
-              <a href="#">Descargar Cliente</a>
-            </div>
-          </div>
-        </div>
-        <div class="col s12 m6 l4 xl3 push-xl3">
-          <div class="card sticky-action hoverable">
-            <div class="card-image">
-              <img src="images/engines/unity.png">
-            </div>
-            <div class="card-content">
-              <span class="card-title">Unity<i class="material-icons light-green-text right">android</i><i class="material-icons right">desktop_windows</i></span>
-            </div>
-            <div class="card-action">
-              <a href="#">Descargar Cliente</a>
-            </div>
-          </div>
-        </div>
-      </div>
+      include sections/flexible
     </div>
   </div>
-
-  <!-- Footer -->
-  <footer class="page-footer blue">
-    <div class="container">
-      <div class="row">
-        <div class="col l6 s12">
-          <h5 class="white-text">AgreLink</h5>
-        </div>
-      </div>
-    </div>
-    <div class="footer-copyright blue">
-      <div class="container">© 2020 Copyright</div>
-    </div>
-  </footer>

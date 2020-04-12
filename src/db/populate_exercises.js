@@ -1,94 +1,261 @@
 const db = require('./db_connector')
-const BaseExercise = require('./models/exercise')
-const Cube = require('./models/cube')
-const Matcher = require('./models/matcher')
-const IceCreamShop = require('./models/iceshop')
-const Sandwich = require('./models/sandwich')
-const Clasification = require('./models/clasification')
-const Recycle = require('./models/recycle')
+const Exercise = require('./models/exercise')
 
-cube = new Cube({
-  name: "Cubos",
-  description: "Se presentan unos cubos con tiempos de aparición aleatorios donde el paciente debe reaccionar con el mando adecuado para hacerlos desaparecer.",
-  img: "/images/exercises/cubos.jpg",
-  parameters: {
-    cantidad: 2,
-    reaparicion: 2,
-    duracion: 40
-  }
-})
+exercises = [
+  cube = new Exercise({
+    name: "Cubos",
+    description: "Se presentan unos cubos con tiempos de aparición aleatorios donde el paciente debe reaccionar con el mando adecuado para hacerlos desaparecer.",
+    img: "/images/exercises/cubos.jpg",
+    parameters: {
+      amount: {
+        name: "Cantidad",
+        description: "Número de cubos a mostrar",
+        value: 2
+      },
+      respawn: {
+        name: "Reaparición",
+        description: "Tiempo de reaparición de los cubos",
+        value: 2
+      },
+      duration: {
+        name: "Duración",
+        description: "Duración del ejercicio en segundos",
+        value: 40
+      }
+    },
+    profiles: {
+      easy: {
+        amount: 2,
+        respawn: 4,
+        duration: 30
+      },
+      medium: {
+        amount: 4,
+        respawn: 3,
+        duration: 60,
+      },
+      hard: {
+        amount: 6,
+        respawn: 2,
+        duration: 120
+      }
+    }
+  }),
+  matcher = new Exercise({
+    name: "Matcher",
+    description: "El paciente debe usar el joystick del mando correspondiente para destruir ciertos objetos en el momento adecuado.",
+    img: "/images/exercises/matcher.png",
+    parameters: {
+      speed: {
+        name: "Velocidad",
+        description: "Velocidad a la que los patrones se acercan al paciente",
+        value: 2
+      },
+      respawn: {
+        name: "Reaparición",
+        description: "Tiempo de reaparición de los cubos",
+        value: 3
+      },
+      duration: {
+        name: "Duración",
+        description: "Duración del ejercicio en segundos",
+        value: 40
+      }
+    },
+    profiles: {
+      easy: {
+        speed: 2,
+        respawn: 4,
+        duration: 30
+      },
+      medium: {
+        speed: 4,
+        respawn: 3,
+        duration: 60,
+      },
+      hard: {
+        speed: 6,
+        respawn: 2,
+        duration: 120
+      }
+    }
+  }),
+  iceCreamShop = new Exercise({
+    name: "Heladeria",
+    description: "Simulación de una heladería en la que el paciente deberá atender a un conjunto de clientes sirviendo helados.",
+    img: "/images/exercises/heladeria.jpg",
+    parameters: {
+      flavors: {
+        name: "Sabores",
+        description: "Número de sabores de helado disponibles",
+        value: 6
+      },
+      clients: {
+        name: "Clientes",
+        description: "Número de clientes simultáneos a los que atender",
+        value: 1
+      },
+      duration: {
+        name: "Duración",
+        description: "Duración del ejercicio en segundos",
+        value: 60
+      }
+    },
+    profiles: {
+      easy: {
+        flavors: 4,
+        clients: 1,
+        duration: 30
+      },
+      medium: {
+        flavors: 6,
+        clients: 2,
+        duration: 60,
+      },
+      hard: {
+        flavors: 8,
+        clients: 3,
+        duration: 120
+      }
+    }
+  }),
+  sandwich = new Exercise({
+    name: "Sandwich",
+    description: "Creación de diferentes sandwiches con número de ingredientes y pisos variable.",
+    img: "/images/exercises/sandwich.jpg",
+    parameters: {
+      ingredients: {
+        name: "Ingredientes",
+        description: "Número de ingredientes totales",
+        value: 6
+      },
+      floors: {
+        name: "Pisos",
+        description: "Numero de pisos de sandwich necesarios",
+        value: 2
+      },
+      duration: {
+        name: "Duración",
+        description: "Duración del ejercicio en segundos",
+        value: 60
+      }
+    },
+    profiles: {
+      easy: {
+        ingredients: 4,
+        floors: 2,
+        duration: 30
+      },
+      medium: {
+        ingredients: 6,
+        floors: 3,
+        duration: 60,
+      },
+      hard: {
+        ingredients: 8,
+        floors: 4,
+        duration: 120
+      }
+    }
+  }),
+  clasification = new Exercise({
+    name: "Clasificación",
+    description: "Clasificar palabras en distintas temáticas según la palabra concreta",
+    img: "/images/exercises/voronoi.png",
+    parameters: {
+      subjects: {
+        name: "Asignaturas",
+        description: "Número de las distintas temáticas en las que discriminar",
+        value: 6
+      },
+      words: {
+        name: "Palabras",
+        description: "Cantidad de palabras a discriminar",
+        value: 20
+      },
+      colored: {
+        name: "Colorear",
+        description: "Si se quiere especificar un color único a cada temática",
+        value: true
+      },
+      duration: {
+        name: "Duración",
+        description: "Duración del ejercicio en segundos",
+        value: 60
+      }
+    },
+    profiles: {
+      easy: {
+        subjects: 4,
+        words: 10,
+        colored: false,
+        duration: 30
+      },
+      medium: {
+        subjects: 6,
+        words: 20,
+        colored: false,
+        duration: 60,
+      },
+      hard: {
+        subjects: 8,
+        words: 30,
+        colored: true,
+        duration: 120
+      }
+    }
+  }),
+  recycle = new Exercise({
+    name: "Reciclaje",
+    description: "Reciclado de distintos objetos en sus cubos correspondientes",
+    img: "/images/exercises/reciclaje.jpg",
+    parameters: {
+      materials: {
+        name: "Materiales",
+        description: "Número de distintos materiales a reciclar",
+        value: 3
+      },
+      objects: {
+        name: "Objetos",
+        description: "Cantidad de objetos distintos a reciclar",
+        value: 10
+      },
+      duration: {
+        name: "Duración",
+        description: "Duración del ejercicio en segundos",
+        value: 60
+      }
+    },
+    profiles: {
+      easy: {
+        materials: 3,
+        objects: 5,
+        duration: 30
+      },
+      medium: {
+        materials: 4,
+        objects: 8,
+        duration: 60,
+      },
+      hard: {
+        materials: 5,
+        objects: 12,
+        duration: 120
+      }
+    }
+  })
+]
 
-matcher = new Matcher({
-  name: "Matcher",
-  description: "El paciente debe usar el joystick del mando correspondiente para destruir ciertos objetos en el momento adecuado.",
-  img: "/images/exercises/matcher.png",
-  parameters: {
-    velocidad: 2,
-    reaparicion: 3,
-    duracion: 40
-  }
-})
-
-iceCreamShop = new IceCreamShop({
-  name: "Heladeria",
-  description: "Simulación de una heladería en la que el paciente deberá atender a un conjunto de clientes sirviendo helados.",
-  img: "/images/exercises/heladeria.jpg",
-  parameters: {
-    sabores: 6,
-    clientes: 1,
-    duracion: 60
-  }
-})
-
-sandwich = new Sandwich({
-  name: "Sandwich",
-  description: "Creación de diferentes sandwiches con número de ingredientes y pisos variable.",
-  img: "/images/exercises/sandwich.jpg",
-  parameters: {
-    ingredientes: 6,
-    pisos: 2,
-    duracion: 60
-  }
-})
-
-discriminator = new Clasification({
-  name: "Clasificación",
-  description: "Clasificar palabras en distintas temáticas según la palabra concreta",
-  img: "/images/exercises/voronoi.png",
-  parameters: {
-    ingredientes: 6,
-    pisos: 2,
-    duracion: 60
-  }
-})
-
-recycle = new Recycle({
-  name: "Reciclaje",
-  description: "Reciclado de distintos objetos en sus cubos correspondientes",
-  img: "/images/exercises/reciclaje.jpg",
-  parameters: {
-    ingredientes: 6,
-    pisos: 2,
-    duracion: 60
-  }
-})
-
-async function populate() {
-  cube = await cube.save();
-  matcher = await matcher.save();
-  iceCreamShop = await iceCreamShop.save();
-  sandwich = await sandwich.save();
-  discriminator = await discriminator.save();
-  recycle = await recycle.save();
-}
-
-BaseExercise.deleteMany({}, function(error){
-  if (error)
+Exercise.deleteMany({}, function(error) {
+  if (error) {
     console.log(error)
-  else
-    console.log("Removed")
+  } else {
+    exercises.forEach(exercise => {
+      exercise.save(function(error) {
+        if (error) console.log(error)
+      })
+    })
+  }
 })
-
-populate()
 
 console.log("Finished")

@@ -6,12 +6,12 @@
     background-color: rgb(38, 166, 154);
 }
 
-header, main, footer {
+header, main {
     padding-left: 300px;
 }
 
 @media only screen and (max-width : 992px) {
-    header, main, footer {
+    header, main {
         padding-left: 0;
     }
 }

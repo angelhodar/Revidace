@@ -1,26 +1,9 @@
 extends ../layout.pug
 
 block content
-    <header>
-        <ul id="dashboard-panel" class="sidenav sidenav-fixed">
-            <li>
-                <div class="user-view">
-                    <div class="background"><img src="/images/user_background.jpg"></div>
-                    <a href="#user"><img class="circle" src="/images/default_user_pic.jpg"></a>
-                    <a href="#name"><span class="white-text name">#{user.name}</span></a>
-                    <a href="#email"><span class="white-text email">#{user.email}</span></a>
-                </div>
-            </li>
-            <li><a class="waves-effect" href="profile"><i class="material-icons">account_box</i>Perfil</a></li>
-            <li><div class="divider"></div></li>
-            <li><a class="waves-effect" href="devices"><i class="material-icons">devices</i>Dispositivos</a></li>
-            <li><a class="waves-effect" href="patients"><i class="material-icons">people</i>Pacientes</a></li>
-            <li><a class="waves-effect" href="exercises"><i class="material-icons">mode_edit</i>Ejercicios</a></li>
-            <li><div class="divider"></div></li>
-            <li><a href="/logout"><i class="material-icons left">exit_to_app</i>Salir</a></li>
-        </ul>
-    </header>
 
+    include ../partials/panel
+    
     <main>
         <nav class="topbar">
             <div class="nav-wrapper teal">

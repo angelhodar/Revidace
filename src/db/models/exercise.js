@@ -1,30 +1,32 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
-const parameterSchema = mongoose.Schema({
-    "name": String,
-    "description": String,
-    "value" : mongoose.Schema.Types.Mixed
-})
+const ParameterSchema = mongoose.Schema({
+  name: String,
+  description: String,
+  value: {},
+});
 
-const exerciseSchema = mongoose.Schema({
-    "name" : {
-        type: String,
-        required: true
-    },
-    "description": {
-        type: String,
-        required: true
-    },
-    "img": {
-        type: String,
-        required: true
-    },
-    "parameters": {
-        "duracion": {type: Number, default: 60} 
-    },
-    "params_description": {
-        "Duración": {type: String, default: "Duración del ejercicio en segundos"},
-    }
-})
+const ExerciseSchema = mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  img: {
+    type: String,
+    required: true,
+  },
+  parameters: {
+    type: Map,
+    of: ParameterSchema,
+  },
+  profiles : {
+    type: Map,
+    of: {}
+  }
+});
 
-module.exports = mongoose.model('Exercise', exerciseSchema)
+module.exports = mongoose.model("Exercise", ExerciseSchema);
