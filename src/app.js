@@ -7,7 +7,7 @@ const app = express();
 const server = require("http").Server(app);
 const io = require("./modules/io")(server);
 const db = require("./db/db_connector");
-
+// Prueba pull request
 // Routes
 const indexRouter = require("./routes/index");
 const devicesRouter = require("./routes/devices");
