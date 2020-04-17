@@ -17,6 +17,7 @@ const resultsRouter = require("./routes/results");
 const dashboardRouter = require("./routes/dashboard");
 const loginRouter = require("./routes/login");
 const registerRouter = require("./routes/register");
+const logoutRouter = require("./routes/logout");
 
 app.set("view engine", "pug");
 app.set("views", __dirname + "/views");
@@ -51,6 +52,7 @@ app.use("/dashboard/results", resultsRouter);
 app.use("/dashboard", dashboardRouter);
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
+app.use("/logout", logoutRouter);
 
 server.listen(process.env.PORT || 3000);
 
