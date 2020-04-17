@@ -9,6 +9,10 @@ block content
         <div class="valign-wrapper">
             <div class="col s12 l6 xl6 pull-l3 pull-xl3 card-panel">
                 <form class="login-form" action="login" method="post">
+                    if error
+                        <div class="row center">
+                            <p class="card-panel red center white-text">Usuario o contraseña incorrectos</p>
+                        </div>
                     <div class="input-field col s12">
                         <i class="material-icons prefix">mail_outline</i>
                         <input class="validate" id="email" name="email" type="email">
