@@ -2,14 +2,14 @@ const mongoose = require("mongoose");
 
 const ParameterSchema = mongoose.Schema({
   name: String,
-  description: String,
-  value: {},
+  description: String
 });
 
 const ExerciseSchema = mongoose.Schema({
   name: {
     type: String,
     required: true,
+    unique: true
   },
   description: {
     type: String,

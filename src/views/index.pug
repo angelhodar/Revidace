@@ -2,34 +2,30 @@ extends layout.pug
 
 block content
 
-  <!--  Banner Section   -->
-  <div class="section" id="banner-section">
-    include sections/banner
-  </div>
+  <div class="container">
+    <!--  Banner Section   -->
+    <div class="section" id="banner-section">
+      include sections/banner
+    </div>
 
-  <!-- Automated Section -->
-  <div class="section" id="automated-section">
-    include sections/automated
-  </div>
+    <!-- Automated Section -->
+    <div class="section" id="automated-section">
+      include sections/automated
+    </div>
 
-  <!-- Exercises Section -->
-  <div class="section" id="exercises-section">
-    <div class="container">
+    <!-- Exercises Section -->
+    <div class="section" id="exercises-section">
       include sections/exercises_sample
     </div>
-  </div>
 
-  <!-- Exercise Personalization Section -->
-  <div class="section" id="personalization-section">
-    <div class="container">
+    <!-- Exercise Personalization Section -->
+    <div class="section" id="personalization-section">
       include sections/personalization
       +personalization(exercises[3])
     </div>
-  </div>
 
-    <!-- Engines Section -->
-  <div class="section" id="engines-section">
-    <div class="container">
+      <!-- Engines Section -->
+    <div class="section" id="engines-section">
       include sections/flexible
     </div>
   </div>

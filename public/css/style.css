@@ -19,3 +19,7 @@ header, main {
 #dashboard-content {
     padding: 10px;
 }
+
+#results-card {
+    height: 100vh;
+}

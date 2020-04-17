@@ -1,4 +1,24 @@
 extends dashboard.pug
 
 block dashboard-content
-    <h2>TODO: Create table from JSON to see results</h2>
+    <div id="results-card" class="card">
+        <div class="results-card-content">
+            <div class="card-title center">Resultados</div>
+            <div class="container">
+                <ul id="results-collapsible" class="collapsible popout">
+                each patient in patients
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">person</i>#{patient.name}</div>
+                        <div class="collapsible-body">
+                            <ul class="collection">
+                                <li class="collection-item"><div>Cubos - Dificil - 10/03/2020 14:00:00<a href="#!" class="secondary-content"><i class="material-icons">receipt</i></a></div></li>
+                                <li class="collection-item"><div>Heladeria - Facil - 10/03/2020 14:30:00<a href="#!" class="secondary-content"><i class="material-icons">receipt</i></a></div></li>
+                                <li class="collection-item"><div>Sandwich - Dificil - 10/03/2020 15:00:00<a href="#!" class="secondary-content"><i class="material-icons">receipt</i></a></div></li>
+                                <li class="collection-item"><div>Reciclaje - Medio - 10/03/2020 15:30:00<a href="#!" class="secondary-content"><i class="material-icons">receipt</i></a></div></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>

@@ -9,6 +9,7 @@ var MONGO_URI = process.env.MONGO_LOCAL
 mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useCreateIndex: true
 });
 
 var db = mongoose.connection;

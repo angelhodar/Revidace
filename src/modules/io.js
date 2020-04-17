@@ -4,7 +4,7 @@ function create_io(server) {
   const io = require("socket.io")(server);
 
   io.on("connection", function (socket) {
-    console.log(`Client connected: socket.id`);
+    console.log(`Client connected: ${socket.id}`);
 
     socket.on("device", function (data) {
       device = new Device({
@@ -21,16 +21,15 @@ function create_io(server) {
     });
 
     socket.on("results", function (data, callback) {
-      Device.findOneAndUpdate(
-        { sid: socket.sid },
-        { $push: { results: data } }
-      );
-      callback("OK");
+      Device.updateOne({ sid: socket.id }, { result: data }, (error) => {
+        if (error) console.log(error);
+        else callback("OK");
+      });
     });
 
     socket.on("disconnect", function () {
       console.log(`Client disconnected: ${socket.id}`);
-      Device.deleteOne({ sid: socket.id }, function (error) {
+      Device.deleteOne({ sid: socket.id }, (error) => {
         if (error) console.log(error);
         console.log(`Client ${socket.id} deleted from DB`);
       });

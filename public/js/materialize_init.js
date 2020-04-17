@@ -5,4 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
     var nav_instances = M.Sidenav.init(navs);
     var tabs = document.querySelectorAll('.tabs');
     var tabs_instances = M.Tabs.init(tabs);
+    var collapsibles = document.querySelectorAll('.collapsible');
+    var collap_instances = M.Collapsible.init(collapsibles);
 });

@@ -21,11 +21,12 @@ io.on("connect", function () {
     console.log("Exercise received: " + data);
     console.log("Emitting results...");
     let results = {
-      tipos: ["rojo", "azul"],
+      var1: 5,
+      var2: 10,
       tiempo: 20,
     };
-    io.emit("results", JSON.stringify(results, null, 4), function (response) {
-      console.log("Results emitted");
+    io.emit("results", results, function (response) {
+      console.log("Response: " + response);
     });
   });
 });

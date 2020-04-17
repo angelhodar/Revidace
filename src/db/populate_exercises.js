@@ -9,18 +9,15 @@ exercises = [
     parameters: {
       amount: {
         name: "Cantidad",
-        description: "Número de cubos a mostrar",
-        value: 2
+        description: "Número de cubos a mostrar"
       },
       respawn: {
         name: "Reaparición",
-        description: "Tiempo de reaparición de los cubos",
-        value: 2
+        description: "Tiempo de reaparición de los cubos"
       },
       duration: {
         name: "Duración",
-        description: "Duración del ejercicio en segundos",
-        value: 40
+        description: "Duración del ejercicio en segundos"
       }
     },
     profiles: {
@@ -48,18 +45,15 @@ exercises = [
     parameters: {
       speed: {
         name: "Velocidad",
-        description: "Velocidad a la que los patrones se acercan al paciente",
-        value: 2
+        description: "Velocidad a la que los patrones se acercan al paciente"
       },
       respawn: {
         name: "Reaparición",
-        description: "Tiempo de reaparición de los cubos",
-        value: 3
+        description: "Tiempo de reaparición de los cubos"
       },
       duration: {
         name: "Duración",
-        description: "Duración del ejercicio en segundos",
-        value: 40
+        description: "Duración del ejercicio en segundos"
       }
     },
     profiles: {
@@ -87,18 +81,15 @@ exercises = [
     parameters: {
       flavors: {
         name: "Sabores",
-        description: "Número de sabores de helado disponibles",
-        value: 6
+        description: "Número de sabores de helado disponibles"
       },
       clients: {
         name: "Clientes",
-        description: "Número de clientes simultáneos a los que atender",
-        value: 1
+        description: "Número de clientes simultáneos a los que atender"
       },
       duration: {
         name: "Duración",
-        description: "Duración del ejercicio en segundos",
-        value: 60
+        description: "Duración del ejercicio en segundos"
       }
     },
     profiles: {
@@ -126,18 +117,15 @@ exercises = [
     parameters: {
       ingredients: {
         name: "Ingredientes",
-        description: "Número de ingredientes totales",
-        value: 6
+        description: "Número de ingredientes totales"
       },
       floors: {
         name: "Pisos",
-        description: "Numero de pisos de sandwich necesarios",
-        value: 2
+        description: "Numero de pisos de sandwich necesarios"
       },
       duration: {
         name: "Duración",
-        description: "Duración del ejercicio en segundos",
-        value: 60
+        description: "Duración del ejercicio en segundos"
       }
     },
     profiles: {
@@ -165,23 +153,19 @@ exercises = [
     parameters: {
       subjects: {
         name: "Asignaturas",
-        description: "Número de las distintas temáticas en las que discriminar",
-        value: 6
+        description: "Número de las distintas temáticas en las que discriminar"
       },
       words: {
         name: "Palabras",
-        description: "Cantidad de palabras a discriminar",
-        value: 20
+        description: "Cantidad de palabras a discriminar"
       },
       colored: {
         name: "Colorear",
-        description: "Si se quiere especificar un color único a cada temática",
-        value: true
+        description: "Si se quiere especificar un color único a cada temática"
       },
       duration: {
         name: "Duración",
-        description: "Duración del ejercicio en segundos",
-        value: 60
+        description: "Duración del ejercicio en segundos"
       }
     },
     profiles: {
@@ -212,18 +196,15 @@ exercises = [
     parameters: {
       materials: {
         name: "Materiales",
-        description: "Número de distintos materiales a reciclar",
-        value: 3
+        description: "Número de distintos materiales a reciclar"
       },
       objects: {
         name: "Objetos",
-        description: "Cantidad de objetos distintos a reciclar",
-        value: 10
+        description: "Cantidad de objetos distintos a reciclar"
       },
       duration: {
         name: "Duración",
-        description: "Duración del ejercicio en segundos",
-        value: 60
+        description: "Duración del ejercicio en segundos"
       }
     },
     profiles: {

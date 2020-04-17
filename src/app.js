@@ -13,6 +13,7 @@ const indexRouter = require("./routes/index");
 const devicesRouter = require("./routes/devices");
 const exercisesRouter = require("./routes/exercises");
 const patientsRouter = require("./routes/patients");
+const resultsRouter = require("./routes/results");
 const dashboardRouter = require("./routes/dashboard");
 const loginRouter = require("./routes/login");
 const registerRouter = require("./routes/register");
@@ -25,7 +26,7 @@ app.use(express.static("public"));
 
 var store = new MongoDBStore({
   mongooseConnection: db,
-  collection: "Sessions",
+  collection: "sessions",
 });
 
 // Catch session errors
@@ -46,6 +47,7 @@ app.use("/", indexRouter);
 app.use("/dashboard/devices", devicesRouter);
 app.use("/dashboard/exercises", exercisesRouter);
 app.use("/dashboard/patients", patientsRouter);
+app.use("/dashboard/results", resultsRouter);
 app.use("/dashboard", dashboardRouter);
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);

@@ -7,7 +7,7 @@ block dashboard-content
             <div class="row">
             each device_data in devices
                 <div class="col s12 m6 l6 xl4">
-                    include ../partials/device
+                    include ../components/device
                     +device(device_data, patients, exercises)
                 </div>
             </div>

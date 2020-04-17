@@ -13,19 +13,19 @@ mixin personalization(exercise)
     </div>
     <div class="row">
         <div id="easy" class="col s12 m6 l7 xl7">
-            include ../partials/parameters
+            include ../components/parameters
             +parameters(exercise, "easy")
         </div>
         <div id="medium" class="col s12 m6 l7 xl7" style="display: none;">
-            include ../partials/parameters
+            include ../components/parameters
             +parameters(exercise, "medium")
         </div>
         <div id="hard" class="col s12 m6 l7 xl7" style="display: none;">
-            include ../partials/parameters
+            include ../components/parameters
             +parameters(exercise, "hard")
         </div>
         <div class="col s12 m6 l5 xl5">
-            include ../partials/exercise
+            include ../components/exercise
             +exercise(exercise)
         </div>
     </div>

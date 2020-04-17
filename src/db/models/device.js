@@ -6,6 +6,7 @@ const DeviceSchema = mongoose.Schema({
   sid: {
     type: String,
     required: true,
+    unique: true
   },
   engine: {
     type: String,
@@ -23,8 +24,10 @@ const DeviceSchema = mongoose.Schema({
     type: PatientSchema
   },
   exercise: {
-    type: ExerciseSchema
-  }
+    type: Map,
+    of: String
+  },
+  result: {}
 });
 
 module.exports = mongoose.model("Devices", DeviceSchema);

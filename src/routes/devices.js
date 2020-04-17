@@ -19,16 +19,21 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   let device = await Device.findById(req.body.device_id).lean();
   let assigned_patient = await Patient.findById(req.body.patient);
-  let assigned_exercise = await Exercise.findById(req.body.exercise);
+  let assigned_exercise = await Exercise.findById(req.body.exercise).lean();
   const status = await Device.updateOne(
     { _id: req.body.device_id },
     {
       patient: assigned_patient,
-      exercise: assigned_exercise
+      exercise: {
+        name: req.body.exercise,
+        profile: req.body.profile
+      }
     }
   );
-  // TODO: Get all form params like req.body.exercise, req.body.profile
-  // and so on and pass to req.app.locals.io to run exercise
+  req.app.locals.io.emit('exercise', {
+    name: req.body.exercise,
+    params: assigned_exercise.profiles[req.body.profile]
+  });
   res.redirect("devices");
 });
 
