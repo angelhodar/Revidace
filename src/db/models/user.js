@@ -13,6 +13,14 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  googleId: {
+    type: String,
+    required: false,
+  },
+  facebookId: {
+    type: String,
+    required: false,
+  }
 });
 
 module.exports = mongoose.model("User", UserSchema);

@@ -7,6 +7,8 @@ const app = express();
 const server = require("http").Server(app);
 const io = require("./modules/io")(server);
 const db = require("./db/db_connector");
+const passport = require('passport');
+const passportSetup = require('./config/passport-setup');
 
 // Routes
 const indexRouter = require("./routes/index");
@@ -24,6 +26,9 @@ app.set("views", __dirname + "/views");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
+
+// initialize passport
+app.use(passport.initialize());
 
 var store = new MongoDBStore({
   mongooseConnection: db,
