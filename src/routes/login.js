@@ -48,16 +48,4 @@ router.get('/google/redirect', passport.authenticate('google', { failureRedirect
   res.redirect('/dashboard');
 });
 
-// login with facebook
-router.get('/facebook', passport.authenticate('facebook'));
-
-// callback route for facebook to redirect to
-router.get('/facebook/redirect', passport.authenticate('facebook', { failureRedirect: '/login' }), (req, res) => {
-  req.session.user = {
-    name: req.user.username,
-    email: req.user.email,
-  };
-  res.redirect('/dashboard');
-});
-
 module.exports = router;

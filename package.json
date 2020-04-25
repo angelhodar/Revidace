@@ -31,7 +31,6 @@
     "express-session": "^1.17.0",
     "mongoose": "^5.9.7",
     "passport": "^0.4.1",
-    "passport-facebook": "^3.0.0",
     "passport-google-oauth20": "^2.0.0",
     "pug": "^2.0.4",
     "socket.io": "^2.3.0",

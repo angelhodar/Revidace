@@ -8,7 +8,7 @@ const server = require("http").Server(app);
 const io = require("./modules/io")(server);
 const db = require("./db/db_connector");
 const passport = require('passport');
-const passportSetup = require('./config/passport-setup');
+require('./config/passport-setup');
 
 // Routes
 const indexRouter = require("./routes/index");
