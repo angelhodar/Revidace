@@ -8,7 +8,7 @@ const server = require("http").Server(app);
 const io = require("./modules/io")(server);
 const db = require("./db/db_connector");
 const passport = require('passport');
-require('./config/passport-setup');
+const initializePassportSetUp = require('./config/passport-setup');
 
 // Routes
 const indexRouter = require("./routes/index");
@@ -29,6 +29,9 @@ app.use(express.static("public"));
 
 // initialize passport
 app.use(passport.initialize());
+
+// initialize passport setup
+initializePassportSetUp(passport);
 
 var store = new MongoDBStore({
   mongooseConnection: db,
