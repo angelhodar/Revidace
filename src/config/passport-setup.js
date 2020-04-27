@@ -1,4 +1,4 @@
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const User = require('../db/models/user');
 
 function initializeSetUp(passport){
