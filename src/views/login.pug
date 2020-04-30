@@ -6,33 +6,8 @@ block content
 
     <div id="login-page" class="row container">
         <h2 class="header center orange-text">Ingresar</h2>
-        <div class="valign-wrapper">
-            <div class="col s12 l6 xl6 pull-l3 pull-xl3 card-panel">
-                <form class="login-form" action="login" method="post">
-                    if error
-                        <div class="row center">
-                            <p class="card-panel red center white-text">Usuario o contraseña incorrectos</p>
-                        </div>
-                    <div class="input-field col s12">
-                        <i class="material-icons prefix">mail_outline</i>
-                        <input class="validate" id="email" name="email" type="email">
-                        <label for="email" data-error="wrong" data-success="right">Email</label>
-                    </div>
-                    <div class="input-field col s12">
-                        <i class="material-icons prefix">lock_outline</i>
-                        <input name="password" id="password" type="password">
-                        <label for="password">Contraseña</label>
-                    </div>
-                    <div class="input-field center col s12">
-                        <input type="submit" value="Ingresar" class="btn">
-                    </div>
-                </form>
-                <div class="row center">
-                    <a class="orange accent-4 waves-effect waves-light btn" href="/login/google"><i class="fab fa-google left"></i>Ingresar con Google</a>
-                </div>
-                <div class="row center">
-                    <p class="margin medium-small"><a href="#">¿Olvidaste tu contraseña?</a></p>
-                </div>
-            </div>
+        <hr color="#ffdab9"/>
+        <div style="margin-top: 15mm;" class="row center">
+            <a class="red accent-2 waves-effect waves-light btn-large" href="/login/google"><i class="fab fa-google left"></i>Ingresar con Google</a>
         </div>
     </div>
