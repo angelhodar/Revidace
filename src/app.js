@@ -17,6 +17,7 @@ const exercisesRouter = require("./routes/exercises");
 const patientsRouter = require("./routes/patients");
 const resultsRouter = require("./routes/results");
 const dashboardRouter = require("./routes/dashboard");
+const profileRouter = require("./routes/profile");
 const loginRouter = require("./routes/login");
 const logoutRouter = require("./routes/logout");
 
@@ -29,7 +30,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 
-// initialize passport setup
 initializePassportSetUp(passport);
 
 var store = new MongoDBStore({
@@ -50,6 +50,7 @@ app.use(
     saveUninitialized: false,
   })
 );
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -58,6 +59,7 @@ app.use("/dashboard/devices", devicesRouter);
 app.use("/dashboard/exercises", exercisesRouter);
 app.use("/dashboard/patients", patientsRouter);
 app.use("/dashboard/results", resultsRouter);
+app.use("/dashboard/profile", profileRouter);
 app.use("/dashboard", dashboardRouter);
 app.use("/login", loginRouter);
 app.use("/logout", logoutRouter);

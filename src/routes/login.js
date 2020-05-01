@@ -1,20 +1,14 @@
 const express = require("express");
-const bcrypt = require("bcrypt");
 const router = express.Router();
-const User = require("../db/models/user");
 const passport = require('passport');
 
-router.get("/", (req, res) => {
-  res.render("login", {error: false});
-});
-
-// login with google
+// Route that redirects to Google OAuth screen
 router.get('/google', passport.authenticate('google', {
   scope: ['profile', 'email']
 }));
 
-// callback route for google to redirect to
-router.get('/google/redirect', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
+// Callback route to be redirected from Google
+router.get('/google/redirect', passport.authenticate('google', { failureRedirect: '/' }), (req, res) => {
   res.redirect('/dashboard');
 });
 
