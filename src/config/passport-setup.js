@@ -20,7 +20,7 @@ function initializeSetUp(passport){
             clientSecret: process.env.GOOGLE_CLIENT_SECRET
         }, (accessToken, refreshToken, profile, done) => {
             // check if user already exists in our db
-            User.findOne({googleId: profile.id}).then((currentUser) => {
+            User.findOne({email: profile.emails[0].value}).then((currentUser) => {
                 if(currentUser){
                     // already have the user
                     done(null, currentUser);
@@ -29,8 +29,7 @@ function initializeSetUp(passport){
                     new User({
                         email: profile.emails[0].value,
                         username: profile.displayName,
-                        googleId: profile.id,
-                        password: ''
+                        googleId: profile.id
                     }).save().then((newUser) => {
                         done(null, newUser);
                     });

@@ -26,9 +26,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 
-// initialize passport
-app.use(passport.initialize());
-
 // initialize passport setup
 initializePassportSetUp(passport);
 
@@ -50,6 +47,8 @@ app.use(
     saveUninitialized: false,
   })
 );
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use("/", indexRouter);
 app.use("/dashboard/devices", devicesRouter);

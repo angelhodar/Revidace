@@ -15,10 +15,6 @@ router.get('/google', passport.authenticate('google', {
 
 // callback route for google to redirect to
 router.get('/google/redirect', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
-  req.session.user = {
-    name: req.user.username,
-    email: req.user.email,
-  };
   res.redirect('/dashboard');
 });
 

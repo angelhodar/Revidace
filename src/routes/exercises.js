@@ -5,7 +5,7 @@ const router = express.Router();
 router.get("/", async (req, res) => {
   let exercises = await Exercise.find().lean();
   res.render("dashboard/exercises", {
-    user: req.session.user,
+    user: req.user,
     exercises: exercises,
   });
 });
