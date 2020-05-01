@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
   let exercises = await Exercise.find().lean();
   let patients = await Patient.find().lean();
   res.render("dashboard/devices", {
-    user: req.session.user,
+    user: req.user,
     devices: devices,
     patients: patients,
     exercises: exercises,

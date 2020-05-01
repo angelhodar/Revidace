@@ -9,11 +9,11 @@ router.get("/", (req, res) => {
 });
 
 router.get("/home", (req, res) => {
-  res.render("dashboard/home", { user: req.session.user });
+  res.render("dashboard/home", { user: req.user });
 });
 
 router.get("/profile", (req, res) => {
-  res.render("dashboard/profile", { user: req.session.user });
+  res.render("dashboard/profile", { user: req.user });
 });
 
 router.post("/profile", (req, res) => {

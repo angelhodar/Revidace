@@ -7,6 +7,8 @@ const app = express();
 const server = require("http").Server(app);
 const io = require("./modules/io")(server);
 const db = require("./db/db_connector");
+const passport = require('passport');
+const initializePassportSetUp = require('./config/passport-setup');
 
 // Routes
 const indexRouter = require("./routes/index");
@@ -16,7 +18,6 @@ const patientsRouter = require("./routes/patients");
 const resultsRouter = require("./routes/results");
 const dashboardRouter = require("./routes/dashboard");
 const loginRouter = require("./routes/login");
-const registerRouter = require("./routes/register");
 const logoutRouter = require("./routes/logout");
 
 // Error middleware
@@ -27,6 +28,9 @@ app.set("views", __dirname + "/views");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
+
+// initialize passport setup
+initializePassportSetUp(passport);
 
 var store = new MongoDBStore({
   mongooseConnection: db,
@@ -46,6 +50,8 @@ app.use(
     saveUninitialized: false,
   })
 );
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use("/", indexRouter);
 app.use("/dashboard/devices", devicesRouter);
@@ -54,7 +60,6 @@ app.use("/dashboard/patients", patientsRouter);
 app.use("/dashboard/results", resultsRouter);
 app.use("/dashboard", dashboardRouter);
 app.use("/login", loginRouter);
-app.use("/register", registerRouter);
 app.use("/logout", logoutRouter);
 
 // Always last middleware to include
