@@ -5,7 +5,7 @@ const router = express.Router();
 router.get("/", async (req, res) => {
   let patients = await Patient.find().lean();
   res.render("dashboard/patients", {
-    user: req.session.user,
+    user: req.user,
     patients: patients,
   });
 });
