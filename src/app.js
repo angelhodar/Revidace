@@ -19,6 +19,9 @@ const loginRouter = require("./routes/login");
 const registerRouter = require("./routes/register");
 const logoutRouter = require("./routes/logout");
 
+// Error middleware
+const errorHandler = require("./middlewares/error");
+
 app.set("view engine", "pug");
 app.set("views", __dirname + "/views");
 app.use(express.json());
@@ -53,6 +56,9 @@ app.use("/dashboard", dashboardRouter);
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
 app.use("/logout", logoutRouter);
+
+// Always last middleware to include
+app.use(errorHandler);
 
 server.listen(process.env.PORT || 3000);
 
