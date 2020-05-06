@@ -17,23 +17,25 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  let device = await Device.findById(req.body.device_id).lean();
-  let assigned_patient = await Patient.findById(req.body.patient);
-  let assigned_exercise = await Exercise.findById(req.body.exercise).lean();
-  const status = await Device.updateOne(
-    { _id: req.body.device_id },
+  let exercise = await Exercise.findById(req.body.exercise).lean();
+
+  var exec_data = {
+    exercise: exercise.name,
+    profile: req.body.profile,
+    patient: req.body.patient,
+  }
+
+  Device.findByIdAndUpdate(
+    req.body.device_id,
     {
-      patient: assigned_patient,
-      exercise: {
-        name: req.body.exercise,
-        profile: req.body.profile
-      }
+      executing: exec_data
+    },
+    (err) => {
+      if (err) console.log(err)
+      else req.app.locals.io.emit("exercise", exec_data);
     }
   );
-  req.app.locals.io.emit('exercise', {
-    name: req.body.exercise,
-    params: assigned_exercise.profiles[req.body.profile]
-  });
+
   res.redirect("devices");
 });
 

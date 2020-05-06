@@ -12,7 +12,7 @@ const PatientSchema = mongoose.Schema({
     {
       exercise: String,
       profile: String,
-      date: { type: Date, default: Date.now },
+      date: { type: Date },
       values: {}
     }
   ]

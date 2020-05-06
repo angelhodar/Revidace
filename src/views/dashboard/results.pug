@@ -11,11 +11,25 @@ block dashboard-content
                         <div class="collapsible-header"><i class="material-icons">person</i>#{patient.name}</div>
                         <div class="collapsible-body">
                             <ul class="collection">
-                                <li class="collection-item"><div>Cubos - Dificil - 10/03/2020 14:00:00<a href="#!" class="secondary-content"><i class="material-icons">receipt</i></a></div></li>
-                                <li class="collection-item"><div>Heladeria - Facil - 10/03/2020 14:30:00<a href="#!" class="secondary-content"><i class="material-icons">receipt</i></a></div></li>
-                                <li class="collection-item"><div>Sandwich - Dificil - 10/03/2020 15:00:00<a href="#!" class="secondary-content"><i class="material-icons">receipt</i></a></div></li>
-                                <li class="collection-item"><div>Reciclaje - Medio - 10/03/2020 15:30:00<a href="#!" class="secondary-content"><i class="material-icons">receipt</i></a></div></li>
-                            </ul>
+                            if patient.results
+                                each result in patient.results
+                                    <li class="collection-item">#{result.exercise} - #{result.profile} - #{result.date.toISOString()}<a href="#!" class="secondary-content"><i class="material-icons">receipt</i></a></li>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Parameter</th>
+                                                <th>Value</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        each value, parameter in result.values
+                                            <tr>
+                                                <td>#{parameter}</td>
+                                                <td>#{value}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </ul>
                         </div>
                     </li>
                 </ul>

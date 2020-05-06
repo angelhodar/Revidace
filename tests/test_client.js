@@ -11,7 +11,7 @@ io.on("connect", function () {
     engine: "Python",
     manufacturer: "Oculus",
     device: "Quest",
-    account: "angel",
+    account: "Test",
   };
 
   console.log("Emitting data: " + JSON.stringify(data));
@@ -21,9 +21,9 @@ io.on("connect", function () {
     console.log("Exercise received: " + data);
     console.log("Emitting results...");
     let results = {
-      var1: 5,
-      var2: 10,
-      tiempo: 20,
+      'Test Value': 5,
+      'Another Test Value': 'correct',
+      'Total Time': 20,
     };
     io.emit("results", results, function (response) {
       console.log("Response: " + response);

@@ -1,4 +1,5 @@
 const Device = require("../db/models/device");
+const Patient = require("../db/models/patient");
 
 function create_io(server) {
   const io = require("socket.io")(server);
@@ -20,11 +21,30 @@ function create_io(server) {
       });
     });
 
-    socket.on("results", function (data, callback) {
-      Device.updateOne({ sid: socket.id }, { result: data }, (error) => {
-        if (error) console.log(error);
-        else callback("OK");
-      });
+    socket.on("results", async function (data, callback) {
+      let device = await Device.findOne({sid : socket.id})
+      Patient.findByIdAndUpdate(
+        device.executing.patient,
+        { $push: { 
+            results: {
+              exercise: device.executing.exercise,
+              profile: device.executing.profile,
+              date: Date.now(),
+              values: data
+            }
+          }
+        },
+        (err) => {
+          if (err) {
+            console.log(error);
+          }
+          else {
+            device.executing = null;
+            device.save();
+            callback("OK");
+          }
+        }
+      );
     });
 
     socket.on("disconnect", function () {
