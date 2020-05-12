@@ -1,5 +1,6 @@
 const db = require('./db_connector')
 const Exercise = require('./models/exercise')
+const addDurationParam = require('../config/exercisesConfig.js');
 
 exercises = [
   cube = new Exercise({
@@ -14,10 +15,6 @@ exercises = [
       respawn: {
         name: "Reaparición",
         description: "Tiempo de reaparición de los cubos"
-      },
-      duration: {
-        name: "Duración",
-        description: "Duración del ejercicio en segundos"
       }
     },
     profiles: {
@@ -50,10 +47,6 @@ exercises = [
       respawn: {
         name: "Reaparición",
         description: "Tiempo de reaparición de los cubos"
-      },
-      duration: {
-        name: "Duración",
-        description: "Duración del ejercicio en segundos"
       }
     },
     profiles: {
@@ -86,10 +79,6 @@ exercises = [
       clients: {
         name: "Clientes",
         description: "Número de clientes simultáneos a los que atender"
-      },
-      duration: {
-        name: "Duración",
-        description: "Duración del ejercicio en segundos"
       }
     },
     profiles: {
@@ -122,10 +111,6 @@ exercises = [
       floors: {
         name: "Pisos",
         description: "Numero de pisos de sandwich necesarios"
-      },
-      duration: {
-        name: "Duración",
-        description: "Duración del ejercicio en segundos"
       }
     },
     profiles: {
@@ -162,10 +147,6 @@ exercises = [
       colored: {
         name: "Colorear",
         description: "Si se quiere especificar un color único a cada temática"
-      },
-      duration: {
-        name: "Duración",
-        description: "Duración del ejercicio en segundos"
       }
     },
     profiles: {
@@ -201,10 +182,6 @@ exercises = [
       objects: {
         name: "Objetos",
         description: "Cantidad de objetos distintos a reciclar"
-      },
-      duration: {
-        name: "Duración",
-        description: "Duración del ejercicio en segundos"
       }
     },
     profiles: {
@@ -226,6 +203,8 @@ exercises = [
     }
   })
 ]
+
+addDurationParam(exercises);
 
 Exercise.deleteMany({}, function(error) {
   if (error) {
