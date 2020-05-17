@@ -1,6 +1,14 @@
 const db = require('./db_connector')
-const Exercise = require('./models/exercise')
-const addDurationParam = require('../config/exercisesConfig.js');
+const Exercise = require('../models/exercise')
+
+function addDurationParam(exercises){
+  for(i=0; i < exercises.length; i++){
+      exercises[i].parameters.set("duration", {
+          name: "Duración",
+          description: "Duración del ejercicio en segundos"
+        });
+  }
+}
 
 exercises = [
   cube = new Exercise({

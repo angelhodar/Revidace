@@ -1,71 +1,64 @@
 require("dotenv").config();
 
 const express = require("express");
-var session = require("express-session");
-var MongoDBStore = require("connect-mongo")(session);
+const cors = require("cors");
+var morgan = require("morgan");
+
+// Firebase Admin SDK
+const admin = require("firebase-admin");
+const credentials = require("./config/firebase-adminsdk.json");
+
+// Intialization
+admin.initializeApp({
+  credential: admin.credential.cert(credentials),
+  databaseURL: process.env.FIREBASE_DATABASE_URL,
+});
+
+// Create express app
 const app = express();
+
+// Inject SocketIO functionality
 const server = require("http").Server(app);
-const io = require("./modules/io")(server);
-const db = require("./db/db_connector");
-const passport = require('passport');
-const initializePassportSetUp = require('./config/passport-setup');
+const io = require("./sockets/io")(server);
 
-// Routes
-const indexRouter = require("./routes/index");
-const devicesRouter = require("./routes/devices");
-const exercisesRouter = require("./routes/exercises");
-const patientsRouter = require("./routes/patients");
-const resultsRouter = require("./routes/results");
-const dashboardRouter = require("./routes/dashboard");
-const profileRouter = require("./routes/profile");
-const loginRouter = require("./routes/login");
-const logoutRouter = require("./routes/logout");
+// Establish connection with DB
+const db = require("./db/connector");
 
-// Error middleware
-const errorHandler = require("./middlewares/error");
+// API Routes
+const devicesRouter = require("./routes/api/devices")
+const exercisesRouter = require("./routes/api/exercises")
+const usersRouter = require("./routes/api/users")
+const patientsRouter = require("./routes/api/patients")
 
-app.set("view engine", "pug");
-app.set("views", __dirname + "/views");
+// Swagger documentation
+const swaggerUI = require('swagger-ui-express');
+const swaggerJsdoc = require('swagger-jsdoc');
+
+// Swagger configuration
+const options = {
+  swaggerDefinition: {
+    info: {
+      title: 'AgreLink',
+      version: '1.0.0',
+      description: 'API REST for the AgreLink project',
+    },
+  },
+  apis: ['./routes/api/*.js'],
+};
+
+const specs = swaggerJsdoc(options);
+
+// Express middlewares
+app.use(cors());
+app.use(morgan("dev"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(express.static("public"));
 
-initializePassportSetUp(passport);
-
-var store = new MongoDBStore({
-  mongooseConnection: db,
-  collection: "sessions",
-});
-
-// Catch session errors
-store.on("error", function (error) {
-  console.log(error);
-});
-
-app.use(
-  session({
-    secret: process.env.SECRET,
-    store: store,
-    resave: false,
-    saveUninitialized: false,
-  })
-);
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-app.use("/", indexRouter);
-app.use("/dashboard/devices", devicesRouter);
-app.use("/dashboard/exercises", exercisesRouter);
-app.use("/dashboard/patients", patientsRouter);
-app.use("/dashboard/results", resultsRouter);
-app.use("/dashboard/profile", profileRouter);
-app.use("/dashboard", dashboardRouter);
-app.use("/login", loginRouter);
-app.use("/logout", logoutRouter);
-
-// Always last middleware to include
-app.use(errorHandler);
+// Attach API routes
+app.use("/api/v1/devices", devicesRouter);
+app.use("/api/v1/exercises", exercisesRouter);
+app.use("/api/v1/users", usersRouter);
+app.use("/api/v1/patients", patientsRouter);
+app.use('/docs', swaggerUI.serve, swaggerUI.setup(specs));
 
 server.listen(process.env.PORT || 3000);
 

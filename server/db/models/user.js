@@ -9,10 +9,6 @@ const UserSchema = mongoose.Schema({
   name: {
     type: String,
     required: true,
-  },
-  googleId: {
-    type: String,
-    required: false,
   }
 });
 

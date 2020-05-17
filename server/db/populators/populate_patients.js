@@ -1,5 +1,5 @@
 const db = require("./db_connector");
-const Patient = require("./models/patient");
+const Patient = require("../models/patient");
 
 patients = [
   p1 = new Patient({

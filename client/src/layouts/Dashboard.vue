@@ -1,97 +1,29 @@
 <template>
   <q-layout view="lHh Lpr lff">
-    <q-header elevated>
-      <q-toolbar>
-        <q-btn flat dense round icon="menu" @click="menuOpen = !menuOpen"/>
-        <q-toolbar-title class="absolute-center">AgreLink</q-toolbar-title>
-      </q-toolbar>
-    </q-header>
 
-    <q-drawer v-model="menuOpen" content-class="bg-grey-1">
-      <q-scroll-area style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd">
-        <q-list>
-          <q-item-label header>Panel</q-item-label>
-          <PanelSection
-            v-for="link in menu"
-            :key="link.title"
-            v-bind="link"
-          />
-        </q-list>
-      </q-scroll-area>
+    <Header :togglePanel="true"/>
 
-      <q-img class="absolute-top" src="https://cdn.quasar.dev/img/material.png" style="height: 150px">
-          <div class="absolute-bottom bg-transparent">
-            <q-avatar size="56px" class="q-mb-sm">
-              <img src="https://cdn.quasar.dev/img/boy-avatar.png">
-            </q-avatar>
-            <div class="text-weight-bold">Test</div>
-            <div>test@gmail.com</div>
-          </div>
-        </q-img>
-
-    </q-drawer>
+    <Panel :shown="panelShown" @changePanelState="panelShown != panelShown"/>
 
     <q-page-container>
       <router-view />
     </q-page-container>
+
   </q-layout>
 </template>
 
 <script>
-import PanelSection from 'components/PanelSection'
+import Header from 'components/Header'
+import Panel from 'components/Panel'
 
 export default {
   components: {
-    PanelSection
+    Header,
+    Panel
   },
-
   data () {
     return {
-      menuOpen: false,
-      menu: [
-        {
-          title: 'Perfil',
-          icon: 'account_circle',
-          route: 'https://quasar.dev',
-          separator: false
-        },
-        {
-          title: 'Configuración',
-          icon: 'settings',
-          route: 'https://quasar.dev',
-          separator: true
-        },
-        {
-          title: 'Dispositivos',
-          icon: 'contactless',
-          route: 'https://github.com/quasarframework',
-          separator: false
-        },
-        {
-          title: 'Ejercicios',
-          icon: 'create',
-          route: 'https://chat.quasar.dev',
-          separator: false
-        },
-        {
-          title: 'Pacientes',
-          icon: 'people_alt',
-          route: 'https://forum.quasar.dev',
-          separator: false
-        },
-        {
-          title: 'Resultados',
-          icon: 'assignment',
-          route: 'https://forum.quasar.dev',
-          separator: true
-        },
-        {
-          title: 'Salir',
-          icon: 'exit_to_app',
-          route: 'https://twitter.quasar.dev',
-          separator: false
-        }
-      ]
+      panelShown: false
     }
   }
 }

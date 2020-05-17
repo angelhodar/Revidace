@@ -16,11 +16,11 @@
 
 <script>
 export default {
-  props: [
-    'title',
-    'icon',
-    'route',
-    'separator'
-  ]
+  props: {
+    title: String,
+    icon: String,
+    route: String,
+    separator: Boolean
+  }
 }
 </script>
