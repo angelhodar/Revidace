@@ -4,7 +4,7 @@ import * as firebase from "firebase/app";
 import "firebase/auth"
 
 // Credentials
-import creds from 'config/firebase-creds'
+import creds from '../config/firebase-creds'
 
 let firebaseApp = firebase.initializeApp(creds)
 let firebaseAuth = firebaseApp.auth()
