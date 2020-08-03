@@ -1,39 +1,48 @@
 {
-  "name": "AgreLink",
-  "version": "1.0.0",
-  "description": "Automated virtual reality exercises for people with acquired brain damage",
-  "main": "src/app.js",
+  "name": "agrelink-front",
+  "version": "0.0.1",
+  "description": "Frontend for the AgreLink project",
+  "productName": "AgreLink",
+  "author": "Angel <angelhodar76@gmail.com>",
+  "private": true,
   "scripts": {
-    "start": "node server/app.js",
-    "dev": "nodemon server/app.js",
-    "populate-exercises": "node server/db/populators/populate_exercises.js",
-    "populate-patients": "node server/db/populators/populate_patients.js",
-    "client": "node tests/test_client.js"
+    "lint": "eslint --ext .js,.vue ./",
+    "test": "echo \"No test specified\" && exit 0"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/angelhodar/AgreLink.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/angelhodar/AgreLink/issues"
-  },
-  "homepage": "https://github.com/angelhodar/AgreLink#readme",
   "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "firebase-admin": "^8.12.1",
-    "mongoose": "^5.9.7",
-    "morgan": "^1.10.0",
-    "socket.io": "^2.3.0",
-    "socket.io-client": "^2.3.0",
-    "swagger-jsdoc": "^4.0.0",
-    "swagger-ui-express": "^4.1.4"
+    "@quasar/extras": "^1.0.0",
+    "axios": "^0.18.1",
+    "core-js": "^3.6.5",
+    "firebase": "^7.17.1",
+    "particles.js": "^2.0.0",
+    "quasar": "^1.0.0"
   },
   "devDependencies": {
-    "dotenv": "^8.2.0",
-    "nodemon": "^2.0.3"
+    "@quasar/app": "^2.0.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-loader": "^3.0.3",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "eslint-plugin-vue": "^6.1.2"
+  },
+  "browserslist": [
+    "last 10 Chrome versions",
+    "last 10 Firefox versions",
+    "last 4 Edge versions",
+    "last 7 Safari versions",
+    "last 8 Android versions",
+    "last 8 ChromeAndroid versions",
+    "last 8 FirefoxAndroid versions",
+    "last 10 iOS versions",
+    "last 5 Opera versions"
+  ],
+  "engines": {
+    "node": ">= 10.18.1",
+    "npm": ">= 6.13.4",
+    "yarn": ">= 1.21.1"
   }
 }
