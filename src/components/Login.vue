@@ -11,7 +11,7 @@
       outlined
       v-model="form.password"
       type="password"
-      label="Contraseña" />
+      label="Password" />
 
       <q-btn label="Ingresar" type="submit" color="primary"/>
   </q-form>

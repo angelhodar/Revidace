@@ -6,7 +6,7 @@
   "author": "Angel <angelhodar76@gmail.com>",
   "private": true,
   "scripts": {
-    "lint": "eslint --ext .js,.vue ./",
+    "lint": "eslint --ext .js,.vue ./ --fix",
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {

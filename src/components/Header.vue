@@ -1,7 +1,7 @@
 <template>
   <q-header elevated>
     <q-toolbar>
-      <q-btn v-if="togglePanel" flat dense round icon="menu" @click="changePanelState()"/>
+      <q-btn v-if="showMenuButton" flat dense round icon="menu" @click="changePanelState()"/>
       <q-toolbar-title class="absolute-center">AgreLink</q-toolbar-title>
     </q-toolbar>
   </q-header>
@@ -10,11 +10,12 @@
 <script>
 export default {
   props: {
-    togglePanel: Boolean
+    showMenuButton: Boolean,
+    toggleMenu: Function
   },
   methods: {
-    changePanelState() {
-      this.$emit('changePanelState')
+    changePanelState () {
+      this.toggleMenu()
     }
   }
 }

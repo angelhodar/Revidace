@@ -1,63 +1,57 @@
-import { firebaseAuth } from "boot/firebase";
+import { firebaseAuth } from 'boot/firebase'
 
 const state = {
-  id: null,
+  uid: null,
   token: null,
   email: null
-};
+}
 
 const mutations = {
-  storeUser(state, data) {
-    state.id = data.localId;
-    state.token = data.idToken;
-    state.email = data.email;
+  storeUser (state, data) {
+    state.uid = data.uid
+    state.token = data.token
+    state.email = data.email
   }
-};
+}
 
 const actions = {
-  login({ commit }, payload) {
+  login ({ commit }, payload) {
     firebaseAuth
       .signInWithEmailAndPassword(payload.email, payload.password)
       .then(res => {
-        console.log(res);
-        console.log(firebaseAuth.currentUser);
+        console.log('User logged in')
       })
-      .catch(function(error) {
-        console.log(error.code);
-        console.log(error.message);
-      });
+      .catch(function (error) {
+        console.log(error.code)
+        console.log(error.message)
+      })
   },
-  register({ commit }, payload) {
+  register ({ commit }, payload) {
     firebaseAuth
       .createUserWithEmailAndPassword(payload.email, payload.password)
       .then(res => {
-        // API call to add the user to DB
-        console.log(res);
+        console.log('User registered')
       })
-      .catch(function(error) {
-        console.log(error.code);
-        console.log(error.message);
-      });
+      .catch(function (error) {
+        console.log(error.code)
+        console.log(error.message)
+      })
   },
-  handleAuthStateChanged({ commit }, payload) {
+  handleAuthStateChanged ({ commit }, payload) {
     firebaseAuth.onAuthStateChanged(user => {
       if (user) {
-        // User is signed in.
-        console.log("User signed in");
-        console.log(user);
+        console.log('User signed in')
         user.getIdToken().then(token => {
-          console.log(token);
-        });
-        // ...
+          commit('storeUser', { uid: user.uid, token: token, email: user.email })
+        })
       } else {
-        // User is signed out.
-        console.log("User signed out");
+        console.log('User signed out')
       }
-    });
+    })
   }
-};
+}
 
-const getters = {};
+const getters = {}
 
 export default {
   namespaced: true,
@@ -65,4 +59,4 @@ export default {
   mutations,
   actions,
   getters
-};
+}

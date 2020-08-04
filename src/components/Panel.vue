@@ -5,10 +5,16 @@
       <q-list>
         <q-item-label header>Panel</q-item-label>
         <PanelSection
-          v-for="link in menu"
+          v-for="link in userMenu"
           :key="link.title"
           v-bind="link"
         />
+        <q-item-label header>Administration</q-item-label>
+          <PanelSection
+          v-for="link in adminMenu"
+          :key="link.title"
+          v-bind="link"
+          />
       </q-list>
     </q-scroll-area>
 
@@ -26,18 +32,16 @@
 </template>
 
 <script>
-import PanelSection from 'components/PanelSection'
-
 export default {
   props: {
     shown: Boolean
   },
   components: {
-    PanelSection
+    PanelSection: () => import('components/PanelSection')
   },
   data () {
     return {
-      menu: [
+      userMenu: [
         {
           title: 'Perfil',
           icon: 'account_circle',
@@ -78,6 +82,20 @@ export default {
           title: 'Salir',
           icon: 'exit_to_app',
           route: 'https://twitter.quasar.dev',
+          separator: false
+        }
+      ],
+      adminMenu: [
+        {
+          title: 'Usuarios',
+          icon: 'account_circle',
+          route: 'https://quasar.dev',
+          separator: false
+        },
+        {
+          title: 'Ejercicios',
+          icon: 'create',
+          route: 'https://chat.quasar.dev',
           separator: false
         }
       ]

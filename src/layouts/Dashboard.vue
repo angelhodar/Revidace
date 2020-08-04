@@ -1,9 +1,9 @@
 <template>
   <q-layout view="lHh Lpr lff">
 
-    <Header :togglePanel="true"/>
+    <Header :showMenuButton="true" :toggleMenu="togglePanel"/>
 
-    <Panel :shown="panelShown" @changePanelState="panelShown != panelShown"/>
+    <Panel :shown="panelShown"/>
 
     <q-page-container>
       <router-view />
@@ -21,6 +21,11 @@ export default {
   data () {
     return {
       panelShown: false
+    }
+  },
+  methods: {
+    togglePanel () {
+      this.panelShown = !this.panelShown
     }
   }
 }

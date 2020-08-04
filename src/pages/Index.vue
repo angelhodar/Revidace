@@ -8,7 +8,15 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
-  name: 'PageIndex'
+  name: 'PageIndex',
+  mounted () {
+    this.handleAuthStateChanged()
+  },
+  methods: {
+    ...mapActions('auth', ['handleAuthStateChanged'])
+  }
 }
 </script>
