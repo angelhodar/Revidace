@@ -1,26 +1,25 @@
 <template>
   <q-layout view="lHh Lpr lff">
+    <Header :showMenuButton="true" :toggleMenu="togglePanel" />
 
-    <Header :showMenuButton="true" :toggleMenu="togglePanel"/>
-
-    <Panel :shown="panelShown"/>
+    <Panel :shown="panelShown" :role="role" />
 
     <q-page-container>
       <router-view />
     </q-page-container>
-
   </q-layout>
 </template>
 
 <script>
 export default {
   components: {
-    Header: () => import('components/Header'),
-    Panel: () => import('components/Panel')
+    Header: () => import("components/Header"),
+    Panel: () => import("components/Panel")
   },
   data () {
     return {
-      panelShown: false
+      panelShown: false,
+      role: "admin"
     }
   },
   methods: {

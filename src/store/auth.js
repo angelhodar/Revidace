@@ -1,4 +1,4 @@
-import { firebaseAuth } from 'boot/firebase'
+import { firebaseAuth } from "boot/firebase"
 
 const state = {
   uid: null,
@@ -19,7 +19,7 @@ const actions = {
     firebaseAuth
       .signInWithEmailAndPassword(payload.email, payload.password)
       .then(res => {
-        console.log('User logged in')
+        console.log("User logged in")
       })
       .catch(function (error) {
         console.log(error.code)
@@ -30,7 +30,7 @@ const actions = {
     firebaseAuth
       .createUserWithEmailAndPassword(payload.email, payload.password)
       .then(res => {
-        console.log('User registered')
+        console.log("User registered")
       })
       .catch(function (error) {
         console.log(error.code)
@@ -40,12 +40,12 @@ const actions = {
   handleAuthStateChanged ({ commit }, payload) {
     firebaseAuth.onAuthStateChanged(user => {
       if (user) {
-        console.log('User signed in')
+        console.log("User signed in")
         user.getIdToken().then(token => {
-          commit('storeUser', { uid: user.uid, token: token, email: user.email })
+          commit("storeUser", { uid: user.uid, token: token, email: user.email })
         })
       } else {
-        console.log('User signed out')
+        console.log("User signed out")
       }
     })
   }

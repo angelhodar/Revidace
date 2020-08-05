@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-item clickable tag="a" target="_blank" :href="route">
+    <q-item :to="route">
       <q-item-section v-if="icon" avatar>
         <q-icon :name="icon" />
       </q-item-section>

@@ -12,6 +12,11 @@ npm install
 quasar dev
 ```
 
+### If the above command doesnt work install the Quasar CLI
+```bash
+npm install -g @quasar/cli
+```
+
 ### Lint the files
 ```bash
 npm run lint
