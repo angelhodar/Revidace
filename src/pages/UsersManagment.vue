@@ -74,7 +74,7 @@ export default {
   },
   methods: {
     async getUsersData () {
-      const res = await this.$axios.get("http://localhost:5000/api/v1/users")
+      const res = await this.$http.get("http://localhost:5000/api/v1/users")
       this.data = res.data
       this.loading = false
     },

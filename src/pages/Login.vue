@@ -1,39 +1,42 @@
 <template>
-  <q-layout>
-    <q-page-container>
-      <q-page class="flex flex-center">
-        <div id="particles-js"></div>
-        <q-card v-bind:style="$q.screen.lt.sm?{'width': '70%'}:{'width':'30%'}">
-          <q-card-section>
-            <q-avatar size="103px" class="absolute-center shadow-10">
-              <img src="profile.svg" />
-            </q-avatar>
-          </q-card-section>
-          <q-card-section>
-            <div class="text-center q-pt-lg">
-              <div class="col text-h6 ellipsis">Log in</div>
-            </div>
-          </q-card-section>
-          <q-card-section>
-            <q-form @submit="onLogin" class="q-gutter-md">
-              <q-input filled v-model="form.email" label="Email" type="email" />
-              <q-input filled v-model="form.password" label="Password" type="password" />
-              <q-btn
-                push
-                rounded
-                class="flex flex-center"
-                icon="login"
-                label="Login"
-                to="/dashboard"
-                type="submit"
-                color="primary"
-              />
-            </q-form>
-          </q-card-section>
-        </q-card>
-      </q-page>
-    </q-page-container>
-  </q-layout>
+  <q-page class="flex flex-center">
+    <div id="particles-js"></div>
+    <q-card v-bind:style="$q.screen.lt.sm?{'width': '70%'}:{'width':'30%'}">
+      <q-card-section>
+        <q-avatar size="103px" class="absolute-center shadow-10">
+          <img src="profile.svg" />
+        </q-avatar>
+      </q-card-section>
+      <q-card-section>
+        <div class="text-center q-pt-lg">
+          <div class="col text-h6 ellipsis">Login</div>
+        </div>
+      </q-card-section>
+      <q-card-section>
+        <q-form @submit="onLogin" class="q-gutter-md">
+          <q-input filled v-model="form.email" label="Email" type="email">
+            <template v-slot:prepend>
+              <q-icon name="email" />
+            </template>
+          </q-input>
+          <q-input filled v-model="form.password" label="Password" type="password">
+            <template v-slot:prepend>
+              <q-icon name="lock" />
+            </template>
+          </q-input>
+          <q-btn
+            push
+            rounded
+            class="flex flex-center"
+            icon="login"
+            label="Login"
+            type="submit"
+            color="primary"
+          />
+        </q-form>
+      </q-card-section>
+    </q-card>
+  </q-page>
 </template>
 
 <script>
@@ -71,8 +74,5 @@ export default {
   width: 100%;
   height: 100%;
   background: #000000;
-}
-.login-form {
-  position: absolute;
 }
 </style>

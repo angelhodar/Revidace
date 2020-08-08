@@ -1,16 +1,20 @@
 import { firebaseAuth } from "boot/firebase"
+import Vue from "vue"
 
 const state = {
-  uid: null,
-  token: null,
-  email: null
+  userDetails: {},
+  token: null
 }
 
 const mutations = {
-  storeUser (state, data) {
-    state.uid = data.uid
-    state.token = data.token
-    state.email = data.email
+  SET_USER_DETAILS (state, user) {
+    state.userDetails = user
+  },
+  SET_AUTH_TOKEN (state, token) {
+    state.token = token
+  },
+  LOGOUT (state) {
+    state.token = null
   }
 }
 
@@ -37,21 +41,42 @@ const actions = {
         console.log(error.message)
       })
   },
-  handleAuthStateChanged ({ commit }, payload) {
+  handleAuthStateChanged ({ commit, dispatch, state }) {
     firebaseAuth.onAuthStateChanged(user => {
       if (user) {
-        console.log("User signed in")
+        const userDetails = {
+          email: user.email,
+          uid: user.uid,
+          displayName: user.displayName
+        }
+        commit("SET_USER_DETAILS", userDetails)
         user.getIdToken().then(token => {
-          commit("storeUser", { uid: user.uid, token: token, email: user.email })
+          commit("SET_AUTH_TOKEN", token)
+          Vue.prototype.$http.defaults.headers.common.Authorization = `Bearer ${token}`
+          this.$router.push("/dashboard")
         })
       } else {
-        console.log("User signed out")
+        if (state.token) dispatch("logout")
       }
     })
+  },
+  logout ({ commit }) {
+    firebaseAuth
+      .signOut()
+      .then(res => {
+        commit("LOGOUT")
+        delete Vue.prototype.$http.defaults.headers.common.Authorization
+        this.$router.push("/login")
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 }
 
-const getters = {}
+const getters = {
+  isAuthenticated: state => state.token != null
+}
 
 export default {
   namespaced: true,
