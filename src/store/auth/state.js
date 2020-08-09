@@ -1,7 +1,5 @@
 export default function () {
   return {
-    userDetails: null,
-    userToken: null,
-    isReady: false
+    user: null
   }
 }

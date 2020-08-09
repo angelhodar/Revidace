@@ -74,9 +74,14 @@ export default {
   },
   methods: {
     async getUsersData () {
-      const res = await this.$http.get("http://localhost:5000/api/v1/users")
-      this.data = res.data
-      this.loading = false
+      try {
+        const res = await this.$api.get("/users")
+        this.data = res.data
+      } catch (err) {
+        console.log(err)
+      } finally {
+        this.loading = false
+      }
     },
     exportTable () {
       console.log("Exporting...")

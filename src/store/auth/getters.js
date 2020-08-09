@@ -1,3 +1,3 @@
 export function isAuthenticated (state) {
-  return state.userToken != null
+  return state.user != null
 }

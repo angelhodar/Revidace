@@ -1,11 +1,17 @@
 import axios from "axios"
+import firebaseService from "../services/firebase"
 
-export default ({ router, store, Vue }) => {
-  axios.interceptors.response.use(undefined, function (err) {
-    // If received Unauthorized from server then force to login
-    if (err.status === 401) { router.push("/login") }
+const api = axios.create({
+  baseURL: "http://localhost:5000/api/v1"
+})
+
+export default ({ store, Vue }) => {
+  api.interceptors.request.use(async req => {
+    const token = await firebaseService.auth().currentUser.getIdToken()
+    req.headers.Authorization = `Bearer ${token}`
+    return req
   })
 
-  Vue.prototype.$http = axios
-  store.$http = axios
+  Vue.prototype.$api = api
+  store.$api = api
 }

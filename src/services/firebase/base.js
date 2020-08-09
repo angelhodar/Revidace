@@ -1,7 +1,6 @@
 import * as firebase from "firebase/app"
 import "firebase/auth"
 import * as decode from "jwt-decode"
-import { Notify } from "quasar"
 
 /**
  * Firebase's auth interface method
@@ -21,12 +20,27 @@ export const init = config => {
 }
 
 /**
+ * @param  {Object} store - Vuex Store
+ */
+export const isAuthenticated = store => {
+  return store.getters["auth/isAuthenticated"]
+}
+
+/**
+ * Remove firebase auth token
+ */
+export const logoutUser = () => {
+  return auth().signOut()
+}
+
+/**
  * Async function providing the application time to
  * wait for firebase to initialize and determine if a
  * user is authenticated or not with only a single observable
+ * @param  {Object} store - Vuex Store
  */
 export const ensureAuthIsInitialized = async store => {
-  if (store.state.auth.isReady) return true
+  if (isAuthenticated(store)) return true
   // Create the observer only once on init
   return new Promise((resolve, reject) => {
     // Use a promise to make sure that the router will eventually show the route after the auth is initialized.
@@ -42,20 +56,6 @@ export const ensureAuthIsInitialized = async store => {
   })
 }
 
-/**
- * @param  {Object} store - Vuex store
- */
-export const isAuthenticated = store => {
-  return store.getters["auth/isAuthenticated"]
-}
-
-/**
- * Remove firebase auth token
- */
-export const logoutUser = () => {
-  return auth().signOut()
-}
-
 /** Handle the auth state of the user and
  * set it in the auth store module
  * @param  {Object} store - Vuex Store
@@ -63,40 +63,32 @@ export const logoutUser = () => {
  * @param  {Object} currentUser - Firebase currentUser
  */
 export const handleOnAuthStateChanged = async (store, router, currentUser) => {
-  const initialAuthState = isAuthenticated(store)
+  // Check from the store if the user was authenticated
+  const authenticated = isAuthenticated(store)
 
+  let user = null
+
+  // If the user has logged in then extract its data
   if (currentUser) {
-    currentUser.getIdToken().then(token => {
-      const { role } = decode(token)
-      const userDetails = {
-        uid: currentUser.uid,
-        email: currentUser.email,
-        displayName: currentUser.displayName,
-        role: role,
-        phoneNumber: currentUser.phoneNumber,
-        photoURL: currentUser.photoURL,
-        creationTime: currentUser.metadata.creationTime,
-        lastSignInTime: currentUser.metadata.lastSignInTime
-      }
-      // Save to the store
-      store.commit("auth/setAuthState", {
-        userDetails: userDetails,
-        userToken: token,
-        isReady: true
-      })
-    })
-  } else {
-    // Save to the store
-    store.commit("auth/setAuthState", {
-      userDetails: null,
-      userToken: null,
-      isReady: true
-    })
+    // Get the token of the user and decode it to extract the role
+    const token = await currentUser.getIdToken()
+    const { role } = decode(token)
+    user = {
+      uid: currentUser.uid,
+      email: currentUser.email,
+      displayName: currentUser.displayName,
+      role: role,
+      phoneNumber: currentUser.phoneNumber,
+      photoURL: currentUser.photoURL,
+      creationTime: currentUser.metadata.creationTime,
+      lastSignInTime: currentUser.metadata.lastSignInTime
+    }
   }
 
-  // If the user loses authentication route
-  // them to the login page
-  if (!currentUser && initialAuthState) router.push({ path: "/login" })
+  store.commit("auth/setCurrentUser", user)
+
+  // If the user was authenticated then redirect to login page
+  if (!currentUser && authenticated) router.push({ path: "/login" })
 }
 
 /**
@@ -123,10 +115,7 @@ export const setRoutesAuthGuard = async (router, store) => {
         next()
       }
     } catch (err) {
-      Notify.create({
-        message: `${err}`,
-        color: "negative"
-      })
+      console.log(err)
     }
   })
 }
