@@ -71,12 +71,6 @@ export default {
           title: "Resultados",
           icon: "assignment",
           route: "https://forum.quasar.dev",
-          separator: true
-        },
-        {
-          title: "Salir",
-          icon: "exit_to_app",
-          route: "https://twitter.quasar.dev",
           separator: false
         }
       ],

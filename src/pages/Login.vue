@@ -57,12 +57,26 @@ export default {
     this.initParticles()
   },
   methods: {
-    ...mapActions("auth", ["login"]),
+    ...mapActions("auth", ["loginUser"]),
     initParticles () {
       window.particlesJS("particles-js", particlesConf)
     },
-    onLogin () {
-      this.login(this.form)
+    async onLogin () {
+      try {
+        this.$q.loading.show({
+          message: "Authenticating your account..."
+        })
+        await this.loginUser(this.form)
+        this.$router.push("/dashboard")
+      } catch (err) {
+        console.log(err)
+        this.$q.notify({
+          message: `An error as occured: ${err}`,
+          color: "negative"
+        })
+      } finally {
+        this.$q.loading.hide()
+      }
     }
   }
 }
