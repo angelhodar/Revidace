@@ -12,7 +12,8 @@ const routes = [
     component: () => import("layouts/DashboardLayout.vue"),
     children: [
       { path: "", component: () => import("pages/Dashboard.vue") },
-      { path: "users", component: () => import("pages/UsersManagment.vue") }
+      { path: "users", component: () => import("pages/UsersManagment.vue") },
+      { path: "exercises", component: () => import("pages/Exercises.vue") }
     ],
     meta: { requiresAuth: true }
   },

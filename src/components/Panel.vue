@@ -38,53 +38,41 @@ export default {
     return {
       userMenu: [
         {
-          title: "Perfil",
+          title: "Profile",
           icon: "account_circle",
-          route: "https://quasar.dev",
-          separator: false
-        },
-        {
-          title: "Configuración",
-          icon: "settings",
-          route: "https://quasar.dev",
+          route: "/dashboard/profile",
           separator: true
         },
         {
-          title: "Dispositivos",
+          title: "Devices",
           icon: "contactless",
-          route: "https://github.com/quasarframework",
+          route: "/dashboard/devices",
           separator: false
         },
         {
-          title: "Ejercicios",
+          title: "Exercises",
           icon: "create",
-          route: "https://chat.quasar.dev",
+          route: "/dashboard/exercises",
           separator: false
         },
         {
-          title: "Pacientes",
+          title: "Patients",
           icon: "people_alt",
-          route: "https://forum.quasar.dev",
+          route: "/dashboard/patients",
           separator: false
         },
         {
-          title: "Resultados",
+          title: "Results",
           icon: "assignment",
-          route: "https://forum.quasar.dev",
+          route: "/dashboard/results",
           separator: false
         }
       ],
       adminMenu: [
         {
-          title: "Usuarios",
+          title: "Users",
           icon: "account_circle",
           route: "/dashboard/users",
-          separator: false
-        },
-        {
-          title: "Ejercicios",
-          icon: "create",
-          route: "/dashboard/exercises",
           separator: false
         }
       ]
