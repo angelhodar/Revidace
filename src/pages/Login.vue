@@ -13,7 +13,7 @@
         </div>
       </q-card-section>
       <q-card-section>
-        <q-form @submit="onLogin" class="q-gutter-md">
+        <q-form @submit="login" class="q-gutter-md">
           <q-input filled v-model="form.email" label="Email" type="email">
             <template v-slot:prepend>
               <q-icon name="email" />
@@ -35,6 +35,26 @@
           />
         </q-form>
       </q-card-section>
+      <q-card-section>
+        <q-btn
+          push
+          rounded
+          @click="loginWithProvider('google')"
+          icon="login"
+          label="Google"
+          type="submit"
+          color="orange"
+        />
+        <q-btn
+          push
+          rounded
+          @click="loginWithProvider('twitter')"
+          icon="login"
+          label="Twitter"
+          type="submit"
+          color="blue"
+        />
+      </q-card-section>
     </q-card>
   </q-page>
 </template>
@@ -48,32 +68,36 @@ export default {
   data () {
     return {
       form: {
-        email: null,
-        password: null
+        email: "",
+        password: ""
       }
     }
   },
-  mounted () {
+  async mounted () {
     this.initParticles()
+    const socialToken = this.$route.query.token
+    if (socialToken) {
+      this.$q.loading.show({ message: "Initializing dashboard..." })
+      await this.handleIncomingToken(socialToken)
+      this.$q.loading.hide()
+      this.$router.push("/dashboard")
+    }
   },
   methods: {
-    ...mapActions("auth", ["loginUser"]),
+    ...mapActions("auth", ["loginWithEmailAndPassword", "loginWithSocialProvider", "handleIncomingToken"]),
     initParticles () {
       window.particlesJS("particles-js", particlesConf)
     },
-    async onLogin () {
+    loginWithProvider (provider) {
+      this.loginWithSocialProvider(provider)
+    },
+    async login () {
       try {
-        this.$q.loading.show({
-          message: "Authenticating your account..."
-        })
-        await this.loginUser(this.form)
+        this.$q.loading.show({ message: "Authenticating..." })
+        await this.loginWithEmailAndPassword(this.form)
         this.$router.push("/dashboard")
       } catch (err) {
-        console.log(err)
-        this.$q.notify({
-          message: `An error as occured: ${err}`,
-          color: "negative"
-        })
+        this.$q.notify({ message: err, color: "negative" })
       } finally {
         this.$q.loading.hide()
       }

@@ -1,8 +1,26 @@
-export const loginUser = async function ({ commit }, payload) {
-  const { email, password } = payload
-  return this.$firebase.loginWithEmail(email, password)
+import decode from "jwt-decode"
+
+export const loginWithEmailAndPassword = async function ({ dispatch }, credentials) {
+  const res = await this.$api.post("/auth", credentials)
+  dispatch("handleIncomingToken", res.data.accessToken)
 }
 
-export const logoutUser = async function ({ commit }, payload) {
-  await this.$firebase.logoutUser()
+export const loginWithSocialProvider = function ({ commit }, provider) {
+  window.location.href = `${this.$api.defaults.baseURL}/auth/${provider}`
+}
+
+export const handleIncomingToken = async function ({ commit }, token) {
+  commit("setAccessToken", token)
+  const { uid } = decode(token)
+  const currentUser = await this.$api.get("/users", { params: { uid } })
+  commit("setCurrentUser", currentUser.data[0])
+  this.$api.defaults.headers.common.Authorization = `Bearer ${token}`
+}
+
+export const logout = async function ({ commit }, payload) {
+  // await this.$api.post("/auth/logout")
+  commit("setAccessToken", null)
+  commit("setCurrentUser", null)
+  delete this.$api.defaults.headers.common.Authorization
+  this.$router.replace("/login")
 }

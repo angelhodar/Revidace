@@ -1,3 +1,7 @@
 export function isAuthenticated (state) {
-  return state.user != null
+  return state.token != null
+}
+
+export function getAccessToken (state) {
+  return state.token
 }

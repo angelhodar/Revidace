@@ -3,7 +3,7 @@
     <q-toolbar>
       <q-btn v-if="showMenuButton" flat dense round icon="menu" @click="changePanelState"/>
       <q-toolbar-title class="text-center">AgreLink</q-toolbar-title>
-      <q-btn flat dense round icon="exit_to_app" label="Logout" @click="logoutUser"/>
+      <q-btn flat dense round icon="exit_to_app" label="Logout" @click="logout"/>
     </q-toolbar>
   </q-header>
 </template>
@@ -17,7 +17,7 @@ export default {
     toggleMenu: Function
   },
   methods: {
-    ...mapActions("auth", ["logoutUser"]),
+    ...mapActions("auth", ["logout"]),
     changePanelState () {
       this.toggleMenu()
     }

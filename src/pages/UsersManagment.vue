@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-pa-md">
-    <q-table title="Users" :data="data" :columns="columns" row-key="_id" :loading="loading">
+    <q-table title="Users" :data="data" :columns="columns" row-key="id" :loading="loading">
       <template v-slot:body-cell-role="props">
         <q-td :props="props">
           <div>
@@ -28,7 +28,7 @@
       </template>
       <template v-slot:body-cell-actions="props">
         <q-td :props="props">
-          <q-btn icon="edit" to="/dashboard/users/edit" color="blue-8" flat dense />
+          <q-btn icon="edit" color="blue-8" flat dense />
           <q-btn icon="delete" color="red" class="q-ml-sm" flat dense />
         </q-td>
       </template>
@@ -68,20 +68,20 @@ export default {
       data: []
     }
   },
-  mounted () {
+  async mounted () {
     this.loading = true
-    this.getUsersData()
+    try {
+      await this.getUsersData()
+    } catch (err) {
+      console.log(err)
+    } finally {
+      this.loading = false
+    }
   },
   methods: {
     async getUsersData () {
-      try {
-        const res = await this.$api.get("/users")
-        this.data = res.data
-      } catch (err) {
-        console.log(err)
-      } finally {
-        this.loading = false
-      }
+      const res = await this.$api.get("/users")
+      this.data = res.data
     },
     exportTable () {
       console.log("Exporting...")

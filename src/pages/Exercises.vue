@@ -1,11 +1,7 @@
 <template>
   <q-page class="q-pa-md">
     <div class="row">
-      <ExerciseCard
-        v-for="exercise in exercises"
-        :key="exercise.name"
-        :exercise="exercise"
-      />
+      <ExerciseCard v-for="exercise in exercises" :key="exercise.name" :exercise="exercise" />
     </div>
   </q-page>
 </template>
@@ -26,9 +22,7 @@ export default {
   methods: {
     async getExercises () {
       try {
-        this.$q.loading.show({
-          message: "Loading exercises..."
-        })
+        this.$q.loading.show({ message: "Loading exercises..." })
         const res = await this.$api.get("/exercises")
         this.exercises = res.data
       } catch (err) {
