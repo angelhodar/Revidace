@@ -15,6 +15,7 @@ export const handleIncomingToken = async function ({ commit }, token) {
   const currentUser = await this.$api.get("/users", { params: { uid } })
   commit("setCurrentUser", currentUser.data[0])
   this.$api.defaults.headers.common.Authorization = `Bearer ${token}`
+  this.$router.push("/dashboard")
 }
 
 export const logout = async function ({ commit }, payload) {

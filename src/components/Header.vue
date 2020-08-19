@@ -1,9 +1,9 @@
 <template>
   <q-header elevated>
     <q-toolbar>
-      <q-btn v-if="showMenuButton" flat dense round icon="menu" @click="changePanelState"/>
+      <q-btn v-if="showMenuButton" flat dense icon="menu" @click="changePanelState"/>
       <q-toolbar-title class="text-center">AgreLink</q-toolbar-title>
-      <q-btn flat dense round icon="exit_to_app" label="Logout" @click="logout"/>
+      <q-btn flat dense icon="exit_to_app" label="Logout" @click="logout"/>
     </q-toolbar>
   </q-header>
 </template>

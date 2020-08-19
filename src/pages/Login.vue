@@ -1,9 +1,9 @@
 <template>
-  <q-page class="flex flex-center">
+  <q-page class="row justify-center items-center">
     <div id="particles-js"></div>
-    <q-card v-bind:style="$q.screen.lt.sm?{'width': '70%'}:{'width':'30%'}">
+    <q-card v-bind:style="$q.screen.lt.sm?{'width': '80%'}:{'width':'30%'}">
       <q-card-section>
-        <q-avatar size="103px" class="absolute-center shadow-10">
+        <q-avatar size="100px" class="absolute-center">
           <img src="profile.svg" />
         </q-avatar>
       </q-card-section>
@@ -24,37 +24,19 @@
               <q-icon name="lock" />
             </template>
           </q-input>
-          <q-btn
-            push
-            rounded
-            class="flex flex-center"
-            icon="login"
-            label="Login"
-            type="submit"
-            color="primary"
-          />
+          <div class="row justify-center">
+            <q-btn push icon="login" label="Login" type="submit" color="primary" />
+          </div>
         </q-form>
       </q-card-section>
-      <q-card-section>
-        <q-btn
-          push
-          rounded
-          @click="loginWithProvider('google')"
-          icon="login"
-          label="Google"
-          type="submit"
-          color="orange"
-        />
-        <q-btn
-          push
-          rounded
-          @click="loginWithProvider('twitter')"
-          icon="login"
-          label="Twitter"
-          type="submit"
-          color="blue"
-        />
-      </q-card-section>
+      <q-card-actions align="center">
+        <q-btn round @click="loginWithProvider('google')" size="20px">
+          <q-icon name="fab fa-google" color="orange" />
+        </q-btn>
+        <q-btn round @click="loginWithProvider('facebook')" size="20px">
+          <q-icon name="fab fa-facebook-f" color="blue-10" />
+        </q-btn>
+      </q-card-actions>
     </q-card>
   </q-page>
 </template>
@@ -80,7 +62,6 @@ export default {
       this.$q.loading.show({ message: "Initializing dashboard..." })
       await this.handleIncomingToken(socialToken)
       this.$q.loading.hide()
-      this.$router.push("/dashboard")
     }
   },
   methods: {
@@ -95,7 +76,6 @@ export default {
       try {
         this.$q.loading.show({ message: "Authenticating..." })
         await this.loginWithEmailAndPassword(this.form)
-        this.$router.push("/dashboard")
       } catch (err) {
         this.$q.notify({ message: err, color: "negative" })
       } finally {
