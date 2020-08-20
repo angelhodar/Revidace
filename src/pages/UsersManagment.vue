@@ -1,6 +1,25 @@
 <template>
   <q-page class="q-pa-md">
     <q-table title="Users" :data="data" :columns="columns" row-key="id" :loading="loading">
+      <template v-slot:body-cell-provider="props">
+        <q-td :props="props">
+          <div>
+            <q-icon v-if="props.row.provider === 'local'" name="email" color="teal" size="sm" />
+            <q-icon
+              v-if="props.row.provider === 'google'"
+              name="fab fa-google"
+              color="orange"
+              size="sm"
+            />
+            <q-icon
+              v-if="props.row.provider === 'facebook'"
+              name="fab fa-facebook"
+              color="blue-10"
+              size="sm"
+            />
+          </div>
+        </q-td>
+      </template>
       <template v-slot:body-cell-role="props">
         <q-td :props="props">
           <div>
@@ -19,10 +38,10 @@
           </div>
         </q-td>
       </template>
-      <template v-slot:body-cell-disabled="props">
+      <template v-slot:body-cell-blocked="props">
         <q-td :props="props">
           <div>
-            <q-toggle v-model="props.row.disabled" />
+            <q-toggle v-model="props.row.blocked" />
           </div>
         </q-td>
       </template>
@@ -58,11 +77,12 @@ export default {
       loading: false,
       columns: [
         { name: "email", label: "Email", field: "email", align: "center" },
+        { name: "provider", label: "Provider", field: "provider", align: "center" },
         { name: "name", label: "Name", field: "displayName", align: "center" },
         { name: "role", label: "Role", field: "role", align: "center", format: val => val.charAt(0).toUpperCase() + val.slice(1) },
         { name: "createdAt", label: "Created", field: "createdAt", align: "center", format: val => date.formatDate(val, "HH:mm:ss DD-MM-YYYY") },
         { name: "lastSignInTime", label: "Last Connection", field: "lastSignInTime", align: "center", format: val => date.formatDate(val, "HH:mm:ss DD-MM-YYYY") },
-        { name: "disabled", label: "Disabled", field: "disabled", align: "center" },
+        { name: "blocked", label: "Blocked", field: "blocked", align: "center" },
         { name: "actions", label: "", field: "actions", align: "center" }
       ],
       data: []
