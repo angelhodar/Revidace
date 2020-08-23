@@ -1,10 +1,6 @@
 import axios from "axios"
 
-const baseURL = process.env.DEV
-  ? "http://localhost:5000/api/v1"
-  : "https://agrelink-api.herokuapp.com/api/v1"
-
-const api = axios.create({ baseURL })
+const api = axios.create({ baseURL: `${process.env.API_URL}/api/v1` })
 
 export default ({ store, Vue }) => {
   api.interceptors.response.use(

@@ -18,10 +18,12 @@
     "core-js": "^3.6.5",
     "jwt-decode": "^2.2.0",
     "particles.js": "^2.0.0",
-    "quasar": "^1.0.0"
+    "quasar": "^1.0.0",
+    "socket.io-client": "^2.3.0",
+    "vue-socket.io-extended": "^4.0.4"
   },
   "devDependencies": {
-    "@quasar/app": "^2.0.0",
+    "@quasar/app": "^2.0.8",
     "babel-eslint": "^10.0.1",
     "eslint": "^6.8.0",
     "eslint-config-standard": "^14.1.0",

@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex"
+import { mapState, mapActions } from "vuex"
 export default {
   components: {
     Header: () => import("components/Structure/Header"),
@@ -22,7 +22,15 @@ export default {
       panelShown: false
     }
   },
+  mounted () {
+    this.$socket.client.open()
+    this.sendUserData({
+      uid: this.user.uid,
+      email: this.user.email
+    })
+  },
   methods: {
+    ...mapActions("sockets", ["sendUserData"]),
     togglePanel () {
       this.panelShown = !this.panelShown
     }
