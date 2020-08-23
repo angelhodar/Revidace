@@ -7,30 +7,20 @@
 </template>
 
 <script>
+import { Exercises } from "../services"
+
 export default {
   components: {
-    ExerciseCard: () => import("components/ExerciseCard")
+    ExerciseCard: () => import("components/Exercises/ExerciseCard")
   },
   data () {
     return {
       exercises: []
     }
   },
-  mounted () {
-    this.getExercises()
-  },
-  methods: {
-    async getExercises () {
-      try {
-        this.$q.loading.show({ message: "Loading exercises..." })
-        const res = await this.$api.get("/exercises")
-        this.exercises = res.data
-      } catch (err) {
-        console.log(err)
-      } finally {
-        this.$q.loading.hide()
-      }
-    }
+  async mounted () {
+    const { data } = await Exercises.getExercises()
+    this.exercises = data
   }
 }
 </script>

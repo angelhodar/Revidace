@@ -32,7 +32,7 @@ export default {
     role: String
   },
   components: {
-    PanelSection: () => import("components/PanelSection")
+    PanelSection: () => import("./PanelSection")
   },
   data () {
     return {

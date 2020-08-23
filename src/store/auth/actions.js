@@ -1,4 +1,5 @@
 import decode from "jwt-decode"
+import { Users } from "../../services"
 
 export const loginWithEmailAndPassword = async function ({ dispatch }, credentials) {
   const res = await this.$api.post("/auth", credentials)
@@ -13,13 +14,12 @@ export const handleIncomingToken = async function ({ commit }, token) {
   commit("setAccessToken", token)
   this.$api.defaults.headers.common.Authorization = `Bearer ${token}`
   const { uid } = decode(token)
-  const currentUser = await this.$api.get("/users", { params: { uid } })
-  commit("setCurrentUser", currentUser.data[0])
+  const { data: currentUser } = await Users.getUser(uid)
+  commit("setCurrentUser", currentUser)
   this.$router.push("/dashboard")
 }
 
 export const logout = async function ({ commit }, payload) {
-  // await this.$api.post("/auth/logout")
   commit("setAccessToken", null)
   commit("setCurrentUser", null)
   delete this.$api.defaults.headers.common.Authorization

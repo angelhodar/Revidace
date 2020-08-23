@@ -14,18 +14,18 @@
       </q-card-section>
       <q-card-section>
         <q-form @submit="login" class="q-gutter-md">
-          <q-input filled v-model="form.email" label="Email" type="email">
+          <q-input outlined v-model="form.email" label="Email" type="email">
             <template v-slot:prepend>
               <q-icon name="email" />
             </template>
           </q-input>
-          <q-input filled v-model="form.password" label="Password" type="password">
+          <q-input outlined v-model="form.password" label="Password" type="password">
             <template v-slot:prepend>
               <q-icon name="lock" />
             </template>
           </q-input>
           <div class="row justify-center">
-            <q-btn push icon="login" label="Login" type="submit" color="primary" />
+            <q-btn outline icon="login" label="Login" type="submit" color="primary" />
           </div>
         </q-form>
       </q-card-section>

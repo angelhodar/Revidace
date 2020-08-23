@@ -14,8 +14,8 @@
 import { mapState } from "vuex"
 export default {
   components: {
-    Header: () => import("components/Header"),
-    Panel: () => import("components/Panel")
+    Header: () => import("components/Structure/Header"),
+    Panel: () => import("components/Structure/Panel")
   },
   data () {
     return {

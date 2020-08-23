@@ -69,6 +69,7 @@
 
 <script>
 import { date } from "quasar"
+import { Users } from "../services"
 
 export default {
   name: "UsersManagment",
@@ -91,7 +92,8 @@ export default {
   async mounted () {
     this.loading = true
     try {
-      await this.getUsersData()
+      const { data } = await Users.getUsers()
+      this.data = data
     } catch (err) {
       console.log(err)
     } finally {
@@ -99,10 +101,6 @@ export default {
     }
   },
   methods: {
-    async getUsersData () {
-      const res = await this.$api.get("/users")
-      this.data = res.data
-    },
     exportTable () {
       console.log("Exporting...")
     }
