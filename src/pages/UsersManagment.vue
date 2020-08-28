@@ -93,14 +93,22 @@
       </template>
       <template v-slot:body-cell-actions="props">
         <q-td :props="props">
-          <q-btn icon="edit" color="blue-8" flat dense />
-          <q-btn icon="delete" color="red" class="q-ml-sm" flat dense />
+          <q-btn icon="edit" color="blue-8" flat dense @click="editUser(props.row)" />
+          <q-btn
+            icon="delete"
+            color="red"
+            class="q-ml-sm"
+            flat
+            dense
+            @click="deleteUser(props.row)"
+          />
         </q-td>
       </template>
       <template v-slot:loading>
         <q-inner-loading showing color="primary" />
       </template>
     </q-table>
+    <UserModal :user="selectedUser" />
   </q-page>
 </template>
 
@@ -112,7 +120,8 @@ const { capitalize } = format
 export default {
   name: "UsersManagment",
   components: {
-    BreadCrumbs: () => import("components/Dashboard/BreadCrumbs")
+    BreadCrumbs: () => import("components/Dashboard/BreadCrumbs"),
+    UserModal: () => import("components/UserModal")
   },
   data () {
     return {
@@ -128,7 +137,8 @@ export default {
         { name: "blocked", label: "Blocked", field: "blocked", align: "center" },
         { name: "actions", label: "", field: "actions", align: "center" }
       ],
-      data: []
+      data: [],
+      selectedUser: null
     }
   },
   async mounted () {
@@ -145,6 +155,12 @@ export default {
   methods: {
     exportTable () {
       console.log("Exporting...")
+    },
+    editUser (user) {
+      this.selectedUser = user
+    },
+    deleteUser (user) {
+      console.log(user)
     },
     addUser () {
       console.log("Show user modal")
