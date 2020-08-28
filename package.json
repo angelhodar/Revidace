@@ -19,6 +19,7 @@
     "jwt-decode": "^2.2.0",
     "particles.js": "^2.0.0",
     "quasar": "^1.0.0",
+    "query-string": "^6.13.1",
     "socket.io-client": "^2.3.0",
     "vue-socket.io-extended": "^4.0.4"
   },

@@ -1,6 +1,12 @@
 import axios from "axios"
+import qs from "query-string"
 
-const api = axios.create({ baseURL: `${process.env.API_URL}/api/v1` })
+const api = axios.create({
+  baseURL: `${process.env.API_URL}/api/v1`,
+  paramsSerializer: (params) => {
+    return qs.stringify(params, { arrayFormat: "comma" })
+  }
+})
 
 export default ({ store, Vue }) => {
   api.interceptors.response.use(

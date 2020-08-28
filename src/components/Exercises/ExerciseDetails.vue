@@ -17,12 +17,8 @@
       <q-card-section class="q-pt-none">{{ exercise.description }}</q-card-section>
 
       <q-card-section>
-        <ExerciseProfiles />
+        <ExerciseProfiles :exerciseProp="exercise"/>
       </q-card-section>
-
-      <q-card-actions align="right">
-        <q-btn flat label="OK" color="primary" v-close-popup />
-      </q-card-actions>
     </q-card>
   </q-dialog>
 </template>

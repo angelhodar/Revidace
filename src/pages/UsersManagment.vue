@@ -1,6 +1,52 @@
 <template>
   <q-page class="q-pa-md">
-    <q-table title="Users" :data="data" :columns="columns" row-key="id" :loading="loading">
+    <BreadCrumbs label="Users" icon="people" />
+
+    <q-table
+      title="Users"
+      :data="data"
+      :columns="columns"
+      :filter="filter"
+      row-key="id"
+      :loading="loading"
+    >
+      <template v-slot:top>
+        <q-btn
+          outline
+          color="primary"
+          icon="person_add"
+          :disable="loading"
+          label="Add User"
+          no-caps
+          @click="addUser"
+        />
+        <q-btn
+          outline
+          class="q-ml-sm"
+          color="primary"
+          icon="archive"
+          :disable="loading"
+          label="Import"
+          no-caps
+          @click="importUsers"
+        />
+        <q-btn
+          outline
+          class="q-ml-sm"
+          color="primary"
+          icon="insert_drive_file"
+          label="Export CSV"
+          :disable="loading"
+          no-caps
+          @click="exportTable"
+        />
+        <q-space />
+        <q-input rounded outlined dense debounce="300" color="primary" v-model="filter">
+          <template v-slot:append>
+            <q-icon name="person_search" />
+          </template>
+        </q-input>
+      </template>
       <template v-slot:body-cell-provider="props">
         <q-td :props="props">
           <div>
@@ -54,33 +100,29 @@
       <template v-slot:loading>
         <q-inner-loading showing color="primary" />
       </template>
-      <template v-slot:top-right>
-        <q-btn
-          color="primary"
-          icon-right="archive"
-          label="Export CSV"
-          no-caps
-          @click="exportTable"
-        />
-      </template>
     </q-table>
   </q-page>
 </template>
 
 <script>
-import { date } from "quasar"
+import { date, format } from "quasar"
 import { Users } from "../services"
+const { capitalize } = format
 
 export default {
   name: "UsersManagment",
+  components: {
+    BreadCrumbs: () => import("components/Dashboard/BreadCrumbs")
+  },
   data () {
     return {
       loading: false,
+      filter: "",
       columns: [
         { name: "email", label: "Email", field: "email", align: "center" },
         { name: "provider", label: "Provider", field: "provider", align: "center" },
         { name: "name", label: "Name", field: "displayName", align: "center" },
-        { name: "role", label: "Role", field: "role", align: "center", format: val => val.charAt(0).toUpperCase() + val.slice(1) },
+        { name: "role", label: "Role", field: "role", align: "center", format: val => capitalize(val) },
         { name: "createdAt", label: "Created", field: "createdAt", align: "center", format: val => date.formatDate(val, "HH:mm:ss DD-MM-YYYY") },
         { name: "lastSignInTime", label: "Last Connection", field: "lastSignInTime", align: "center", format: val => date.formatDate(val, "HH:mm:ss DD-MM-YYYY") },
         { name: "blocked", label: "Blocked", field: "blocked", align: "center" },
@@ -103,6 +145,12 @@ export default {
   methods: {
     exportTable () {
       console.log("Exporting...")
+    },
+    addUser () {
+      console.log("Show user modal")
+    },
+    importUsers () {
+      console.log("Import users")
     }
   }
 }

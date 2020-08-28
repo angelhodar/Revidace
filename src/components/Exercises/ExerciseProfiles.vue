@@ -18,6 +18,9 @@ import { Exercises } from "../../services"
 
 export default {
   name: "ExerciseProfiles",
+  props: {
+    exerciseProp: Object
+  },
   components: {
     ExerciseParameters: () => import("./ExerciseParameters")
   },
@@ -33,8 +36,12 @@ export default {
     }
   },
   async mounted () {
-    const { data } = await Exercises.getExercises()
-    this.exercise = data[0]
+    if (this.exerciseProp != null) {
+      this.exercise = this.exerciseProp
+    } else {
+      const { data } = await Exercises.getExercises()
+      this.exercise = data[0]
+    }
   }
 }
 </script>
