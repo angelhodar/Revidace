@@ -24,13 +24,10 @@ export default {
   },
   mounted () {
     this.$socket.client.open()
-    this.sendUserData({
-      uid: this.user.uid,
-      email: this.user.email
-    })
+    this.identifyUser(this.user.id)
   },
   methods: {
-    ...mapActions("sockets", ["sendUserData"]),
+    ...mapActions("sockets", ["identifyUser"]),
     togglePanel () {
       this.panelShown = !this.panelShown
     }
