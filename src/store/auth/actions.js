@@ -13,8 +13,8 @@ export const loginWithSocialProvider = function ({ commit }, provider) {
 export const handleIncomingToken = async function ({ commit }, token) {
   commit("setAccessToken", token)
   this.$api.defaults.headers.common.Authorization = `Bearer ${token}`
-  const { uid } = decode(token)
-  const { data: currentUser } = await Users.getUser(uid)
+  const { id } = decode(token)
+  const { data: currentUser } = await Users.getUser(id)
   commit("setCurrentUser", currentUser)
   this.$router.push("/dashboard")
 }

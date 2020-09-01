@@ -4,6 +4,7 @@ import qs from "query-string"
 const api = axios.create({
   baseURL: `${process.env.API_URL}/api/v1`,
   paramsSerializer: (params) => {
+    // This arrayFormat is required for module api-query-params on server
     return qs.stringify(params, { arrayFormat: "comma" })
   }
 })
