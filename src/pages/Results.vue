@@ -29,7 +29,14 @@
       </template>
       <template v-slot:body-cell-actions="props">
         <q-td :props="props">
-          <q-btn icon="assignment" color="primary" label="Details" outline no-caps @click="showResultDetails(props.row)"/>
+          <q-btn
+            icon="assignment"
+            color="primary"
+            :label="$q.screen.gt.md ? 'Details' : ''"
+            outline
+            no-caps
+            @click="showResultDetails(props.row)"
+          />
         </q-td>
       </template>
       <template v-slot:loading>
@@ -54,12 +61,44 @@ export default {
       loading: false,
       filter: "",
       columns: [
-        { name: "patient", label: "Patient", field: row => row.patient.name, align: "center" },
-        { name: "user", label: "User", field: row => row.user.displayName, align: "center" },
-        { name: "device", label: "Device", field: row => row.device.name, align: "center" },
-        { name: "exercise", label: "Exercise", field: row => row.exercise.name, align: "center" },
-        { name: "profile", label: "Profile", field: "profile", align: "center", format: val => capitalize(val) },
-        { name: "createdAt", label: "Created", field: "createdAt", align: "center", format: val => date.formatDate(val, "HH:mm:ss DD-MM-YYYY") },
+        {
+          name: "patient",
+          label: "Patient",
+          field: (row) => row.patient.name,
+          align: "center"
+        },
+        {
+          name: "user",
+          label: "User",
+          field: (row) => row.user.displayName,
+          align: "center"
+        },
+        {
+          name: "device",
+          label: "Device",
+          field: (row) => row.device.name,
+          align: "center"
+        },
+        {
+          name: "exercise",
+          label: "Exercise",
+          field: (row) => row.exercise.name,
+          align: "center"
+        },
+        {
+          name: "profile",
+          label: "Profile",
+          field: "profile",
+          align: "center",
+          format: (val) => capitalize(val)
+        },
+        {
+          name: "createdAt",
+          label: "Created",
+          field: "createdAt",
+          align: "center",
+          format: (val) => date.formatDate(val, "HH:mm:ss DD-MM-YYYY")
+        },
         { name: "actions", label: "", field: "actions", align: "center" }
       ],
       data: []
@@ -70,7 +109,12 @@ export default {
     try {
       const { data } = await Results.getResults({
         populate: ["patient", "user", "device", "exercise"],
-        fields: ["patient.name", "user.displayName", "device.name", "exercise.name"]
+        fields: [
+          "patient.name",
+          "user.displayName",
+          "device.name",
+          "exercise.name"
+        ]
       })
       console.log(data)
       this.data = data

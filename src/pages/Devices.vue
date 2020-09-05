@@ -14,7 +14,7 @@
 
 <script>
 import { Devices } from "../services"
-import ExerciseLauncherPlugin from "components/ExerciseLauncherPlugin"
+import ExerciseLauncher from "components/ExerciseLauncher"
 
 export default {
   components: {
@@ -33,7 +33,7 @@ export default {
   methods: {
     deviceSelected (device) {
       this.$q.dialog({
-        component: ExerciseLauncherPlugin,
+        component: ExerciseLauncher,
         parent: this,
         device: device
       }).onOk((data) => {

@@ -14,7 +14,7 @@
 
 <script>
 import { Exercises } from "../services"
-import ExerciseDetailsPlugin from "components/Exercises/ExerciseDetailsPlugin"
+import ExerciseDetails from "components/Exercises/ExerciseDetails"
 
 export default {
   components: {
@@ -33,7 +33,7 @@ export default {
   methods: {
     showExerciseModal (exercise) {
       this.$q.dialog({
-        component: ExerciseDetailsPlugin,
+        component: ExerciseDetails,
         parent: this,
         exercise: exercise
       })

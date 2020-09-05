@@ -1,21 +1,54 @@
 <template>
   <q-dialog ref="dialog" @hide="onDialogHide">
-    <q-card class="q-pa-md">
+    <q-card class="q-pa-md" :style="$q.screen.lt.sm?{'width': '100%'}:{'width':'200%'}">
       <q-card-section>
-        <div class="text-h4 text-center">User</div>
+        <div class="row">
+          <q-icon :name="user != null ? 'edit' : 'person_add'" size="lg" />
+          <div class="text-h4 q-pl-md">{{ user != null ? "Update User" : "Add User" }}</div>
+        </div>
       </q-card-section>
 
       <q-card-section class="q-gutter-md">
-        <q-input outlined v-model="email" label="Email" type="email" />
-        <q-input outlined v-model="password" label="Password" type="password" />
-        <q-input outlined v-model="displayName" label="Name" />
-        <q-select outlined v-model="role" :options="roles" label="Role" />
-        <q-input outlined v-model="photoURL" type="url" label="Photo URL" />
-        <q-toggle v-model="blocked" label="Blocked" />
+        <q-input outlined v-model="email" label="Email" type="email">
+          <template v-slot:prepend>
+            <q-icon name="email" />
+          </template>
+        </q-input>
+        <q-input outlined v-model="password" label="Password" type="password">
+          <template v-slot:prepend>
+            <q-icon name="lock" />
+          </template>
+        </q-input>
+        <q-input outlined v-model="displayName" label="Name" >
+          <template v-slot:prepend>
+            <q-icon name="face" />
+          </template>
+        </q-input>
+        <q-select outlined v-model="role" :options="['Admin', 'Manager', 'User']" label="Role">
+          <template v-slot:prepend>
+            <q-icon name="supervisor_account" />
+          </template>
+        </q-select>
+        <q-input outlined v-model="photoURL" type="url" label="Photo URL">
+          <template v-slot:prepend>
+            <q-icon name="photo" />
+          </template>
+        </q-input>
       </q-card-section>
 
-      <q-card-actions>
-        <q-btn outline color="primary" label="Update" @click="onClick" />
+      <q-card-actions align="around" >
+        <q-btn
+          outline
+          color="primary"
+          :label="user != null ? 'Update' : 'Add'"
+          @click="onClick"
+        />
+        <q-btn
+          outline
+          color="red"
+          label="Cancel"
+          @click="hide"
+        />
       </q-card-actions>
     </q-card>
   </q-dialog>
@@ -37,9 +70,7 @@ export default {
       password: "",
       displayName: "",
       role: "",
-      photoURL: "",
-      blocked: false,
-      roles: ["Admin", "Manager", "User"]
+      photoURL: ""
     }
   },
   mounted () {
@@ -53,7 +84,6 @@ export default {
       this.displayName = this.user.displayName
       this.role = capitalize(this.user.role)
       this.photoURL = this.user.photoURL
-      this.blocked = this.user.blocked
     },
     show () {
       this.$refs.dialog.show()
@@ -72,8 +102,7 @@ export default {
           password: this.password,
           displayName: this.displayName,
           role: this.role.toLowerCase(),
-          photoURL: this.photoURL,
-          blocked: this.blocked
+          photoURL: this.photoURL
         }
       })
       this.hide()

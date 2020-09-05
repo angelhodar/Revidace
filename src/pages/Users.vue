@@ -11,35 +11,35 @@
       :loading="loading"
     >
       <template v-slot:top>
-        <q-btn
-          outline
-          color="primary"
-          icon="person_add"
-          :disable="loading"
-          label="Add User"
-          no-caps
-          @click="addUser"
-        />
-        <q-btn
-          outline
-          class="q-ml-sm"
-          color="primary"
-          icon="archive"
-          :disable="loading"
-          label="Import"
-          no-caps
-          @click="importUsers"
-        />
-        <q-btn
-          outline
-          class="q-ml-sm"
-          color="primary"
-          icon="insert_drive_file"
-          label="Export CSV"
-          :disable="loading"
-          no-caps
-          @click="exportTable"
-        />
+        <div class="q-gutter-md">
+          <q-btn
+            outline
+            color="primary"
+            icon="person_add"
+            :disable="loading"
+            label="Add User"
+            no-caps
+            @click="addUser"
+          />
+          <q-btn
+            outline
+            color="primary"
+            icon="archive"
+            :disable="loading"
+            label="Import"
+            no-caps
+            @click="importUsers"
+          />
+          <q-btn
+            outline
+            color="primary"
+            icon="insert_drive_file"
+            label="Export CSV"
+            :disable="loading"
+            no-caps
+            @click="exportTable"
+          />
+        </div>
         <q-space />
         <q-input rounded outlined dense debounce="300" color="primary" v-model="filter">
           <template v-slot:append>
@@ -69,7 +69,7 @@
       <template v-slot:body-cell-blocked="props">
         <q-td :props="props">
           <div>
-            <q-toggle v-model="props.row.blocked" />
+            <q-toggle :value="props.row.blocked" @input="onBlockChange(props.row)" />
           </div>
         </q-td>
       </template>
@@ -110,12 +110,40 @@ export default {
       filter: "",
       columns: [
         { name: "email", label: "Email", field: "email", align: "center" },
-        { name: "provider", label: "Provider", field: "provider", align: "center" },
+        {
+          name: "provider",
+          label: "Provider",
+          field: "provider",
+          align: "center"
+        },
         { name: "name", label: "Name", field: "displayName", align: "center" },
-        { name: "role", label: "Role", field: "role", align: "center", format: val => capitalize(val) },
-        { name: "createdAt", label: "Created", field: "createdAt", align: "center", format: val => date.formatDate(val, "HH:mm:ss DD-MM-YYYY") },
-        { name: "lastSignInTime", label: "Last Connection", field: "lastSignInTime", align: "center", format: val => date.formatDate(val, "HH:mm:ss DD-MM-YYYY") },
-        { name: "blocked", label: "Blocked", field: "blocked", align: "center" },
+        {
+          name: "role",
+          label: "Role",
+          field: "role",
+          align: "center",
+          format: (val) => capitalize(val)
+        },
+        {
+          name: "createdAt",
+          label: "Created",
+          field: "createdAt",
+          align: "center",
+          format: (val) => date.formatDate(val, "HH:mm:ss DD-MM-YYYY")
+        },
+        {
+          name: "lastSignInTime",
+          label: "Last Connection",
+          field: "lastSignInTime",
+          align: "center",
+          format: (val) => date.formatDate(val, "HH:mm:ss DD-MM-YYYY")
+        },
+        {
+          name: "blocked",
+          label: "Blocked",
+          field: "blocked",
+          align: "center"
+        },
         { name: "actions", label: "", field: "actions", align: "center" }
       ],
       data: []
@@ -137,28 +165,68 @@ export default {
       console.log("Exporting...")
     },
     editUser (user) {
-      this.$q.dialog({
-        component: UserModal,
-        parent: this,
-        user: user
-      }).onOk((user) => {
-        console.log(user)
-      })
+      this.$q
+        .dialog({
+          component: UserModal,
+          parent: this,
+          user: user
+        })
+        .onOk((user) => {
+          console.log(user)
+        })
     },
     deleteUser (user) {
-      console.log(user)
+      this.$q
+        .dialog({
+          title: "Confirm",
+          message: "Are you sure you want to delete the user?",
+          ok: {
+            outline: true,
+            label: "Yes"
+          },
+          cancel: {
+            outline: true,
+            color: "red"
+          },
+          persistent: true
+        })
+        .onOk(() => {
+          console.log("Deleting user...")
+        })
     },
     addUser () {
-      this.$q.dialog({
-        component: UserModal,
-        parent: this,
-        user: null
-      }).onOk((user) => {
-        console.log(user)
-      })
+      this.$q
+        .dialog({
+          component: UserModal,
+          parent: this,
+          user: null
+        })
+        .onOk((user) => {
+          console.log(user)
+        })
     },
     importUsers () {
       console.log("Import users")
+    },
+    onBlockChange (user) {
+      const state = user.blocked ? "unblock" : "block"
+      this.$q
+        .dialog({
+          title: "Confirm",
+          message: `Are you sure you want to ${state} the user?`,
+          ok: {
+            outline: true,
+            label: "Yes"
+          },
+          cancel: {
+            outline: true,
+            color: "red"
+          },
+          persistent: true
+        })
+        .onOk(() => {
+          console.log("User block state changing...")
+        })
     }
   }
 }

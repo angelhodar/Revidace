@@ -6,6 +6,6 @@ export function launchExercise ({ commit }, payload) {
   this._vm.$socket.client.emit("send_exercise", payload)
 }
 
-/* export function socket_device ({ commit }, payload) {
-  console.log("New device")
-} */
+export function socket_device ({ commit }, payload) {
+  console.log(`New device connected: ${payload}`)
+}

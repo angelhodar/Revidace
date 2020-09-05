@@ -1,7 +1,7 @@
 <template>
   <q-page class="row justify-center items-center">
     <div id="particles-js"></div>
-    <q-card v-bind:style="$q.screen.lt.sm?{'width': '80%'}:{'width':'30%'}">
+    <q-card :style="$q.screen.lt.sm?{'width': '80%'}:{'width':'30%'}">
       <q-card-section>
         <q-avatar size="100px" class="absolute-center">
           <img src="profile.svg" />
