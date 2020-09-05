@@ -12,9 +12,10 @@ const routes = [
     component: () => import("layouts/DashboardLayout.vue"),
     children: [
       { path: "", component: () => import("pages/Dashboard.vue") },
-      { path: "users", component: () => import("pages/UsersManagment.vue") },
+      { path: "users", component: () => import("pages/Users.vue") },
       { path: "exercises", component: () => import("pages/Exercises.vue") },
       { path: "devices", component: () => import("pages/Devices.vue") },
+      { path: "patients", component: () => import("pages/Patients.vue") },
       { path: "results", component: () => import("pages/Results.vue") }
     ],
     meta: { requiresAuth: true }

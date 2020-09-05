@@ -5,7 +5,6 @@
         <div class="absolute-bottom text-subtitle2 text-center">{{ exercise.name }}</div>
       </q-img>
     </q-card>
-    <ExerciseDetails :shown="clicked" :exercise="exercise" />
   </div>
 </template>
 
@@ -14,21 +13,10 @@ export default {
   props: {
     exercise: Object
   },
-  components: {
-    ExerciseDetails: () => import("./ExerciseDetails")
-  },
-  data () {
-    return {
-      clicked: false
-    }
-  },
   methods: {
     showExerciseDetails () {
-      this.clicked = !this.clicked
+      this.$emit("showDetails", this.exercise)
     }
   }
 }
 </script>
-
-<style>
-</style>

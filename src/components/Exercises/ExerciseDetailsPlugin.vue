@@ -1,6 +1,6 @@
 <template>
-  <q-dialog ref="dialog" @hide="onHide" >
-    <q-card v-if="exercise != null">
+  <q-dialog ref="dialog" @hide="onDialogHide">
+    <q-card>
       <q-card-section>
         <q-carousel animated v-model="slide" arrows navigation infinite>
           <q-carousel-slide :name="1" img-src="https://cdn.quasar.dev/img/mountains.jpg" />
@@ -25,22 +25,25 @@
 
 <script>
 export default {
-  name: "ExerciseDetails",
+  props: {
+    exercise: Object
+  },
   components: {
     ExerciseProfiles: () => import("./ExerciseProfiles")
   },
   data () {
     return {
-      exercise: null,
       slide: 1
     }
   },
   methods: {
-    show (exercise) {
-      this.exercise = exercise
+    show () {
       this.$refs.dialog.show()
     },
-    onHide () {
+    hide () {
+      this.$refs.dialog.hide()
+    },
+    onDialogHide () {
       this.$emit("hide")
     }
   }

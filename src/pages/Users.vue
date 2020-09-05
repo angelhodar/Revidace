@@ -66,24 +66,6 @@
           </div>
         </q-td>
       </template>
-      <template v-slot:body-cell-role="props">
-        <q-td :props="props">
-          <div>
-            <q-btn-toggle
-              v-model="props.row.role"
-              size="md"
-              no-caps
-              flat
-              toggle-color="primary"
-              :options="[
-                  {label: 'User', value: 'user'},
-                  {label: 'Manager', value: 'manager'},
-                  {label: 'Admin', value: 'admin'}
-                ]"
-            />
-          </div>
-        </q-td>
-      </template>
       <template v-slot:body-cell-blocked="props">
         <q-td :props="props">
           <div>
@@ -108,20 +90,19 @@
         <q-inner-loading showing color="primary" />
       </template>
     </q-table>
-    <UserModal :user="selectedUser" />
   </q-page>
 </template>
 
 <script>
 import { date, format } from "quasar"
 import { Users } from "../services"
+import UserModal from "components/UserModal"
 const { capitalize } = format
 
 export default {
   name: "UsersManagment",
   components: {
-    BreadCrumbs: () => import("components/Dashboard/BreadCrumbs"),
-    UserModal: () => import("components/UserModal")
+    BreadCrumbs: () => import("components/Dashboard/BreadCrumbs")
   },
   data () {
     return {
@@ -137,8 +118,7 @@ export default {
         { name: "blocked", label: "Blocked", field: "blocked", align: "center" },
         { name: "actions", label: "", field: "actions", align: "center" }
       ],
-      data: [],
-      selectedUser: null
+      data: []
     }
   },
   async mounted () {
@@ -157,13 +137,25 @@ export default {
       console.log("Exporting...")
     },
     editUser (user) {
-      this.selectedUser = user
+      this.$q.dialog({
+        component: UserModal,
+        parent: this,
+        user: user
+      }).onOk((user) => {
+        console.log(user)
+      })
     },
     deleteUser (user) {
       console.log(user)
     },
     addUser () {
-      console.log("Show user modal")
+      this.$q.dialog({
+        component: UserModal,
+        parent: this,
+        user: null
+      }).onOk((user) => {
+        console.log(user)
+      })
     },
     importUsers () {
       console.log("Import users")

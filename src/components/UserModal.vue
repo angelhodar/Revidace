@@ -1,5 +1,5 @@
 <template>
-  <q-dialog v-model="shown">
+  <q-dialog ref="dialog" @hide="onDialogHide">
     <q-card class="q-pa-md">
       <q-card-section>
         <div class="text-h4 text-center">User</div>
@@ -13,14 +13,18 @@
         <q-input outlined v-model="photoURL" type="url" label="Photo URL" />
         <q-toggle v-model="blocked" label="Blocked" />
       </q-card-section>
+
       <q-card-actions>
-        <q-btn v-close-popup outline color="primary" label="Update" />
+        <q-btn outline color="primary" label="Update" @click="onClick" />
       </q-card-actions>
     </q-card>
   </q-dialog>
 </template>
 
 <script>
+import { format } from "quasar"
+const { capitalize } = format
+
 export default {
   name: "UserModal",
   props: {
@@ -28,7 +32,7 @@ export default {
   },
   data () {
     return {
-      shown: false,
+      id: "",
       email: "",
       password: "",
       displayName: "",
@@ -38,28 +42,41 @@ export default {
       roles: ["Admin", "Manager", "User"]
     }
   },
+  mounted () {
+    if (this.user) this.updateData(this.user)
+  },
   methods: {
     updateData () {
+      this.id = this.user.id
       this.email = this.user.email
       this.password = this.user.password
       this.displayName = this.user.displayName
-      this.role = this.user.role
+      this.role = capitalize(this.user.role)
       this.photoURL = this.user.photoURL
       this.blocked = this.user.blocked
     },
+    show () {
+      this.$refs.dialog.show()
+    },
+    hide () {
+      this.$refs.dialog.hide()
+    },
+    onDialogHide () {
+      this.$emit("hide")
+    },
     onClick () {
-      // TODO: API call POST if not editing user PUT otherwise
-    }
-  },
-  watch: {
-    user: function (val) {
-      if (val != null) {
-        this.user = val
-        this.updateData()
-        this.shown = true
-      } else {
-        this.shown = false
-      }
+      this.$emit("ok", {
+        id: this.id,
+        data: {
+          email: this.email,
+          password: this.password,
+          displayName: this.displayName,
+          role: this.role.toLowerCase(),
+          photoURL: this.photoURL,
+          blocked: this.blocked
+        }
+      })
+      this.hide()
     }
   }
 }
