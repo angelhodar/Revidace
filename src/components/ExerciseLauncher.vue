@@ -9,7 +9,13 @@
       </q-card-section>
 
       <q-card-section class="q-gutter-md">
-        <q-select outlined v-model="patient" :options="patients.map(p => p.name)" label="Patient">
+        <q-select
+          outlined
+          v-model="patient"
+          :options="patients"
+          option-label="name"
+          label="Patient"
+        >
           <template v-slot:prepend>
             <q-icon name="person" />
           </template>
@@ -17,7 +23,8 @@
         <q-select
           outlined
           v-model="exercise"
-          :options="exercises.map(e => e.name)"
+          :options="exercises"
+          option-label="name"
           label="Exercise"
         >
           <template v-slot:prepend>
@@ -31,7 +38,13 @@
         </q-select>
       </q-card-section>
       <q-card-actions align="around">
-        <q-btn outline color="primary" label="Launch" @click="onLaunch" />
+        <q-btn
+          outline
+          color="primary"
+          label="Launch"
+          :disabled="exercise == null || patient == null"
+          @click="onLaunch"
+        />
         <q-btn outline color="red" label="Cancel" @click="hide" />
       </q-card-actions>
     </q-card>
@@ -39,32 +52,20 @@
 </template>
 
 <script>
-import { Exercises, Patients } from "../services"
-
 export default {
   name: "ExerciseLauncher",
   props: {
-    device: Object
+    device: Object,
+    exercises: Array,
+    patients: Array
   },
   data () {
     return {
-      exercises: [],
-      patients: [],
-      patient: "",
-      exercise: "",
+      patient: null,
+      exercise: null,
       profile: "Easy",
       profiles: ["Easy", "Medium", "Hard"]
     }
-  },
-  async mounted () {
-    const { data: exercises } = await Exercises.getExercises({
-      fields: ["name"]
-    })
-    const { data: patients } = await Patients.getPatients()
-    this.exercises = exercises
-    this.exercise = exercises[0].name
-    this.patients = patients
-    this.patient = patients[0].name
   },
   methods: {
     show () {
@@ -77,16 +78,10 @@ export default {
       this.$emit("hide")
     },
     onLaunch () {
-      const selectedExercise = this.exercises.find(
-        (e) => e.name === this.exercise
-      )
-      const selectedPatient = this.patients.find(
-        (p) => p.name === this.patient
-      )
       this.$emit("ok", {
         device: this.device.id,
-        exercise: selectedExercise.id,
-        patient: selectedPatient.id,
+        exercise: this.exercise.id,
+        patient: this.patient.id,
         profile: this.profile.toLowerCase()
       })
       this.hide()

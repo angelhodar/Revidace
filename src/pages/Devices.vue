@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { Devices } from "../services"
+import { Devices, Exercises, Patients } from "../services"
 import ExerciseLauncher from "components/ExerciseLauncher"
 
 export default {
@@ -23,22 +23,32 @@ export default {
   },
   data () {
     return {
-      devices: []
+      devices: [],
+      exercises: [],
+      patients: []
     }
   },
   async mounted () {
-    const { data } = await Devices.getDevices()
-    this.devices = data
+    const { data: devices } = await Devices.getDevices()
+    const { data: patients } = await Patients.getPatients()
+    const { data: exercises } = await Exercises.getExercises()
+    this.devices = devices
+    this.patients = patients
+    this.exercises = exercises
   },
   methods: {
     deviceSelected (device) {
-      this.$q.dialog({
-        component: ExerciseLauncher,
-        parent: this,
-        device: device
-      }).onOk((data) => {
-        console.log(data)
-      })
+      this.$q
+        .dialog({
+          component: ExerciseLauncher,
+          parent: this,
+          device: device,
+          exercises: this.exercises,
+          patients: this.patients
+        })
+        .onOk((data) => {
+          console.log(data)
+        })
     }
   }
 }
