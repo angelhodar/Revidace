@@ -79,8 +79,14 @@ export default {
     },
     onLaunch () {
       this.$emit("ok", {
-        device: this.device.id,
-        exercise: this.exercise.id,
+        device: {
+          id: this.device.id,
+          socket: this.device.socket
+        },
+        exercise: {
+          id: this.exercise.id,
+          name: this.exercise.name
+        },
         patient: this.patient.id,
         profile: this.profile.toLowerCase()
       })

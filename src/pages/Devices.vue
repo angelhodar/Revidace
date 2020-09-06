@@ -15,6 +15,7 @@
 <script>
 import { Devices, Exercises, Patients } from "../services"
 import ExerciseLauncher from "components/ExerciseLauncher"
+import { mapState, mapActions } from "vuex"
 
 export default {
   components: {
@@ -36,19 +37,21 @@ export default {
     this.patients = patients
     this.exercises = exercises
   },
+  computed: {
+    ...mapState("auth", ["user"])
+  },
   methods: {
+    ...mapActions("sockets", ["launchExercise"]),
     deviceSelected (device) {
-      this.$q
-        .dialog({
-          component: ExerciseLauncher,
-          parent: this,
-          device: device,
-          exercises: this.exercises,
-          patients: this.patients
-        })
-        .onOk((data) => {
-          console.log(data)
-        })
+      this.$q.dialog({
+        component: ExerciseLauncher,
+        parent: this,
+        device: device,
+        exercises: this.exercises,
+        patients: this.patients
+      }).onOk((data) => {
+        this.launchExercise({ user: this.user.id, ...data })
+      })
     }
   }
 }

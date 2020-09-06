@@ -1,7 +1,7 @@
 import io from "socket.io-client"
 import VueSocketIOExt from "vue-socket.io-extended"
 
-const socket = io(process.env.API_URL, {
+const socket = io(`${process.env.API_URL}/users`, {
   autoConnect: false // Prevent until user is authenticated
 })
 

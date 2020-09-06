@@ -3,10 +3,11 @@
     <BreadCrumbs label="Results" icon="assignment" />
     <q-table
       title="Results"
+      row-key="id"
       :data="data"
       :columns="columns"
       :filter="filter"
-      row-key="id"
+      :pagination="{rowsPerPage: 15}"
       :loading="loading"
     >
       <template v-slot:top>

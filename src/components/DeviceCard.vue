@@ -19,7 +19,7 @@ export default {
   },
   methods: {
     sendExercise () {
-      this.$emit("onSendExercise", this.device)
+      if (!this.device.busy) this.$emit("onSendExercise", this.device)
     }
   }
 }
