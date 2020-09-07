@@ -1,8 +1,8 @@
 {
-  "name": "agrelink-front",
+  "name": "Revidace",
   "version": "0.0.1",
-  "description": "Frontend for the AgreLink project",
-  "productName": "AgreLink",
+  "description": "Frontend for the Revidace project",
+  "productName": "Revidace",
   "author": "Angel <angelhodar76@gmail.com>",
   "private": true,
   "scripts": {

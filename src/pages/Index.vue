@@ -26,7 +26,7 @@ export default {
   },
   data () {
     return {
-      title: "AgreLink",
+      title: "Revidace",
       subtitle: "Automated virtual reality exercises for people with acquired brain damage",
       sections: [
         {
