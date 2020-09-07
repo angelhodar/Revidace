@@ -1,7 +1,7 @@
 <template>
   <div class="column items-center">
-    <div class="text-h1 q-pt-md text-center">{{ title }}</div>
-    <div class="text-h5 q-py-lg text-center">{{ subtitle }}</div>
+    <div class="text-h2 q-pt-md text-center">{{ title }}</div>
+    <div class="text-h6 q-py-lg text-center">{{ subtitle }}</div>
     <q-btn outline color="primary" to="/login" size="lg">Login</q-btn>
   </div>
 </template>

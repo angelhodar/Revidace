@@ -1,6 +1,6 @@
-# AgreLink
+# Revidace
 
-Frontend for the AgreLink project
+Frontend for the Revidace project
 
 ## Install the dependencies
 ```bash

@@ -41,7 +41,7 @@ module.exports = function (ctx) {
     build: {
       vueRouterMode: "history", // available values: 'hash', 'history'
       env: {
-        API_URL: ctx.dev ? "http://localhost:5000" : "https://agrelink-api.herokuapp.com"
+        API_URL: ctx.dev ? "http://localhost:5000" : "https://revidace-api.herokuapp.com"
       },
 
       // transpile: false,
@@ -114,9 +114,9 @@ module.exports = function (ctx) {
       workboxPluginMode: "GenerateSW", // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: "AgreLink",
-        short_name: "AgreLink",
-        description: "Frontend for the AgreLink project",
+        name: "Revidace",
+        short_name: "Revidace",
+        description: "Frontend for the Revidace project",
         display: "standalone",
         orientation: "portrait",
         background_color: "#ffffff",
@@ -179,7 +179,7 @@ module.exports = function (ctx) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: "agrelink-front"
+        appId: "Revidace"
       },
 
       // More info: https://quasar.dev/quasar-cli/developing-electron-apps/node-integration
