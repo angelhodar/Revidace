@@ -3,6 +3,8 @@ import Vuex from "vuex"
 
 import auth from "./auth"
 import sockets from "./sockets"
+import devices from "./devices"
+import results from "./results"
 
 Vue.use(Vuex)
 
@@ -19,7 +21,9 @@ export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
       auth,
-      sockets
+      sockets,
+      devices,
+      results
     },
 
     // enable strict mode (adds overhead!)

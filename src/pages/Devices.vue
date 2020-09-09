@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { Devices, Exercises, Patients } from "../services"
+import { Exercises, Patients } from "../services"
 import ExerciseLauncher from "components/ExerciseLauncher"
 import { mapState, mapActions } from "vuex"
 
@@ -24,24 +24,24 @@ export default {
   },
   data () {
     return {
-      devices: [],
       exercises: [],
       patients: []
     }
   },
   async mounted () {
-    const { data: devices } = await Devices.getDevices()
+    await this.getDevices()
     const { data: patients } = await Patients.getPatients()
     const { data: exercises } = await Exercises.getExercises()
-    this.devices = devices
     this.patients = patients
     this.exercises = exercises
   },
   computed: {
-    ...mapState("auth", ["user"])
+    ...mapState("auth", ["user"]),
+    ...mapState("devices", ["devices"])
   },
   methods: {
     ...mapActions("sockets", ["launchExercise"]),
+    ...mapActions("devices", ["getDevices"]),
     deviceSelected (device) {
       this.$q.dialog({
         component: ExerciseLauncher,
