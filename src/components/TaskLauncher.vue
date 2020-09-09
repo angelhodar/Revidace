@@ -4,7 +4,7 @@
       <q-card-section>
         <div class="row">
           <q-icon name="assignment" size="md" />
-          <div class="text-h5 q-pl-md">Exercise Launcher</div>
+          <div class="text-h5 q-pl-md">Task Launcher</div>
         </div>
       </q-card-section>
 
@@ -53,7 +53,7 @@
 
 <script>
 export default {
-  name: "ExerciseLauncher",
+  name: "TaskLauncher",
   props: {
     device: Object,
     exercises: Array,

@@ -4,7 +4,7 @@ import Vuex from "vuex"
 import auth from "./auth"
 import sockets from "./sockets"
 import devices from "./devices"
-import results from "./results"
+import tasks from "./tasks"
 
 Vue.use(Vuex)
 
@@ -23,7 +23,7 @@ export default function (/* { ssrContext } */) {
       auth,
       sockets,
       devices,
-      results
+      tasks
     },
 
     // enable strict mode (adds overhead!)

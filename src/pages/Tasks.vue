@@ -1,8 +1,8 @@
 <template>
   <q-page class="q-pa-md">
-    <BreadCrumbs label="Results" icon="assignment" />
+    <BreadCrumbs label="Tasks" icon="assignment" />
     <q-table
-      title="Results"
+      title="Tasks"
       row-key="id"
       :data="data"
       :columns="columns"
@@ -28,6 +28,19 @@
           </template>
         </q-input>
       </template>
+      <template v-slot:body-cell-status="props">
+        <q-td :props="props">
+          <div>
+            <q-badge v-if="props.row.status === 'active'" color="orange" :label="props.row.status" />
+            <q-badge
+              v-if="props.row.status === 'completed'"
+              color="green"
+              :label="props.row.status"
+            />
+            <q-badge v-if="props.row.status === 'failed'" color="red" :label="props.row.status" />
+          </div>
+        </q-td>
+      </template>
       <template v-slot:body-cell-actions="props">
         <q-td :props="props">
           <q-btn
@@ -36,7 +49,16 @@
             :label="$q.screen.gt.md ? 'Details' : ''"
             outline
             no-caps
-            @click="showResultDetails(props.row)"
+            @click="showTaskDetails(props.row)"
+          />
+          <q-btn
+            icon="delete"
+            color="red"
+            class="q-ml-sm"
+            :label="$q.screen.gt.md ? 'Delete' : ''"
+            outline
+            no-caps
+            @click="removeTask(props.row)"
           />
         </q-td>
       </template>
@@ -49,11 +71,11 @@
 
 <script>
 import { date, format } from "quasar"
-import { Results } from "../services"
+import { Tasks } from "../services"
 const { capitalize } = format
 
 export default {
-  name: "Results",
+  name: "Tasks",
   components: {
     BreadCrumbs: () => import("components/Dashboard/BreadCrumbs")
   },
@@ -94,6 +116,13 @@ export default {
           format: (val) => capitalize(val)
         },
         {
+          name: "status",
+          label: "Status",
+          field: "status",
+          align: "center",
+          format: (val) => capitalize(val)
+        },
+        {
           name: "createdAt",
           label: "Created",
           field: "createdAt",
@@ -108,7 +137,7 @@ export default {
   async mounted () {
     this.loading = true
     try {
-      const { data } = await Results.getResults({
+      const { data } = await Tasks.getTasks({
         populate: ["patient", "user", "device", "exercise"],
         fields: [
           "patient.name",
@@ -129,8 +158,11 @@ export default {
     exportTable () {
       console.log("Exporting...")
     },
-    showResultDetails (result) {
-      console.log("Showing results...")
+    showTaskDetails (task) {
+      console.log("Showing tasks...")
+    },
+    removeTask (task) {
+      console.log("Removing tasks...")
     }
   }
 }

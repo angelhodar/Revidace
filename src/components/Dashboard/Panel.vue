@@ -62,9 +62,9 @@ export default {
           separator: false
         },
         {
-          title: "Results",
+          title: "Tasks",
           icon: "assignment",
-          route: "/dashboard/results",
+          route: "/dashboard/tasks",
           separator: false
         }
       ],

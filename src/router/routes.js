@@ -16,7 +16,7 @@ const routes = [
       { path: "exercises", component: () => import("pages/Exercises.vue") },
       { path: "devices", component: () => import("pages/Devices.vue") },
       { path: "patients", component: () => import("pages/Patients.vue") },
-      { path: "results", component: () => import("pages/Results.vue") }
+      { path: "tasks", component: () => import("pages/Tasks.vue") }
     ],
     meta: { requiresAuth: true }
   },

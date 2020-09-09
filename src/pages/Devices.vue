@@ -14,7 +14,7 @@
 
 <script>
 import { Exercises, Patients } from "../services"
-import ExerciseLauncher from "components/ExerciseLauncher"
+import TaskLauncher from "components/TaskLauncher"
 import { mapState, mapActions } from "vuex"
 
 export default {
@@ -40,17 +40,17 @@ export default {
     ...mapState("devices", ["devices"])
   },
   methods: {
-    ...mapActions("sockets", ["launchExercise"]),
+    ...mapActions("sockets", ["launchTask"]),
     ...mapActions("devices", ["getDevices"]),
     deviceSelected (device) {
       this.$q.dialog({
-        component: ExerciseLauncher,
+        component: TaskLauncher,
         parent: this,
         device: device,
         exercises: this.exercises,
         patients: this.patients
       }).onOk((data) => {
-        this.launchExercise({ user: this.user.id, ...data })
+        this.launchTask({ user: this.user.id, ...data })
       })
     }
   }

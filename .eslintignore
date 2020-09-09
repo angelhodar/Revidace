@@ -6,4 +6,4 @@
 /node_modules
 /src/store/sockets
 /src/store/devices
-/src/store/results
+/src/store/tasks
