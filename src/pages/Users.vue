@@ -96,7 +96,7 @@
 <script>
 import { date, format } from "quasar"
 import { mapState, mapActions } from "vuex"
-import UserModal from "components/UserModal"
+import UserModal from "components/Users/UserModal"
 const { capitalize } = format
 
 export default {

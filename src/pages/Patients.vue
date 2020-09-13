@@ -12,7 +12,7 @@ import { mapState, mapActions } from "vuex"
 
 export default {
   components: {
-    PatientCard: () => import("components/PatientCard"),
+    PatientCard: () => import("components/Patients/PatientCard"),
     BreadCrumbs: () => import("components/Dashboard/BreadCrumbs")
   },
   async mounted () {

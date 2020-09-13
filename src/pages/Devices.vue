@@ -3,7 +3,7 @@
     <BreadCrumbs label="Devices" icon="contactless" />
     <div class="row">
       <DeviceCard
-        v-for="device in devices"
+        v-for="device in connectedDevices"
         :key="device.id"
         :device="device"
         @onSelected="deviceSelected"
@@ -13,12 +13,12 @@
 </template>
 
 <script>
-import TaskLauncher from "components/TaskLauncher"
+import TaskLauncher from "components/Tasks/TaskLauncher"
 import { mapState, mapActions } from "vuex"
 
 export default {
   components: {
-    DeviceCard: () => import("components/DeviceCard"),
+    DeviceCard: () => import("components/Devices/DeviceCard"),
     BreadCrumbs: () => import("components/Dashboard/BreadCrumbs")
   },
   async mounted () {
@@ -30,7 +30,10 @@ export default {
     ...mapState("users", ["user"]),
     ...mapState("devices", ["devices"]),
     ...mapState("exercises", ["exercises"]),
-    ...mapState("patients", ["patients"])
+    ...mapState("patients", ["patients"]),
+    connectedDevices () {
+      return this.devices.filter(d => d.socket != null)
+    }
   },
   methods: {
     ...mapActions("tasks", ["launchTask"]),

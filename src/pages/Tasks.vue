@@ -4,7 +4,7 @@
     <q-table
       title="Tasks"
       row-key="id"
-      :data="data"
+      :data="tasks"
       :columns="columns"
       :filter="filter"
       :pagination="{rowsPerPage: 15}"
@@ -71,7 +71,7 @@
 
 <script>
 import { date, format } from "quasar"
-import { Tasks } from "../services"
+import { mapState, mapActions } from "vuex"
 const { capitalize } = format
 
 export default {
@@ -130,31 +130,27 @@ export default {
           format: (val) => date.formatDate(val, "HH:mm:ss DD-MM-YYYY")
         },
         { name: "actions", label: "", field: "actions", align: "center" }
-      ],
-      data: []
+      ]
     }
   },
   async mounted () {
     this.loading = true
-    try {
-      const { data } = await Tasks.getTasks({
-        populate: ["patient", "user", "device", "exercise"],
-        fields: [
-          "patient.name",
-          "user.displayName",
-          "device.name",
-          "exercise.name"
-        ]
-      })
-      console.log(data)
-      this.data = data
-    } catch (err) {
-      console.log(err)
-    } finally {
-      this.loading = false
-    }
+    await this.getTasks({
+      populate: ["patient", "user", "device", "exercise"],
+      fields: [
+        "patient.name",
+        "user.displayName",
+        "device.name",
+        "exercise.name"
+      ]
+    })
+    this.loading = false
+  },
+  computed: {
+    ...mapState("tasks", ["tasks"])
   },
   methods: {
+    ...mapActions("tasks", ["getTasks"]),
     exportTable () {
       console.log("Exporting...")
     },
