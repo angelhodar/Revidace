@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { Exercises } from "../services"
+import { mapState, mapActions } from "vuex"
 import ExerciseDetails from "components/Exercises/ExerciseDetails"
 
 export default {
@@ -21,16 +21,14 @@ export default {
     ExerciseCard: () => import("components/Exercises/ExerciseCard"),
     BreadCrumbs: () => import("components/Dashboard/BreadCrumbs")
   },
-  data () {
-    return {
-      exercises: []
-    }
-  },
   async mounted () {
-    const { data } = await Exercises.getExercises()
-    this.exercises = data
+    await this.getExercises()
+  },
+  computed: {
+    ...mapState("exercises", ["exercises"])
   },
   methods: {
+    ...mapActions("exercises", ["getExercises"]),
     showExerciseModal (exercise) {
       this.$q.dialog({
         component: ExerciseDetails,

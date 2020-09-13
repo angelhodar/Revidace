@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-md col-md-4 col-lg-3 col-xs-12">
     <q-card class="exercise-card" @click="showExerciseDetails">
-      <q-img src="https://picsum.photos/400/250">
+      <q-img :src="exercise.thumbnail">
         <div class="absolute-bottom text-subtitle2 text-center">{{ exercise.name }}</div>
       </q-img>
     </q-card>

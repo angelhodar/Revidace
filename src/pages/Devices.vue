@@ -6,14 +6,13 @@
         v-for="device in devices"
         :key="device.id"
         :device="device"
-        @onSendExercise="deviceSelected"
+        @onSelected="deviceSelected"
       />
     </div>
   </q-page>
 </template>
 
 <script>
-import { Exercises, Patients } from "../services"
 import TaskLauncher from "components/TaskLauncher"
 import { mapState, mapActions } from "vuex"
 
@@ -22,26 +21,22 @@ export default {
     DeviceCard: () => import("components/DeviceCard"),
     BreadCrumbs: () => import("components/Dashboard/BreadCrumbs")
   },
-  data () {
-    return {
-      exercises: [],
-      patients: []
-    }
-  },
   async mounted () {
     await this.getDevices()
-    const { data: patients } = await Patients.getPatients()
-    const { data: exercises } = await Exercises.getExercises()
-    this.patients = patients
-    this.exercises = exercises
+    await this.getExercises()
+    await this.getPatients()
   },
   computed: {
-    ...mapState("auth", ["user"]),
-    ...mapState("devices", ["devices"])
+    ...mapState("users", ["user"]),
+    ...mapState("devices", ["devices"]),
+    ...mapState("exercises", ["exercises"]),
+    ...mapState("patients", ["patients"])
   },
   methods: {
-    ...mapActions("sockets", ["launchTask"]),
+    ...mapActions("tasks", ["launchTask"]),
     ...mapActions("devices", ["getDevices"]),
+    ...mapActions("exercises", ["getExercises"]),
+    ...mapActions("patients", ["getPatients"]),
     deviceSelected (device) {
       this.$q.dialog({
         component: TaskLauncher,

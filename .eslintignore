@@ -4,6 +4,6 @@
 /src-cordova
 /.quasar
 /node_modules
-/src/store/sockets
 /src/store/devices
 /src/store/tasks
+/src/store/users

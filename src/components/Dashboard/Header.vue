@@ -17,7 +17,7 @@ export default {
     toggleMenu: Function
   },
   methods: {
-    ...mapActions("auth", ["logout"]),
+    ...mapActions("users", ["logout"]),
     changePanelState () {
       this.toggleMenu()
     }

@@ -1,8 +1,9 @@
 import Vue from "vue"
 import Vuex from "vuex"
 
-import auth from "./auth"
-import sockets from "./sockets"
+import users from "./users"
+import exercises from "./exercises"
+import patients from "./patients"
 import devices from "./devices"
 import tasks from "./tasks"
 
@@ -20,8 +21,9 @@ Vue.use(Vuex)
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
-      auth,
-      sockets,
+      users,
+      exercises,
+      patients,
       devices,
       tasks
     },

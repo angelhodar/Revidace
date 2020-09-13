@@ -28,13 +28,13 @@ export default {
     this.identifyUser(this.user.id)
   },
   methods: {
-    ...mapActions("sockets", ["identifyUser"]),
+    ...mapActions("users", ["identifyUser"]),
     togglePanel () {
       this.panelShown = !this.panelShown
     }
   },
   computed: {
-    ...mapState("auth", ["user"])
+    ...mapState("users", ["user"])
   }
 }
 </script>

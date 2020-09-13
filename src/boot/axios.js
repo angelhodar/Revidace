@@ -14,7 +14,7 @@ export default ({ store, Vue }) => {
     response => response,
     error => {
       if (error.response.status === 401) {
-        this.$store.dispatch("auth/logout", { root: true })
+        this.$store.dispatch("users/logout", { root: true })
       }
       return Promise.reject(error)
     }

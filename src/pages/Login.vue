@@ -65,7 +65,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions("auth", ["loginWithEmailAndPassword", "loginWithSocialProvider", "handleIncomingToken"]),
+    ...mapActions("users", ["loginWithEmailAndPassword", "loginWithSocialProvider", "handleIncomingToken"]),
     initParticles () {
       window.particlesJS("particles-js", particlesConf)
     },

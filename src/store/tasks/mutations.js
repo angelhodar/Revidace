@@ -1,4 +1,3 @@
-/*
-export function someMutation (state) {
+export function SET_TASKS(state, tasks) {
+  state.tasks = tasks;
 }
-*/

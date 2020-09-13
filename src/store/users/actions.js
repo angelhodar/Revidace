@@ -19,9 +19,18 @@ export const handleIncomingToken = async function ({ commit }, token) {
   this.$router.push("/dashboard")
 }
 
-export const logout = async function ({ commit }, payload) {
+export const logout = async function ({ commit }) {
   commit("setAccessToken", null)
   commit("setCurrentUser", null)
   delete this.$api.defaults.headers.common.Authorization
   this.$router.replace("/login")
+}
+
+export const getUsers = async function ({ commit }) {
+  const { data } = await Users.getUsers()
+  commit("SET_USERS", data)
+}
+
+export function identifyUser ({ commit }, id) {
+  this._vm.$socket.client.emit("user", id)
 }

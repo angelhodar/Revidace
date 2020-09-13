@@ -8,21 +8,21 @@
 </template>
 
 <script>
-import { Patients } from "../services"
+import { mapState, mapActions } from "vuex"
 
 export default {
   components: {
     PatientCard: () => import("components/PatientCard"),
     BreadCrumbs: () => import("components/Dashboard/BreadCrumbs")
   },
-  data () {
-    return {
-      patients: []
-    }
-  },
   async mounted () {
-    const { data } = await Patients.getPatients()
-    this.patients = data
+    await this.getPatients()
+  },
+  computed: {
+    ...mapState("patients", ["patients"])
+  },
+  methods: {
+    ...mapActions("patients", ["getPatients"])
   }
 }
 </script>

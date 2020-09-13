@@ -4,7 +4,7 @@
 
     <q-table
       title="Users"
-      :data="data"
+      :data="users"
       :columns="columns"
       :filter="filter"
       row-key="id"
@@ -95,7 +95,7 @@
 
 <script>
 import { date, format } from "quasar"
-import { Users } from "../services"
+import { mapState, mapActions } from "vuex"
 import UserModal from "components/UserModal"
 const { capitalize } = format
 
@@ -145,62 +145,56 @@ export default {
           align: "center"
         },
         { name: "actions", label: "", field: "actions", align: "center" }
-      ],
-      data: []
+      ]
     }
   },
   async mounted () {
     this.loading = true
-    try {
-      const { data } = await Users.getUsers()
-      this.data = data
-    } catch (err) {
-      console.log(err)
-    } finally {
-      this.loading = false
-    }
+    await this.getUsers()
+    this.loading = false
+  },
+  computed: {
+    ...mapState("users", ["users"])
   },
   methods: {
+    ...mapActions("users", ["getUsers"]),
     exportTable () {
       console.log("Exporting...")
     },
     editUser (user) {
-      this.$q
-        .dialog({
-          component: UserModal,
-          parent: this,
-          user: user
-        })
+      this.$q.dialog({
+        component: UserModal,
+        parent: this,
+        user: user
+      })
         .onOk((user) => {
           console.log(user)
         })
     },
     deleteUser (user) {
-      this.$q
-        .dialog({
-          title: "Confirm",
-          message: "Are you sure you want to delete the user?",
-          ok: {
-            outline: true,
-            label: "Yes"
-          },
-          cancel: {
-            outline: true,
-            color: "red"
-          },
-          persistent: true
-        })
+      this.$q.dialog({
+        title: "Confirm",
+        message: "Are you sure you want to delete the user?",
+        ok: {
+          outline: true,
+          label: "Yes"
+        },
+        cancel: {
+          outline: true,
+          color: "red"
+        },
+        persistent: true
+      })
         .onOk(() => {
           console.log("Deleting user...")
         })
     },
     addUser () {
-      this.$q
-        .dialog({
-          component: UserModal,
-          parent: this,
-          user: null
-        })
+      this.$q.dialog({
+        component: UserModal,
+        parent: this,
+        user: null
+      })
         .onOk((user) => {
           console.log(user)
         })
@@ -210,20 +204,19 @@ export default {
     },
     onBlockChange (user) {
       const state = user.blocked ? "unblock" : "block"
-      this.$q
-        .dialog({
-          title: "Confirm",
-          message: `Are you sure you want to ${state} the user?`,
-          ok: {
-            outline: true,
-            label: "Yes"
-          },
-          cancel: {
-            outline: true,
-            color: "red"
-          },
-          persistent: true
-        })
+      this.$q.dialog({
+        title: "Confirm",
+        message: `Are you sure you want to ${state} the user?`,
+        ok: {
+          outline: true,
+          label: "Yes"
+        },
+        cancel: {
+          outline: true,
+          color: "red"
+        },
+        persistent: true
+      })
         .onOk(() => {
           console.log("User block state changing...")
         })

@@ -28,7 +28,7 @@ export default function ({ store }) {
 
   Router.beforeEach(async (to, from, next) => {
     try {
-      const authenticated = store.getters["auth/isAuthenticated"]
+      const authenticated = store.getters["users/isAuthenticated"]
       if (to.matched.some(record => record.meta.requiresAuth)) {
         if (authenticated) {
           next()

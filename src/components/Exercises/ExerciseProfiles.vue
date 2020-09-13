@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { Exercises } from "../../services"
+import { mapState, mapActions } from "vuex"
 
 export default {
   name: "ExerciseProfiles",
@@ -39,9 +39,15 @@ export default {
     if (this.exerciseProp != null) {
       this.exercise = this.exerciseProp
     } else {
-      const { data } = await Exercises.getExercises()
-      this.exercise = data[0]
+      await this.getExercises()
+      this.exercise = this.exercises[0]
     }
+  },
+  computed: {
+    ...mapState("exercises", ["exercises"])
+  },
+  methods: {
+    ...mapActions("exercises", ["getExercises"])
   }
 }
 </script>
