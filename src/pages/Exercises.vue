@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-pa-md">
-    <BreadCrumbs label="Exercises" icon="create" />
+    <BreadCrumbs :breadcrumbs="breadcrumbs" />
     <div class="row">
       <ExerciseCard
         v-for="exercise in exercises"
@@ -20,6 +20,16 @@ export default {
   components: {
     ExerciseCard: () => import("components/Exercises/ExerciseCard"),
     BreadCrumbs: () => import("components/Dashboard/BreadCrumbs")
+  },
+  data () {
+    return {
+      breadcrumbs: [
+        {
+          label: "Exercises",
+          icon: "create"
+        }
+      ]
+    }
   },
   async mounted () {
     await this.getExercises()

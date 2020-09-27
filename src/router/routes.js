@@ -17,7 +17,7 @@ const routes = [
       { path: "devices", component: () => import("pages/Devices.vue") },
       { path: "patients", component: () => import("pages/Patients.vue") },
       { path: "tasks", component: () => import("pages/Tasks.vue") },
-      { path: "viewer", component: () => import("pages/TaskViewer") }
+      { path: "tasks/:id", component: () => import("pages/TaskViewer") }
     ],
     meta: { requiresAuth: true }
   },

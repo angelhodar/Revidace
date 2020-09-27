@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-pa-md">
-    <BreadCrumbs label="Users" icon="people" />
+    <BreadCrumbs :breadcrumbs="breadcrumbs" />
 
     <q-table
       title="Users"
@@ -106,6 +106,12 @@ export default {
   },
   data () {
     return {
+      breadcrumbs: [
+        {
+          label: "Users",
+          icon: "people"
+        }
+      ],
       loading: false,
       filter: "",
       columns: [

@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-pa-md">
-    <BreadCrumbs label="Patients" icon="people" />
+    <BreadCrumbs :breadcrumbs="breadcrumbs" />
     <div class="row">
       <PatientCard v-for="patient in patients" :key="patient.id" :patient="patient" />
     </div>
@@ -14,6 +14,16 @@ export default {
   components: {
     PatientCard: () => import("components/Patients/PatientCard"),
     BreadCrumbs: () => import("components/Dashboard/BreadCrumbs")
+  },
+  data () {
+    return {
+      breadcrumbs: [
+        {
+          label: "Patients",
+          icon: "people"
+        }
+      ]
+    }
   },
   async mounted () {
     await this.getPatients()

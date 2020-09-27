@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-pa-md">
-    <BreadCrumbs label="Tasks" icon="assignment" />
+    <BreadCrumbs :breadcrumbs="breadcrumbs" />
     <q-table
       title="Tasks"
       row-key="id"
@@ -49,8 +49,7 @@
             :label="$q.screen.gt.md ? 'Details' : ''"
             outline
             no-caps
-            @click="showTaskDetails(props.row)"
-            to="/dashboard/viewer"
+            :to="`/dashboard/tasks/${props.row.id}`"
           />
           <q-btn
             icon="delete"
@@ -82,6 +81,12 @@ export default {
   },
   data () {
     return {
+      breadcrumbs: [
+        {
+          label: "Tasks",
+          icon: "assignment"
+        }
+      ],
       loading: false,
       filter: "",
       columns: [
@@ -154,9 +159,6 @@ export default {
     ...mapActions("tasks", ["getTasks"]),
     exportTable () {
       console.log("Exporting...")
-    },
-    showTaskDetails (task) {
-      console.log("Showing tasks...")
     },
     removeTask (task) {
       console.log("Removing tasks...")

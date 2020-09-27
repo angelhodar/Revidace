@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-pa-md">
-    <BreadCrumbs label="Devices" icon="contactless" />
+    <BreadCrumbs :breadcrumbs="breadcrumbs" />
     <div class="row">
       <DeviceCard
         v-for="device in connectedDevices"
@@ -20,6 +20,16 @@ export default {
   components: {
     DeviceCard: () => import("components/Devices/DeviceCard"),
     BreadCrumbs: () => import("components/Dashboard/BreadCrumbs")
+  },
+  data () {
+    return {
+      breadcrumbs: [
+        {
+          label: "Devices",
+          icon: "contactless"
+        }
+      ]
+    }
   },
   async mounted () {
     await this.getDevices()

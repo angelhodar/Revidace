@@ -1,11 +1,17 @@
 <template>
-  <RandomChart />
+  <TestChart :taskData="task.data" />
 </template>
 
 <script>
 export default {
   components: {
-    RandomChart: () => import("../Charts/RandomChart")
+    TestChart: () => import("../Charts/TestChart")
+  },
+  props: {
+    task: Object
+  },
+  mounted () {
+    console.log(`Task ${this.task.id}`)
   }
 }
 </script>
