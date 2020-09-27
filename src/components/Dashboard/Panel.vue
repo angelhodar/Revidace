@@ -38,12 +38,6 @@ export default {
     return {
       userMenu: [
         {
-          title: "Profile",
-          icon: "account_circle",
-          route: "/dashboard/profile",
-          separator: true
-        },
-        {
           title: "Devices",
           icon: "contactless",
           route: "/dashboard/devices",

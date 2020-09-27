@@ -13,13 +13,12 @@ import { mapActions } from "vuex"
 
 export default {
   props: {
-    showMenuButton: Boolean,
-    toggleMenu: Function
+    showMenuButton: Boolean
   },
   methods: {
     ...mapActions("users", ["logout"]),
     changePanelState () {
-      this.toggleMenu()
+      this.$emit("toggleMenu")
     }
   }
 }

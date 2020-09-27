@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lff">
-    <Header :showMenuButton="true" :toggleMenu="togglePanel" />
+    <Header :showMenuButton="true" @toggleMenu="togglePanel" />
 
     <Panel :shown="panelShown" :role="user.role" />
 
@@ -26,6 +26,9 @@ export default {
   mounted () {
     this.$socket.client.open()
     this.identifyUser(this.user.id)
+  },
+  beforeDestroy () {
+    this.$socket.client.close()
   },
   methods: {
     ...mapActions("users", ["identifyUser"]),

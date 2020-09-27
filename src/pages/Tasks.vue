@@ -50,6 +50,7 @@
             outline
             no-caps
             @click="showTaskDetails(props.row)"
+            to="/dashboard/viewer"
           />
           <q-btn
             icon="delete"
