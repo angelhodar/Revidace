@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.9.4",
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "jwt-decode": "^2.2.0",
     "particles.js": "^2.0.0",
